@@ -1,4 +1,4 @@
-const codesAndDef = {
+export const codesAndDef = {
      "C00180-5": "The course content helped me to achieve the stated learning objectives.",
      "C00182-5": "The learning activities (e.g., lectures, labs, PBL, tutorials, field trips, on-line components, and assignments) helped me to achieve the stated learning objectives.",
      "C00184-5": "The course format encouraged me to participate (e.g., whole class discussion, on-line discussion, small group work, group projects, class presentations, etc.).",
@@ -87,5 +87,3 @@ const codesAndDef = {
      "C00577-4": "Assignments were marked fairly",
      "C00578-4": "Sufficient feedback was given on assignments"
 }
-
-export default codesAndDef
