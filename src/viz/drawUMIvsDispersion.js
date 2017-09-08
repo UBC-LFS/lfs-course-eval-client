@@ -1,7 +1,8 @@
+import * as filter from '../util/filter'
 import * as util from '../clientUtil'
 import R from 'ramda'
-import { margin, height, percentFavourableColor6, graphWidth } from './constants'
-import codesAndDef from './codesAndDef'
+import { margin, height, percentFavourableColor6, graphWidth } from '../constants/constants'
+import questionDefinitions from '../constants/questionDefinitions'
 
 const drawUMIvsDispersion = (data, filterSettings) => {
     const name = data.Name
@@ -65,7 +66,7 @@ const drawUMIvsDispersion = (data, filterSettings) => {
         return "<div class='d3ToolTip'>" +
             "<p>Instructor: " + d.Instructor + "</p>" +
             "<p>Section: " + d.CourseSection + "</p>" +
-            "<p>Question Code: " + d.QuestionCode + ' "' + codesAndDef[d.QuestionCode] + '"' + "</p>" +
+            "<p>Question Code: " + d.QuestionCode + ' "' + questionDefinitions[d.QuestionCode] + '"' + "</p>" +
             "<p>Average: " + util.roundToTwoDecimal(d.Avg) + "</p>" +
             "<p>Dispersion Index: " + util.roundToTwoDecimal(d.DispersionIndex) + "</p>" +
             "<p>Class Size: " + d.ClassSize + "</p>" +
