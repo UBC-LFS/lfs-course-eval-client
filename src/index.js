@@ -1,7 +1,5 @@
-// this is where the API call to get the data will go
+import { fetchJSON } from './api/fetch'
 
-const testFunction = () => {
-    console.log('hi')
-}
-
-export default testFunction
+document.addEventListener('DOMContentLoaded', function() {
+    fetchJSON('test')
+})
