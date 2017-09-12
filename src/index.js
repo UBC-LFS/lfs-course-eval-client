@@ -1,3 +1,8 @@
+//import { getData } from './controller/controller'
+import drawUMIvsDispersion from './viz/drawGraph'
+
 document.addEventListener('DOMContentLoaded', function() {
-    fetch('test')
+   fetch('data')
+    .then(response => response.json())
+    .then(x => drawUMIvsDispersion(x))
 })
