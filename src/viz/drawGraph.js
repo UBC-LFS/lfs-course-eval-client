@@ -1,6 +1,11 @@
 import * as d3 from 'd3'
+import d3Tip from 'd3-tip'
+d3.tip = d3Tip
 import { margin, height, percentFavourableColor6 } from '../constants/constants'
-import questionDefinitions from '../constants/questionDefinitions'
+import * as questionDefinitions from '../constants/questionDefinitions'
+import * as util from '../util/util.js'
+import R from 'ramda'
+
 
 const drawUMIvsDispersion = (array) => {
     const graph = document.getElementById('UMIvsDispersionGraph')
@@ -44,7 +49,8 @@ const drawUMIvsDispersion = (array) => {
             return "<div class='d3ToolTip'>" +
                 "<p>Instructor: " + d.Instructor + "</p>" +
                 "<p>Section: " + d.CourseSection + "</p>" +
-                "<p>Question Code: " + d.QuestionCode + ' "' + questionDefinitions[d.QuestionCode] + '"' + "</p>" +
+                "<p>Question Code: " + d.QuestionCode + ' "' + questionDefinitions["codesAndDef"][d.QuestionCode]
+                + '"' + "</p>" +
                 "<p>Average: " + util.roundToTwoDecimal(d.Avg) + "</p>" +
                 "<p>Dispersion Index: " + util.roundToTwoDecimal(d.DispersionIndex) + "</p>" +
                 "<p>Class Size: " + d.ClassSize + "</p>" +
@@ -85,7 +91,7 @@ const drawUMIvsDispersion = (array) => {
     
         // set circles for the instructor 
         umiDots.selectAll('dot')
-            .data(R.filter(x => util.stripMiddleName(x.Instructor) === name, filterData))
+            .data(R.filter(x => util.stripMiddleName(x.Instructor) === name, array))
             .enter().append('circle')
             .attr('cx', (d) => x(Math.min(d['DispersionIndex'], 0.8)))
             .attr('cy', (d) => y(Math.max(d['Avg'], 2)))
