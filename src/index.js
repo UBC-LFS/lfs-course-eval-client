@@ -1,8 +1,6 @@
 //import { getData } from './controller/controller'
-import drawUMIvsDispersion from './viz/drawGraph'
+import * as dataService from './service/dataService'
 
 document.addEventListener('DOMContentLoaded', function() {
-   fetch('data')
-    .then(response => response.json())
-    .then(x => drawUMIvsDispersion(x))
+   dataService.loadData('data','')
 })
