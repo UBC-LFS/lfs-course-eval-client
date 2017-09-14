@@ -2,6 +2,7 @@ import drawUMIvsDispersion from '../viz/drawGraph'
 
 
 const loadData = (url, filterSettings, chartKey) => {
+
     const filterSettingsConstant = {
         time: {
             year: '2016',
@@ -9,7 +10,7 @@ const loadData = (url, filterSettings, chartKey) => {
         },
         courseLevel: 'all',
         department: 'all',
-        questionCode: 'IUMI06-5',
+        questionCode: 'UMI6',
         toggleBelowMin: false,
         classSizeMin: 0,
         classSizeMax: 300 // [min, max]
