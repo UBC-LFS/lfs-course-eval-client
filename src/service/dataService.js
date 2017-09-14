@@ -1,8 +1,20 @@
 import drawUMIvsDispersion from '../viz/drawGraph'
 
+const fetchJSON = (url) => fetch(url).then(response => response.json())
+let filterString = ''
+const createFilterString = (filterSettings) => {
+    const keyArray = Object.keys(filterSettings)
+    for (let i = 0; i < keyArray.length; i++) {
+        var filterValue = filterSettings[keyArray[i]]
+        if (typeof filterValue !== 'object') {
+            filterString = filterString + '/' + filterValue
+        }
+        else { createFilterString(filterValue) }
+    }
+    return filterString
+}
 
 const loadData = (url, filterSettings, chartKey) => {
-
     const filterSettingsConstant = {
         time: {
             year: '2016',
@@ -20,19 +32,6 @@ const loadData = (url, filterSettings, chartKey) => {
     //Temporary filter settings, change to real filters once applied
     fetchJSON(url)
         .then(x => drawUMIvsDispersion(x))
-}
-const fetchJSON = (url) => fetch(url).then(response => response.json())
-let filterString = ''
-const createFilterString = (filterSettings) => {
-    const keyArray = Object.keys(filterSettings)
-    for (let i = 0; i < keyArray.length; i++) {
-        var filterValue = filterSettings[keyArray[i]]
-        if (typeof filterValue !== 'object') {
-            filterString = filterString + '/' + filterValue
-        }
-        else { createFilterString(filterValue) }
-    }
-    return filterString
 }
 export {
     loadData
