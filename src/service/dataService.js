@@ -1,8 +1,7 @@
 import drawUMIvsDispersion from '../viz/drawGraph'
 
 
-const loadData = (url, filterSettings) => {
-
+const loadData = (url, filterSettings, chartKey) => {
     const filterSettingsConstant = {
         time: {
             year: '2016',
@@ -15,7 +14,7 @@ const loadData = (url, filterSettings) => {
         classSizeMin: 0,
         classSizeMax: 300 // [min, max]
     }
-    url = url + createFilterString(filterSettingsConstant)
+    url = url + '/' + chartKey + createFilterString(filterSettingsConstant)
     console.log(url)
     //Temporary filter settings, change to real filters once applied
     fetchJSON(url)
