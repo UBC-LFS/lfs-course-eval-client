@@ -22,7 +22,7 @@ const loadData = (url, filterSettings, chartKey) => {
         .then(x => drawUMIvsDispersion(x))
 }
 const fetchJSON = (url) => fetch(url).then(response => response.json())
-var filterString = ''
+let filterString = ''
 const createFilterString = (filterSettings) => {
     const keyArray = Object.keys(filterSettings)
     for (let i = 0; i < keyArray.length; i++) {
