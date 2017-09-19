@@ -3,5 +3,5 @@ import * as dataService from './service/dataService'
 
 document.addEventListener('DOMContentLoaded', function() {
     //load first chart upon entering the page
-   dataService.loadData('data','', 'c1')
+   dataService.loadData('data', undefined, 'c1')
 })
