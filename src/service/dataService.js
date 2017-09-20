@@ -18,11 +18,10 @@ const createFilterString = (filterSettings) => {
 const loadData = (url, filterSettings = {
                             time: {
                                 year: '2016',
-                                term: 'all'
+                                term: '2016W2'
                             },
-                            courseLevel: 'all',
-                            department: 'all',
-                            questionCode: 'UMI6',
+                            courseNum: 'LFSLC 100 001',
+                            department: 'LFS',
                             toggleBelowMin: false,
                             classSizeMin: 0,
                             classSizeMax: 300 // [min, max]
