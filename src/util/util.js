@@ -5,7 +5,9 @@ const stripMiddleName = (name) => {
          return splitName.join(" ")
     } else return name
 }    
+
 const roundToTwoDecimal = (x) => Math.round(x*100)/100
+
 export {
     stripMiddleName,
     roundToTwoDecimal
