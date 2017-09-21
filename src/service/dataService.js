@@ -13,7 +13,7 @@ const createFilterString = (filterSettings) => {
     return filterString
 }
 
-const loadData = (filterSettings = {
+const loadChartData = (filterSettings = {
                             time: {
                                 year: '2016',
                                 term: '2016W2'
@@ -32,6 +32,11 @@ const loadData = (filterSettings = {
     return fetchJSON(url)
 }
 
+const loadFilterData = () => {
+    return fetchJSON('filterData')
+}
+
 export {
-    loadData
+    loadChartData,
+    loadFilterData
 }

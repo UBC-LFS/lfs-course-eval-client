@@ -1,5 +1,6 @@
-import { loadData } from '../service/dataService'
+import { loadChartData, loadFilterData } from '../service/dataService'
 import drawChart1 from '../viz/drawChart1'
+import * as get from '../util/get'
 import R from 'ramda'
 
 const controller = () => {
@@ -8,8 +9,13 @@ const controller = () => {
     // chart2Controller and chart3Controller will go here
 }
 
+const initEventListenerController = () => {
+    const filterData = loadFilterData()
+    filterData.then(data => initEventListeners(data))
+}
+
 const chart1Controller = (filterSettings) => {
-    const chart1Data = loadData(undefined, 'c1')
+    const chart1Data = loadChartData(undefined, 'c1')
     // call draw
     chart1Data.then(data => initEventListeners(data))
 }
@@ -24,7 +30,7 @@ const classSizeMin = document.getElementById('classSizeMin')
 const classSizeMax = document.getElementById('classSizeMax')
 
 const eventListeners = () => {
-        
+    
 }
 
 const initEventListeners = (data) => {
