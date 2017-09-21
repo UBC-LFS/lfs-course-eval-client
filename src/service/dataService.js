@@ -20,7 +20,8 @@ const loadChartData = (filterSettings = {
                             },
                             courseNum: 'LFSLC 100 001',
                             department: 'LFS',
-                            toggleBelowMin: false,
+                            toggleBelowMin: true,
+                            questionCode: 'UMI6',
                             classSizeMin: 0,
                             classSizeMax: 300 // [min, max]
                         }, chartKey) => {
