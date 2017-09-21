@@ -1,7 +1,5 @@
-//import { getData } from './controller/controller'
-import * as dataService from './service/dataService'
+import controller from './controller/controller'
 
 document.addEventListener('DOMContentLoaded', function() {
-    //load first chart upon entering the page
-   dataService.loadData('data', undefined, 'c1')
+   controller()
 })
