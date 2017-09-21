@@ -26,9 +26,7 @@ const loadData = (filterSettings = {
                             classSizeMax: 300 // [min, max]
                         }, chartKey) => {
     let url = ''
-    if (chartKey !== 'dashboard'){
-    url = 'data/' + chartKey + createFilterString(filterSettings)}
-    else {url = 'dashboard/' + createFilterString(filterSettings)}
+    url = 'data/' + chartKey + createFilterString(filterSettings)
     console.log(url)
     //Temporary filter settings, change to real filters once applied
     //fetchJSON(url).then(x => drawUMIvsDispersion(x))
