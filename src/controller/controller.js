@@ -1,5 +1,6 @@
 import { loadChartData, loadFilterData } from '../service/dataService'
 import drawChart1 from '../viz/drawChart1'
+import codesAndDef from '../constants/questionDefinitions'
 import * as get from '../util/get'
 import R from 'ramda'
 
@@ -16,7 +17,6 @@ const initEventListenerController = () => {
 
 const chart1Controller = (filterSettings) => {
     const chart1Data = loadChartData(undefined, 'c1')
-    // call draw
     chart1Data.then(data => initEventListeners(data))
 }
 
@@ -34,7 +34,20 @@ const eventListeners = () => {
 }
 
 const initEventListeners = (data) => {
-    
+    yearSelection.innerHTML = data.years.map(x => '<option value="' + x + '">' + x + '</option>').join(' ')
+    // need to set current value below
+    // yearSelection.value = 
+
+    // make sure to add "all" into data.terms on server
+    termSelection.innerHTML = data.terms.map(x => '<option value="' + x + '">' + x + '</option>').join(' ')
+    termSelection.value = 'all'
+        
+    // make sure to add "all" into data.courseLevelSelection on server
+    courseLevelSelection.innerHTML = data.courseLevelSelection.map(x => '<option value="' + x + '">' + x + '</option>').join(' ')
+    courseLevelSelection.value = 'all'
+
+    questionCodeSelection.innerHTML = data.questionCodeSelection.map(x => '<option value="' + x + '">' + x + ": " + codesAndDef[x] + '</option>').join(' ')
+    questionCodeSelection.value = 'UMI6'
 }
 
 export default controller
