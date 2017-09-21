@@ -1,4 +1,4 @@
-import { loadChartData, loadFilterData } from '../service/dataService'
+import { loadData, loadFilterData } from '../service/dataService'
 import drawChart1 from '../viz/drawChart1'
 import codesAndDef from '../constants/questionDefinitions'
 import * as get from '../util/get'
@@ -8,6 +8,7 @@ const controller = () => {
     // initial draw
     chart1Controller(undefined)
     // chart2Controller and chart3Controller will go here
+    dashboardController()
 }
 
 const initEventListenerController = () => {
@@ -16,7 +17,7 @@ const initEventListenerController = () => {
 }
 
 const chart1Controller = (filterSettings) => {
-    const chart1Data = loadChartData(undefined, 'c1')
+    const chart1Data = loadData(undefined, 'c1')
     chart1Data.then(data => initEventListeners(data))
 }
 
@@ -48,6 +49,11 @@ const initEventListeners = (data) => {
 
     questionCodeSelection.innerHTML = data.questionCodeSelection.map(x => '<option value="' + x + '">' + x + ": " + codesAndDef[x] + '</option>').join(' ')
     questionCodeSelection.value = 'UMI6'
+}
+
+const dashboardController = (filterSettings) => {
+    const dashboardData = loadData(undefined, 'dashboard')
+    dashboardData.then(data => initEventListeners(data))
 }
 
 export default controller

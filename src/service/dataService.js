@@ -13,7 +13,7 @@ const createFilterString = (filterSettings) => {
     return filterString
 }
 
-const loadChartData = (filterSettings = {
+const loadData = (filterSettings = {
                             time: {
                                 year: '2016',
                                 term: '2016W2'
@@ -25,8 +25,10 @@ const loadChartData = (filterSettings = {
                             classSizeMin: 0,
                             classSizeMax: 300 // [min, max]
                         }, chartKey) => {
-
-    const url = 'data' + '/' + chartKey + createFilterString(filterSettings)
+    let url = ''
+    if (chartKey !== 'dashboard'){
+    url = 'data/' + chartKey + createFilterString(filterSettings)}
+    else {url = 'dashboard/' + createFilterString(filterSettings)}
     console.log(url)
     //Temporary filter settings, change to real filters once applied
     //fetchJSON(url).then(x => drawUMIvsDispersion(x))
@@ -38,6 +40,6 @@ const loadFilterData = () => {
 }
 
 export {
-    loadChartData,
+    loadData,
     loadFilterData
 }
