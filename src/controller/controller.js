@@ -66,9 +66,9 @@ const initEventListenerController = (filterSetting, ids) => {
     filterData.then(filterObj => initEventListeners(filterSetting, filterObj, ids))
 }
 
-const chart1Controller = (filterSettings) => {
+const chartController = (filterSettings) => {
     const chart1Data = loadData(undefined, 'c1')
-   
+    // call chart2data, chart3data from here?
 }
 
 const dashboardController = (filterSettings) => {
@@ -103,7 +103,7 @@ const controller = () => {
     }
 
     // initial draw
-    chart1Controller(filterSetting)
+    chartController(filterSetting)
     dashboardController()
 
     initEventListenerController(filterSetting, ids)
