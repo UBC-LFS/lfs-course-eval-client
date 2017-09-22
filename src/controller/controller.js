@@ -68,6 +68,7 @@ const initEventListenerController = (filterSetting, ids) => {
 
 const chartController = (filterSettings) => {
     const chart1Data = loadData(undefined, 'c1')
+    chart1Data.then(data => drawChart1(data))
     // call chart2data, chart3data from here?
 }
 
