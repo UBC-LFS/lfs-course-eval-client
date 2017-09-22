@@ -31,12 +31,12 @@ const controller = () => {
 
 const initEventListenerController = () => {
     const filterData = loadFilterData()
-    filterData.then(filterData => initEventListeners(filterData))
+    filterData.then(filterObj => initEventListeners(filterObj))
 }
 
 const chart1Controller = (filterSettings) => {
     const chart1Data = loadData(undefined, 'c1')
-    chart1Data.then(data => initEventListeners(data))
+    //chart1Data.then(data => initEventListeners(data))
 }
 
 const yearSelection = document.getElementById('yearSelection')
@@ -85,24 +85,24 @@ const eventListeners = (filterSetting, callback) => {
     })
 }
 
-const initEventListeners = (filterData) => {
-    yearSelection.innerHTML = filterData.years.map(x => '<option value="' + x + '">' + x + '</option>').join(' ')
+const initEventListeners = (filterObj) => {
+    yearSelection.innerHTML = filterObj.years.map(x => '<option value="' + x + '">' + x + '</option>').join(' ')
     // need to set current value below
     // yearSelection.value = 
 
     // make sure to add "all" into data.terms on server
-    termSelection.innerHTML = filterData.terms.map(x => '<option value="' + x + '">' + x + '</option>').join(' ')
+    termSelection.innerHTML = filterObj.terms.map(x => '<option value="' + x + '">' + x + '</option>').join(' ')
     termSelection.value = 'all'
         
     // make sure to add "all" into data.courseLevelSelection on server
-    courseLevelSelection.innerHTML = filterData.courseLevels.map(x => '<option value="' + x + '">' + x + '</option>').join(' ')
+    courseLevelSelection.innerHTML = filterObj.courseLevels.map(x => '<option value="' + x + '">' + x + '</option>').join(' ')
     courseLevelSelection.value = 'all'
 
-    questionCodeSelection.innerHTML = filterData.questionCodes.map(x => '<option value="' + x + '">' + x + ": " + codesAndDef[x] + '</option>').join(' ')
+    questionCodeSelection.innerHTML = filterObj.questionCodes.map(x => '<option value="' + x + '">' + x + ": " + codesAndDef[x] + '</option>').join(' ')
     questionCodeSelection.value = 'UMI6'
 
     // make sure to add "all" into data.courseLevelSelection on server
-    deptSelection.innerHTML = filterData.depts.map(x => '<option value="' + x + '">' + x + '</option>').join(' ')
+    deptSelection.innerHTML = filterObj.depts.map(x => '<option value="' + x + '">' + x + '</option>').join(' ')
     deptSelection.value = 'all'
 }
 
