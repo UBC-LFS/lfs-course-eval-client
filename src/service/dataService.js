@@ -16,7 +16,7 @@ const createFilterString = (filterSettings) => {
 const loadData = (filterSettings = {
                             time: {
                                 year: '2016',
-                                term: '2016W2'
+                                term: 'W2'
                             },
                             courseNum: 'LFSLC 100 001',
                             department: 'LFS',
