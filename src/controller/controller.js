@@ -45,18 +45,18 @@ const initEventListeners = (initialFilterSetting, filterObj, ids) => {
     ids.yearSelection.innerHTML = filterObj.years.map(x => '<option value="' + x + '">' + x + '</option>').join(' ')
     ids.yearSelection.value = initialFilterSetting.time.year
 
-    // make sure to add "all" into data.terms on server
+    filterObj.terms.push('all')
     ids.termSelection.innerHTML = filterObj.terms.map(x => '<option value="' + x + '">' + x + '</option>').join(' ')
     ids.termSelection.value = 'all'
         
-    // make sure to add "all" into data.courseLevelSelection on server
+    filterObj.courseLevels.push('all')
     ids.courseLevelSelection.innerHTML = filterObj.courseLevels.map(x => '<option value="' + x + '">' + x + '</option>').join(' ')
     ids.courseLevelSelection.value = 'all'
 
     ids.questionCodeSelection.innerHTML = filterObj.questionCodes.map(x => '<option value="' + x + '">' + x + ": " + codesAndDef[x] + '</option>').join(' ')
     ids.questionCodeSelection.value = 'UMI6'
 
-    // make sure to add "all" into data.courseLevelSelection on server
+    filterObj.depts.push('all')
     ids.deptSelection.innerHTML = filterObj.depts.map(x => '<option value="' + x + '">' + x + '</option>').join(' ')
     ids.deptSelection.value = 'all'
 }
