@@ -23,5 +23,6 @@ const loadFilterData = () => fetchJSON('filterData')
 
 export {
     loadData,
-    loadFilterData
+    loadFilterData,
+    createFilterString
 }
