@@ -94,12 +94,12 @@
     },
     {
         "dept": "LFS",
+        "instructorName": "Bruno Mars",
+        "PUID": "AVBST@88IJ@",
         "percentileRankingByFaculty": 0.85,
         "percentileRankingByDept": 0.85,
         "numberOfCoursesTaught": 8,
         "numberOfStudentsTaught": 680,
-        "instructorName": "Bruno Mars",
-        "PUID": "AVBST@88IJ@",
         "UMI1": {
             "average": 3.6,
             "dispersion": 0.6,
@@ -187,12 +187,12 @@
     },
     {
         "dept": "LFS",
+        "instructorName": "Justine Bieber",
+        "PUID": "AVBST/*459Y@",
         "percentileRankingByFaculty": 0.45,
         "percentileRankingByDept": 0.65,
         "numberOfCoursesTaught": 4,
         "numberOfStudentsTaught": 270,
-        "instructorName": "Justine Bieber",
-        "PUID": "AVBST/*459Y@",
         "UMI1": {
             "average": 2.5,
             "dispersion": 0.8,
@@ -281,12 +281,12 @@
     {
       
         "dept": "LFS",
+        "instructorName": "Charlie Brown",
+        "PUID": "AVBSDR/*445Y@",
         "percentileRankingByFaculty": 0.85,
         "percentileRankingByDept": 0.91,
         "numberOfCoursesTaught": 2,
         "numberOfStudentsTaught": 160,
-        "instructorName": "Charlie Brown",
-        "PUID": "AVBSDR/*445Y@",
         "UMI1": {
             "average": 4.4,
             "dispersion": 0.2,
@@ -375,12 +375,12 @@
     {
        
         "dept": "LFS",
+        "instructorName": "Selena Gomez",
+        "PUID": "AVBST/*5465D@",
         "percentileRankingByFaculty": 0.25,
         "percentileRankingByDept": 0.33,
         "numberOfCoursesTaught": 8,
         "numberOfStudentsTaught": 1050,
-        "instructorName": "Selena Gomez",
-        "PUID": "AVBST/*5465D@",
         "UMI1": {
             "average": 2.3,
             "dispersion": 0.8,
