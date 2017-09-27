@@ -1,6 +1,6 @@
 import { loadData, loadFilterData } from '../service/dataService'
 import drawChart1 from '../viz/drawChart1'
-import drawOverallInstructor from '../viz/drawOverallInstructor'
+import drawOverallInstructor from '../viz/drawOverallInstructorTable'
 import codesAndDef from '../constants/questionDefinitions'
 import * as get from '../util/get'
 import R from 'ramda'
