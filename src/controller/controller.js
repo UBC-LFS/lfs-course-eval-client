@@ -1,6 +1,7 @@
 import { loadData, loadFilterData } from '../service/dataService'
 import drawChart1 from '../viz/drawChart1'
 import drawOverallInstructor from '../viz/drawOverallInstructorTable'
+import drawUMIInstructor from '../viz/drawUMIInstructorTable'
 import codesAndDef from '../constants/questionDefinitions'
 import * as get from '../util/get'
 import R from 'ramda'
@@ -69,6 +70,7 @@ const initEventListenerController = (filterSetting, ids) => {
 
 const chartController = (filterSettings) => {
     drawOverallInstructor()
+    drawUMIInstructor()    
     const chart1Data = loadData(undefined, 'c1')
     chart1Data.then(data => drawChart1(data))
     // call chart2data, chart3data from here?

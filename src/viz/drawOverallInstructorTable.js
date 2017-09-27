@@ -5,7 +5,7 @@ const drawOverallInstructor = (tableData = instructorData) => {
         tableData.default.map(x => data.push(
             [x.instructorName, x.dept, x.percentileRankingByFaculty, x.percentileRankingByDept, x.numberOfCoursesTaught, x.numberOfStudentsTaught]
         ))
-        $('#OverallInstructors').DataTable({
+        $('#UMIInstructors').DataTable({
             "aaData": data,
             "aoColumns":
             [
