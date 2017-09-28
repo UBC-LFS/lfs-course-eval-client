@@ -14,7 +14,7 @@ const drawOverallInstructor = (tableData = instructorData) => {
                 { "sTitle": "Percentile Ranking By Faculty" },
                 { "sTitle": "Percentile Ranking By Department" },
                 { "sTitle": "Number of Courses Taught" },
-                { "sTitle": "Number of Students Taught" }
+                { "sTitle": "Number of Students Taught" },
             ],
             "order": [[ 0, "asc" ]]
         });
