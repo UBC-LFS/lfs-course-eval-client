@@ -5,7 +5,7 @@ const drawUMIInstructor = (tableData = courseData) => {
     tableData.default.map(x => data.push(
         [x.course + ' ' + x.section, x.UMI1.average, x.UMI2.average, x.UMI3.average, x.UMI4.average, x.UMI5.average, x.UMI6.average, x.year]
     ))
-    $('#OverallInstructors').DataTable({
+    $('#UMIInstructors').DataTable({
         "aaData": data,
         "aoColumns":
         [
