@@ -2,7 +2,8 @@ import { loadData, loadFilterData } from '../service/dataService'
 import drawChart1 from '../viz/drawChart1'
 import drawOverallInstructor from '../viz/drawOverallInstructorTable'
 import drawUMIInstructor from '../viz/drawUMIInstructorTable'
-import codesAndDef from '../constants/questionDefinitions'
+import drawCoursePerformance from '../viz/drawCoursePerformanceTable'
+import * as questionDefinitions from '../constants/questionDefinitions'
 import * as get from '../util/get'
 import R from 'ramda'
 
@@ -55,7 +56,7 @@ const initEventListeners = (initialFilterSetting, filterObj, ids) => {
     ids.courseLevelSelection.innerHTML = filterObj.courseLevels.map(x => '<option value="' + x + '">' + x + '</option>').join(' ')
     ids.courseLevelSelection.value = 'all'
 
-    ids.questionCodeSelection.innerHTML = filterObj.questionCodes.map(x => '<option value="' + x + '">' + x + ": " + codesAndDef[x] + '</option>').join(' ')
+    ids.questionCodeSelection.innerHTML = filterObj.questionCodes.map(x => '<option value="' + x + '">' + x + ": " + questionDefinitions.codesAndDef[x] + '</option>').join(' ')
     ids.questionCodeSelection.value = 'UMI6'
 
     filterObj.depts.push('all')
@@ -70,7 +71,8 @@ const initEventListenerController = (filterSetting, ids) => {
 
 const chartController = (filterSettings) => {
     drawOverallInstructor()
-    drawUMIInstructor()    
+    drawUMIInstructor() 
+        drawCoursePerformance(undefined, 'UMI6')   
     const chart1Data = loadData(undefined, 'c1')
     chart1Data.then(data => drawChart1(data))
     // call chart2data, chart3data from here?
