@@ -8,7 +8,8 @@
     "test-coverage": "jest --coverage",
     "start": "npm-run-all --parallel watch:build",
     "watch:build": "webpack --watch --display-error-details",
-    "build": "webpack -p"
+    "build": "webpack -p",
+    "style": "standard --global describe --global it"
   },
   "author": "Justin Lee/Clara Chu",
   "license": "ISC",
@@ -29,6 +30,7 @@
     "mocha": "^3.3.0",
     "nodemon": "^1.11.0",
     "npm-run-all": "^4.0.2",
+    "standard": "^10.0.3",
     "webpack": "^3.5.6",
     "webpack-dev-server": "^2.7.1"
   },
