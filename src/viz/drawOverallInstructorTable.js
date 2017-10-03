@@ -3,10 +3,10 @@
 import * as instructorData from '../data/mockInstructorData'
 
 const drawOverallInstructor = (tableData = instructorData) => {
-  const data = []
-  tableData.default.map(x => data.push(
-            [x.instructorName, x.dept, x.percentileRankingByFaculty, x.percentileRankingByDept, x.numberOfCoursesTaught, x.numberOfStudentsTaught]
-        ))
+  const data = tableData.default.map(x => (
+    [x.instructorName, x.dept, x.percentileRankingByFaculty, x.percentileRankingByDept, x.numberOfCoursesTaught, x.numberOfStudentsTaught]
+  ))
+
   $('#OverallInstructors').DataTable({
     'aaData': data,
     'aoColumns':
