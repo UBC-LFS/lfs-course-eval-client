@@ -1,4 +1,6 @@
-import * as filter from '../util/filter'
+/* global d3 */
+
+// import * as filter from '../util/filter'
 import * as util from '../clientUtil'
 import R from 'ramda'
 import { margin, height, percentFavourableColor6, graphWidth } from '../constants/constants'
@@ -26,7 +28,7 @@ const drawUMIvsDispersion = (data, filterSettings) => {
         util.filterClassSize(minMaxRange)
     )(flatData)
 
-  const range = util.getRange(flatData)
+  // const range = util.getRange(flatData)
 
   const svg = d3.select('#UMIvsDispersionGraph')
         .append('svg')

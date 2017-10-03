@@ -1,3 +1,5 @@
+/* global describe, it */
+
 import * as filter from '../src/util/filter'
 import assert from 'assert'
 

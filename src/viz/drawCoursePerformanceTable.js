@@ -1,7 +1,6 @@
 /* global $ */
 
 import * as courseData from '../data/mockCoursePerformanceData'
-import * as d3 from 'd3'
 
 const drawCoursePerformance = (tableData = courseData.courses, questionCode) => {
   const data = []

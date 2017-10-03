@@ -1,3 +1,5 @@
+/* global describe, it */
+
 import * as dataService from '../src/service/dataService'
 import assert from 'assert'
 
