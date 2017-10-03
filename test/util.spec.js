@@ -1,3 +1,5 @@
+/* global describe, it */
+
 import * as util from '../src/util/util'
 import assert from 'assert'
 
