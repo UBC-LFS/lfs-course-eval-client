@@ -6,7 +6,7 @@ import * as d3 from 'd3'
 const drawCoursePerformance = (tableData = courseData.courses, questionCode) => {
   const data = []
   tableData.map(x => data.push(
-    [x.course + ' ' + x.section, x.classSize, x[questionCode].average, x.percentResponses * 100 + '%', x.year]
+    [x.course + ' ' + x.section, x.classSize, x[questionCode].average, x.percentResponses * 100 + '%', x.year, courseData.courseAvg[x.course], courseData.deptAvg[x.dept]]
   ))
   $('#CoursePerformance').DataTable({
     'aaData': data,
@@ -17,7 +17,7 @@ const drawCoursePerformance = (tableData = courseData.courses, questionCode) => 
       {
         'sTitle': 'UMI Average',
         'render': function (data, type, row, meta) {
-          return $('<div></div>', {
+          return $('<div></div>').append(row[2] + $('<div></div>', {
             'class': 'bar-chart-bar'
           }).append(function () {
             const bars = []
@@ -26,17 +26,20 @@ const drawCoursePerformance = (tableData = courseData.courses, questionCode) => 
             }).css({
               'width': (row[2] / 5) * 100 + '%'
             }))
+            bars.push($('<div></div>', { 'class': 'line' }).css({ 'left': (row[5] / 5) * 100 + '%' }))
             return bars
-          }).prop('outerHTML')
+          }).prop('outerHTML')).prop('outerHTML')
         }
       },
       { 'sTitle': 'Response Rate' },
-      { 'sTitle': 'Year' }
+      { 'sTitle': 'Year' },
+      { 'sTitle': 'Course Average' },
+      { 'sTitle': 'Department Average' }
     ],
     'aoColumnDefs': [
       { 'bSortable': false, 'aTargets': [0] },
       {
-        'targets': [4],
+        'targets': [4, 5, 6],
         'visible': false,
         'searchable': false
       },
