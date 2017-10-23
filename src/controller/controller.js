@@ -1,5 +1,5 @@
 import { loadData, loadFilterData } from '../service/dataService'
-import drawChart1 from '../viz/drawChart1'
+import drawUMIVsDispersion from '../viz/drawUMIVsDispersion'
 import drawOverallInstructor from '../viz/drawOverallInstructorTable'
 import drawUMIInstructor from '../viz/drawUMIInstructorTable'
 import drawCoursePerformance from '../viz/drawCoursePerformanceTable'
@@ -72,7 +72,7 @@ const chartController = (filterSettings) => {
   drawUMIInstructor()
   drawCoursePerformance(undefined, 'UMI6')
   const chart1Data = loadData(undefined, 'c1')
-  chart1Data.then(data => drawChart1(data))
+  chart1Data.then(data => drawUMIVsDispersion(data))
     // call chart2data, chart3data from here?
 }
 
