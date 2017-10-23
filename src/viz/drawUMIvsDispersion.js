@@ -11,7 +11,6 @@ d3.tip = d3Tip
 const drawUMIvsDispersion = (array) => {
   const graph = document.getElementById('UMIvsDispersionGraph')
   const graphWidth = $('#UMIvsDispersionGraph').width()
-  console.log(array)
   const svg = d3.select('#UMIvsDispersionGraph')
             .append('svg')
             .attr('style', 'display: block; margin: auto; margin-top: 30px;')
