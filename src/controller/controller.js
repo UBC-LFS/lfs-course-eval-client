@@ -1,4 +1,4 @@
-import { loadData, loadFilterData } from '../service/dataService'
+import { loadData, fetchJSON } from '../service/dataService'
 import drawUMIVsDispersion from '../viz/drawUMIVsDispersion'
 import drawOverallInstructor from '../viz/drawOverallInstructorTable'
 import drawUMIInstructor from '../viz/drawUMIInstructorTable'
@@ -63,7 +63,7 @@ const initEventListeners = (initialFilterSetting, filterObj, ids) => {
 }
 
 const initEventListenerController = (filterSetting, ids) => {
-  const filterData = loadFilterData()
+  const filterData = fetchJSON('filterData')
   filterData.then(filterObj => initEventListeners(filterSetting, filterObj, ids))
 }
 

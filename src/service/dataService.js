@@ -19,10 +19,8 @@ const loadData = (filterSettings = {
   classSizeMax: 300 // [min, max]
 }, chartKey) => fetchJSON(createFilterString(filterSettings, chartKey))
 
-const loadFilterData = () => fetchJSON('filterData')
-
 export {
     loadData,
-    loadFilterData,
-    createFilterString
+    createFilterString,
+    fetchJSON
 }
