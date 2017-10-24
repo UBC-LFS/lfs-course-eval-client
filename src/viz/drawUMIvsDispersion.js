@@ -8,8 +8,7 @@ import * as d3 from 'd3'
 import d3Tip from 'd3-tip'
 d3.tip = d3Tip
 
-const drawUMIvsDispersion = (array) => {
-  const graph = document.getElementById('UMIvsDispersionGraph')
+const drawUMIvsDispersion = (array, filter = { UMI: 6 }) => {
   const graphWidth = $('#UMIvsDispersionGraph').width()
   const svg = d3.select('#UMIvsDispersionGraph')
             .append('svg')
@@ -47,42 +46,42 @@ const drawUMIvsDispersion = (array) => {
 
   const courseInfoTip = d3.tip().html(function (d) {
     return "<div class='d3ToolTip'>" +
-                '<p>instructor: ' + d.instructor + '</p>' +
-                '<p>Section: ' + d.courseNum + '</p>' +
-                '<p>Question Code: ' + d.questionCode + ' "' + questionDefinitions['codesAndDef'][d.questionCode] +
+                '<p>instructor: ' + d.instructorName + '</p>' +
+                '<p>Section: ' + d.section + '</p>' +
+                '<p>Question Code: ' + 'UMI' + filter.UMI + ' "' + questionDefinitions['codesAndDef']['UMI' + filter.UMI] +
                 '"' + '</p>' +
-                '<p>Average: ' + util.roundToTwoDecimal(d.Avg) + '</p>' +
-                '<p>Dispersion Index: ' + util.roundToTwoDecimal(d.Dispersion) + '</p>' +
-                '<p>Class Size: ' + d.classSize + '</p>' +
-                '<p>Response Rate: ' + util.roundToTwoDecimal(d.percentResponses * 100) + '%' + '</p>' +
-                '<p>Percent Favourable: ' + util.roundToTwoDecimal(d.PercentFavourable) + '%' + '</p>' +
+                '<p>Average: ' + d['UMI' + filter.UMI].average + '</p>' +
+                '<p>Dispersion Index: ' + d['UMI' + filter.UMI].dispersionIndex + '</p>' +
+                // '<p>Class Size: ' + d.classSize + '</p>' +
+                // '<p>Response Rate: ' + util.roundToTwoDecimal(d.percentResponses * 100) + '%' + '</p>' +
+                '<p>Percent Favourable: ' + d['UMI' + filter.UMI].percentFavourable + '%' + '</p>' +
                 '</div>'
   }).direction(function (d) {
-    if (x(d.Dispersion) < 200) return 'e'
+    if (x(d['UMI' + filter.UMI].dispersionIndex) < 200) return 'e'
     else return 'n'
   })
 
   umiDots.selectAll('dot')
             .data(array)
             .enter().append('circle')
-            .attr('cx', (d) => x(Math.min(d['Dispersion'], 0.8)))
-            .attr('cy', (d) => y(Math.max(d['Avg'], 2)))
-            .attr('r', (d) => Math.pow(Math.log(d['classSize']), 1.7))
+            .attr('cx', (d) => x(Math.min(d['UMI' + filter.UMI].dispersionIndex, 0.8)))
+            .attr('cy', (d) => y(Math.max(d['UMI' + filter.UMI].average, 2)))
+            .attr('r', (d) => 12) // Math.pow(Math.log(d['classSize']), 1.7))
             .style('fill', (d) => {
-              if (d['PercentFavourable'] >= 90) {
+              if (d['UMI' + filter.UMI].percentFavourable >= 90) {
                 return percentFavourableColor6.first
-              } else if (d['PercentFavourable'] >= 80 && d['PercentFavourable'] < 90) {
+              } else if (d['UMI' + filter.UMI].percentFavourable >= 80 && d['UMI' + filter.UMI].percentFavourable < 90) {
                 return percentFavourableColor6.second
-              } else if (d['PercentFavourable'] >= 70 && d['PercentFavourable'] < 80) {
+              } else if (d['UMI' + filter.UMI].percentFavourable >= 70 && d['UMI' + filter.UMI].percentFavourable < 80) {
                 return percentFavourableColor6.third
-              } else if (d['PercentFavourable'] >= 60 && d['PercentFavourable'] < 70) {
+              } else if (d['UMI' + filter.UMI].percentFavourable >= 60 && d['UMI' + filter.UMI].percentFavourable < 70) {
                 return percentFavourableColor6.fourth
-              } else if (d['PercentFavourable'] >= 50 && d['PercentFavourable'] < 60) {
+              } else if (d['UMI' + filter.UMI].percentFavourable >= 50 && d['UMI' + filter.UMI].percentFavourable < 60) {
                 return percentFavourableColor6.fifth
               } else return percentFavourableColor6.sixth
             })
             .attr('class', (d) => {
-              if (util.stripMiddleName(d.instructor) === name) {
+              if (util.stripMiddleName(d.instructorName) === name) {
                 return 'pulse'
               }
             })
@@ -93,19 +92,19 @@ const drawUMIvsDispersion = (array) => {
   umiDots.selectAll('dot')
             .data(R.filter(x => util.stripMiddleName(x.instructor) === name, array))
             .enter().append('circle')
-            .attr('cx', (d) => x(Math.min(d['Dispersion'], 0.8)))
-            .attr('cy', (d) => y(Math.max(d['Avg'], 2)))
-            .attr('r', (d) => Math.pow(Math.log(d['classSize']), 1.7))
+            .attr('cx', (d) => x(Math.min(d['UMI' + filter.UMI].dispersionIndex, 0.8)))
+            .attr('cy', (d) => y(Math.max(d['UMI' + filter.UMI].average, 2)))
+            .attr('r', (d) => 12) // Math.pow(Math.log(d['classSize']), 1.7))
             .style('fill', (d) => {
-              if (d['PercentFavourable'] >= 90) {
+              if (d['UMI' + filter.UMI].percentFavourable >= 90) {
                 return percentFavourableColor6.first
-              } else if (d['PercentFavourable'] >= 80 && d['PercentFavourable'] < 90) {
+              } else if (d['UMI' + filter.UMI].percentFavourable >= 80 && d['UMI' + filter.UMI].percentFavourable < 90) {
                 return percentFavourableColor6.second
-              } else if (d['PercentFavourable'] >= 70 && d['PercentFavourable'] < 80) {
+              } else if (d['UMI' + filter.UMI].percentFavourable >= 70 && d['UMI' + filter.UMI].percentFavourable < 80) {
                 return percentFavourableColor6.third
-              } else if (d['PercentFavourable'] >= 60 && d['PercentFavourable'] < 70) {
+              } else if (d['UMI' + filter.UMI].percentFavourable >= 60 && d['UMI' + filter.UMI].percentFavourable < 70) {
                 return percentFavourableColor6.fourth
-              } else if (d['PercentFavourable'] >= 50 && d['PercentFavourable'] < 60) {
+              } else if (d['UMI' + filter.UMI].percentFavourable >= 50 && d['UMI' + filter.UMI].percentFavourable < 60) {
                 return percentFavourableColor6.fifth
               } else return percentFavourableColor6.sixth
             })
