@@ -26,12 +26,12 @@ const drawCoursePerformance = (tableData = courseData.courses, questionCode) => 
             }).css({
               'width': (row[2] / 5) * 100 + '%'
             }))
-            bars.push($('<div></div>', { 'class': 'line' }).css({ 'left': (row[5] / 5) * 100 + '%' }).css({'color': '#ccc'}).append(function(){
+            bars.push($('<div></div>', { 'class': 'line' }).css({ 'left': (row[5] / 5) * 100 + '%' }).css({'color': '#ccc'}).append(function () {
               return $('<span></span>', {
                 'class': 'tooltiptext'
               }).append('Course Average: ' + row[5]).prop('outerHTML')
             }))
-            bars.push($('<div></div>', { 'class': 'line' }).css({ 'left': (row[6] / 5) * 100 + '%' }).css({'color': 'gold'}).append(function(){
+            bars.push($('<div></div>', { 'class': 'line' }).css({ 'left': (row[6] / 5) * 100 + '%' }).css({'color': 'gold'}).append(function () {
               return $('<span></span>', {
                 'class': 'tooltiptext'
               }).append('Department Average: ' + row[6]).prop('outerHTML')
