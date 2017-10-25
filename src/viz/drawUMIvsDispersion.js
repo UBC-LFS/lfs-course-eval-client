@@ -66,7 +66,7 @@ const drawUMIvsDispersion = (array, filter = { UMI: 6 }) => {
             .enter().append('circle')
             .attr('cx', (d) => x(Math.min(d['UMI' + filter.UMI].dispersionIndex, 0.8)))
             .attr('cy', (d) => y(Math.max(d['UMI' + filter.UMI].average, 2)))
-            .attr('r', (d) => 12) // Math.pow(Math.log(d['classSize']), 1.7))
+            .attr('r', (d) => Math.pow(Math.log(d.enrolment), 1.7))
             .style('fill', (d) => {
               const percentFavourable = d['UMI' + filter.UMI].percentFavourable
               if (percentFavourable >= 0.90) {
