@@ -2,8 +2,6 @@
 
 import { margin, height, percentFavourableColor6 } from '../constants/constants'
 import * as questionDefinitions from '../constants/questionDefinitions'
-import * as util from '../util/util.js'
-import R from 'ramda'
 import * as d3 from 'd3'
 import d3Tip from 'd3-tip'
 d3.tip = d3Tip
