@@ -68,46 +68,24 @@ const drawUMIvsDispersion = (array, filter = { UMI: 6 }) => {
             .attr('cy', (d) => y(Math.max(d['UMI' + filter.UMI].average, 2)))
             .attr('r', (d) => 12) // Math.pow(Math.log(d['classSize']), 1.7))
             .style('fill', (d) => {
-              if (d['UMI' + filter.UMI].percentFavourable >= 90) {
+              const percentFavourable = d['UMI' + filter.UMI].percentFavourable
+              if (percentFavourable >= 0.90) {
                 return percentFavourableColor6.first
-              } else if (d['UMI' + filter.UMI].percentFavourable >= 80 && d['UMI' + filter.UMI].percentFavourable < 90) {
+              } else if (percentFavourable >= 0.80 && percentFavourable < 0.90) {
                 return percentFavourableColor6.second
-              } else if (d['UMI' + filter.UMI].percentFavourable >= 70 && d['UMI' + filter.UMI].percentFavourable < 80) {
+              } else if (percentFavourable >= 0.70 && percentFavourable < 0.80) {
                 return percentFavourableColor6.third
-              } else if (d['UMI' + filter.UMI].percentFavourable >= 60 && d['UMI' + filter.UMI].percentFavourable < 70) {
+              } else if (percentFavourable >= 0.60 && percentFavourable < 0.70) {
                 return percentFavourableColor6.fourth
-              } else if (d['UMI' + filter.UMI].percentFavourable >= 50 && d['UMI' + filter.UMI].percentFavourable < 60) {
+              } else if (percentFavourable >= 0.50 && percentFavourable < 0.60) {
                 return percentFavourableColor6.fifth
               } else return percentFavourableColor6.sixth
             })
-            .attr('class', (d) => {
-              if (util.stripMiddleName(d.instructorName) === name) {
-                return 'pulse'
-              }
-            })
-            .on('mouseover', courseInfoTip.show)
-            .on('mouseout', courseInfoTip.hide)
-
-        // set circles for the instructor
-  umiDots.selectAll('dot')
-            .data(R.filter(x => util.stripMiddleName(x.instructor) === name, array))
-            .enter().append('circle')
-            .attr('cx', (d) => x(Math.min(d['UMI' + filter.UMI].dispersionIndex, 0.8)))
-            .attr('cy', (d) => y(Math.max(d['UMI' + filter.UMI].average, 2)))
-            .attr('r', (d) => 12) // Math.pow(Math.log(d['classSize']), 1.7))
-            .style('fill', (d) => {
-              if (d['UMI' + filter.UMI].percentFavourable >= 90) {
-                return percentFavourableColor6.first
-              } else if (d['UMI' + filter.UMI].percentFavourable >= 80 && d['UMI' + filter.UMI].percentFavourable < 90) {
-                return percentFavourableColor6.second
-              } else if (d['UMI' + filter.UMI].percentFavourable >= 70 && d['UMI' + filter.UMI].percentFavourable < 80) {
-                return percentFavourableColor6.third
-              } else if (d['UMI' + filter.UMI].percentFavourable >= 60 && d['UMI' + filter.UMI].percentFavourable < 70) {
-                return percentFavourableColor6.fourth
-              } else if (d['UMI' + filter.UMI].percentFavourable >= 50 && d['UMI' + filter.UMI].percentFavourable < 60) {
-                return percentFavourableColor6.fifth
-              } else return percentFavourableColor6.sixth
-            })
+            // .attr('class', (d) => {
+            //   if (util.stripMiddleName(d.instructorName) === name) {
+            //     return 'pulse'
+            //   }
+            // })
             .on('mouseover', courseInfoTip.show)
             .on('mouseout', courseInfoTip.hide)
 
