@@ -3,6 +3,7 @@ import drawUMIVsDispersion from '../viz/drawUMIVsDispersion'
 import drawOverallInstructor from '../viz/drawOverallInstructorTable'
 import drawUMIInstructor from '../viz/drawUMIInstructorTable'
 import drawCoursePerformance from '../viz/drawCoursePerformanceTable'
+import drawCountHistogram from '../viz/drawCountHistogram'
 import * as questionDefinitions from '../constants/questionDefinitions'
 
 const eventListeners = (filterSetting, ids, callback) => {
@@ -82,6 +83,7 @@ const chartController = (filterSettings) => {
     drawUMIVsDispersion(data)
   })
 
+  drawCountHistogram()
   // call chart2data, chart3data from here?
 }
 
