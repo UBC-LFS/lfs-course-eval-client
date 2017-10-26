@@ -11,10 +11,10 @@ let sampleCount = {
 }
 
 const drawCountHistogram = (count = sampleCount) => {
+  const width = 960 - margin.left - margin.right
+
   const x = d3.scaleLinear().domain([1, 2, 3, 4, 5]).rangeRound([0, width])
   const y = d3.scaleLinear().range([height, 0])
-
-  const width = 960 - margin.left - margin.right
 
   const svg = d3.select('body').append('svg')
     .attr('width', width)
@@ -37,7 +37,7 @@ const drawCountHistogram = (count = sampleCount) => {
     .attr('width', (d) => x(d.x1) - x(d.x0) - 1)
     .attr('height', (d) => height - y(d.length))
 
-  console.log(bins)
+  console.log(arrayOfCounts, bins)
 }
 
 export default drawCountHistogram
