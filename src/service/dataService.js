@@ -19,8 +19,14 @@ const loadData = (filterSettings = {
   classSizeMax: 300 // [min, max]
 }, chartKey) => fetchJSON(createFilterString(filterSettings, chartKey))
 
+const loadUMIInstructor = () => fetchJSON('data/UMIInstructor')
+const loadOverallInstructorData = () => fetchJSON('data/OverallInstructor')
+const loadCoursePerformance = () => fetchJSON('data/CoursePerformance')
 export {
     loadData,
     createFilterString,
-    fetchJSON
+    fetchJSON,
+    loadUMIInstructor,
+    loadOverallInstructorData,
+    loadCoursePerformance
 }
