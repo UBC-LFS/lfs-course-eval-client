@@ -34,7 +34,7 @@ const drawCountHistogram = (count = sampleCount) => {
     .data(bins)
     .enter().append('g')
       .attr('class', 'bar')
-      .attr('transform', function (d) { return 'translate(' + x(d.x0 / 5) + ',' + y(d.length) + ')' })
+      .attr('transform', function (d) { return 'translate(' + x((d.x0 - 1) / 5) + ',' + y(d.length) + ')' })
 
   bar.append('rect')
     .attr('x', 1)
