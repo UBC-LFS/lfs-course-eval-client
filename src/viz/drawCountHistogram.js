@@ -13,29 +13,42 @@ let sampleCount = {
 const drawCountHistogram = (count = sampleCount) => {
   const width = 960 - margin.left - margin.right
 
-  const x = d3.scaleLinear().domain([1, 2, 3, 4, 5]).rangeRound([0, width])
+  const x = d3.scaleLinear().rangeRound([0, width])
   const y = d3.scaleLinear().range([height, 0])
 
   const svg = d3.select('body').append('svg')
     .attr('width', width)
     .attr('height', height)
-    .append('g')
+  
+  const g = svg.append('g')
 
   const arrayOfCounts = convertCountIntoArray(count)
-  const histogram = d3.histogram()
 
-  const bins = histogram(arrayOfCounts)
+  const bins = d3.histogram()
+    .domain(x.domain())
+    .thresholds(x.ticks())(count)
 
-  y.domain(0, d3.max(bins))
+  y.domain([0, d3.max(bins, (d) => d.length)])
 
-  svg.selectAll('rect')
+  const bar = g.selectAll('.bar')
     .data(bins)
-    .enter().append('rect')
-    .attr('class', 'bar')
+    .enter().append('g')
+      .attr('class', 'bar')
+      .attr('transform', function (d) { return 'translate(' + x(d.x0) + ',' + y(d.length) + ')' })
+
+  bar.append('rect')
     .attr('x', 1)
-    .attr('transform', (d) => 'translate(' + x(d.x0) + ',' + y(d.length) + ')')
-    .attr('width', (d) => x(d.x1) - x(d.x0) - 1)
-    .attr('height', (d) => height - y(d.length))
+    .attr('width', x(bins[0].x1) - x(bins[0].x0) - 1)
+    .attr('height', function (d) { return height - y(d.length) })
+
+  // svg.selectAll('rect')
+  //   .data(bins)
+  //   .enter().append('rect')
+  //   .attr('class', 'bar')
+  //   .attr('x', 1)
+  //   .attr('transform', (d) => 'translate(' + x(d.x0) + ',' + y(d.length) + ')')
+  //   .attr('width', (d) => x(d.x1) - x(d.x0) - 1)
+  //   .attr('height', (d) => height - y(d.length))
 
   console.log(arrayOfCounts, bins)
 }
