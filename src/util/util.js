@@ -17,10 +17,10 @@ const flattenArray = (array) => array.reduce((acc, cur) => {
 const convertCountIntoArray = (count) => {
   let resultArray = []
   for (let i = 1; i <= 5; i++) {
-    let c = count[String(i)]
+    let c = count[Number(i)]
     // if c is undefined continue
     if (!c) continue
-    let a = Array(c).fill(String(i))
+    let a = Array(c).fill(Number(i))
     resultArray = [resultArray, ...a]
     resultArray = flattenArray(resultArray)
   }

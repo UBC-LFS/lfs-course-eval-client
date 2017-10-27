@@ -64,7 +64,7 @@ describe('convertCountIntoArray', () => {
       '4': 4,
       '5': 5
     }
-    let output = ['1', '2', '2', '3', '3', '3', '4', '4', '4', '4', '5', '5', '5', '5', '5']
+    let output = [1, 2, 2, 3, 3, 3, 4, 4, 4, 4, 5, 5, 5, 5, 5]
     assert.deepEqual(util.convertCountIntoArray(sampleCount), output)
   })
   it('can handle missing count properties', () => {
@@ -72,10 +72,10 @@ describe('convertCountIntoArray', () => {
       '1': 1,
       '2': 2
     }
-    assert.deepEqual(util.convertCountIntoArray(sampleCount), ['1', '2', '2'])
+    assert.deepEqual(util.convertCountIntoArray(sampleCount), [1, 2, 2])
     sampleCount = {
       '5': 100
     }
-    assert.deepEqual(util.convertCountIntoArray(sampleCount), Array(100).fill('5'))
+    assert.deepEqual(util.convertCountIntoArray(sampleCount), Array(100).fill(5))
   })
 })
