@@ -24,7 +24,7 @@ const drawCountHistogram = (count = sampleCount) => {
 
   const arrayOfCounts = convertCountIntoArray(count)
 
-  const bins = d3.histogram().domain([1, 5])(arrayOfCounts)
+  const bins = d3.histogram().thresholds([1, 2, 3, 4, 5])(arrayOfCounts)
 
   // console.log(arrayOfCounts, bins)
 
@@ -34,14 +34,14 @@ const drawCountHistogram = (count = sampleCount) => {
     .data(bins)
     .enter().append('g')
       .attr('class', 'bar')
-      .attr('transform', function (d) { return 'translate(' + x(d.x0) + ',' + y(d.length) + ')' })
+      .attr('transform', function (d) { return 'translate(' + x(d.x0 / 5) + ',' + y(d.length) + ')' })
 
   bar.append('rect')
     .attr('x', 1)
-    .attr('width', x(bins[0].x1) - x(bins[0].x0) - 1)
+    .attr('width', x(bins[0].x1 / 5) - x(bins[0].x0 / 5) - 1)
     .attr('height', function (d) {
       // console.log(d)
-      // console.log(height, d.length)
+      console.log(height, d.length)
       return height - y(d.length)
     })
 
@@ -61,7 +61,7 @@ const drawCountHistogram = (count = sampleCount) => {
     .thresholds(x.ticks(20))
     (dataT)
 
-  console.log(bins, bins2)
+  console.log('bins', bins, 'bins2', bins2)
 }
 
 export default drawCountHistogram
