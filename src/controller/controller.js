@@ -74,16 +74,14 @@ const chartController = (filterSettings) => {
   drawCoursePerformance(undefined, 'UMI6')
   const chart1Data = loadData(undefined, 'c1')
   chart1Data.then(data => {
-    console.log(data)
+    // console.log(data)
   })
 
   const umiDispersionData = fetchJSON('umiDispersion')
   umiDispersionData.then(data => {
-    console.log(data)
+    // console.log(data)
     drawUMIVsDispersion(data)
   })
-
-  drawCountHistogram()
   // call chart2data, chart3data from here?
 }
 

@@ -17,7 +17,7 @@ const flattenArray = (array) => array.reduce((acc, cur) => {
 const convertCountIntoArray = (count) => {
   let resultArray = []
   for (let i = 1; i <= 5; i++) {
-    let c = count[Number(i)]
+    let c = count[i]
     // if c is undefined continue
     if (!c) continue
     let a = Array(c).fill(Number(i))
