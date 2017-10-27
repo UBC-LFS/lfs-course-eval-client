@@ -44,12 +44,10 @@ const drawUMIvsDispersion = (array, filter = { UMI: 6 }) => {
   const umiDots = g.append('g').attr('id', 'umiDots')
 
   const courseInfoTip = d3.tip().html(function (d) {
-
     const tmp = document.createElement('div')
-    tmp.appendChild(drawCountHistogram(d.UMI6.count).node())
-
+    tmp.appendChild(drawCountHistogram(d['UMI' + filter.UMI].count).node())
     const histHTML = tmp.innerHTML
-
+    console.log(d)
     return "<div class='d3ToolTip'>" +
                       '<p>instructor: ' + d.instructorName + '</p>' +
                       '<p>Section: ' + d.section + '</p>' +
@@ -57,8 +55,8 @@ const drawUMIvsDispersion = (array, filter = { UMI: 6 }) => {
                       '"' + '</p>' +
                       '<p>Average: ' + d['UMI' + filter.UMI].average + '</p>' +
                       '<p>Dispersion Index: ' + d['UMI' + filter.UMI].dispersionIndex + '</p>' +
-                      // '<p>Class Size: ' + d.classSize + '</p>' +
-                      // '<p>Response Rate: ' + util.roundToTwoDecimal(d.percentResponses * 100) + '%' + '</p>' +
+                      '<p>Class Size: ' + d.enrolment + '</p>' +
+                      '<p>Response Rate: ' + Math.round(d.responseRate * 100) + '%' + '</p>' +
                       '<p>Percent Favourable: ' + d['UMI' + filter.UMI].percentFavourable + '%' + '</p>' +
                       histHTML +
                   '</div>'
