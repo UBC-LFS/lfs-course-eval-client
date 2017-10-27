@@ -45,7 +45,7 @@ const drawCountHistogram = (count = sampleCount) => {
     .attr('y', 6)
     .attr('x', (x(bins[0].x1 / 5) - x(bins[0].x0 / 5)) / 2)
     .attr('text-anchor', 'middle')
-    .text((d) => 'UMI' + d.x0 + ': ' + d.length)
+    .text((d) => d.length)
 
   return svg
 }
