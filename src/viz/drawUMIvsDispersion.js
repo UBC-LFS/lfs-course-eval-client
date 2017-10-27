@@ -1,6 +1,7 @@
 /* global $ */
 
 import { margin, height, percentFavourableColor6 } from '../constants/constants'
+import drawCountHistogram from './drawCountHistogram'
 import * as questionDefinitions from '../constants/questionDefinitions'
 import * as d3 from 'd3'
 import d3Tip from 'd3-tip'
@@ -43,17 +44,24 @@ const drawUMIvsDispersion = (array, filter = { UMI: 6 }) => {
   const umiDots = g.append('g').attr('id', 'umiDots')
 
   const courseInfoTip = d3.tip().html(function (d) {
+
+    const tmp = document.createElement('div')
+    tmp.appendChild(drawCountHistogram(d.UMI6.count).node())
+
+    const histHTML = tmp.innerHTML
+
     return "<div class='d3ToolTip'>" +
-                '<p>instructor: ' + d.instructorName + '</p>' +
-                '<p>Section: ' + d.section + '</p>' +
-                '<p>Question Code: ' + 'UMI' + filter.UMI + ' "' + questionDefinitions['codesAndDef']['UMI' + filter.UMI] +
-                '"' + '</p>' +
-                '<p>Average: ' + d['UMI' + filter.UMI].average + '</p>' +
-                '<p>Dispersion Index: ' + d['UMI' + filter.UMI].dispersionIndex + '</p>' +
-                // '<p>Class Size: ' + d.classSize + '</p>' +
-                // '<p>Response Rate: ' + util.roundToTwoDecimal(d.percentResponses * 100) + '%' + '</p>' +
-                '<p>Percent Favourable: ' + d['UMI' + filter.UMI].percentFavourable + '%' + '</p>' +
-                '</div>'
+                      '<p>instructor: ' + d.instructorName + '</p>' +
+                      '<p>Section: ' + d.section + '</p>' +
+                      '<p>Question Code: ' + 'UMI' + filter.UMI + ' "' + questionDefinitions['codesAndDef']['UMI' + filter.UMI] +
+                      '"' + '</p>' +
+                      '<p>Average: ' + d['UMI' + filter.UMI].average + '</p>' +
+                      '<p>Dispersion Index: ' + d['UMI' + filter.UMI].dispersionIndex + '</p>' +
+                      // '<p>Class Size: ' + d.classSize + '</p>' +
+                      // '<p>Response Rate: ' + util.roundToTwoDecimal(d.percentResponses * 100) + '%' + '</p>' +
+                      '<p>Percent Favourable: ' + d['UMI' + filter.UMI].percentFavourable + '%' + '</p>' +
+                      histHTML +
+                  '</div>'
   }).direction(function (d) {
     if (x(d['UMI' + filter.UMI].dispersionIndex) < 200) return 'e'
     else return 'n'

@@ -1,4 +1,4 @@
-import { margin, height } from '../constants/constants'
+import { margin } from '../constants/constants'
 import * as d3 from 'd3'
 import { convertCountIntoArray } from '../util/util'
 
@@ -11,12 +11,13 @@ let sampleCount = {
 }
 
 const drawCountHistogram = (count = sampleCount) => {
-  const width = 500 - margin.left - margin.right
+  const width = 300 - margin.left - margin.right
+  const height = 200
 
   const x = d3.scaleLinear().rangeRound([0, width])
   const y = d3.scaleLinear().range([height, 0])
 
-  const svg = d3.select('body').append('svg')
+  const svg = d3.select(document.createElement('div')).append('svg')
     .attr('width', width)
     .attr('height', height)
 
@@ -25,8 +26,6 @@ const drawCountHistogram = (count = sampleCount) => {
   const arrayOfCounts = convertCountIntoArray(count)
 
   const bins = d3.histogram().thresholds([1, 2, 3, 4, 5])(arrayOfCounts)
-
-  console.log(bins)
 
   y.domain([0, d3.max(bins, (d) => d.length)])
 
@@ -47,6 +46,8 @@ const drawCountHistogram = (count = sampleCount) => {
     .attr('x', (x(bins[0].x1 / 5) - x(bins[0].x0 / 5)) / 2)
     .attr('text-anchor', 'middle')
     .text((d) => 'UMI' + d.x0 + ': ' + d.length)
+
+  return svg
 }
 
 export default drawCountHistogram
