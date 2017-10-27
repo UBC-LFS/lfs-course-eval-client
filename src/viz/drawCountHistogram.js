@@ -11,7 +11,7 @@ let sampleCount = {
 }
 
 const drawCountHistogram = (count = sampleCount) => {
-  const width = 300 - margin.left - margin.right
+  const width = 375 - margin.left - margin.right
   const height = 200
 
   const x = d3.scaleLinear().rangeRound([0, width])
