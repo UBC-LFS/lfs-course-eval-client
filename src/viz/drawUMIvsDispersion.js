@@ -47,6 +47,7 @@ const drawUMIvsDispersion = (array, filter = { UMI: 6 }) => {
     const tmp = document.createElement('div')
     tmp.appendChild(drawCountHistogram(d['UMI' + filter.UMI].count).node())
     const histHTML = tmp.innerHTML
+    console.log(d)
     return "<div class='d3ToolTip'>" +
                       '<p>instructor: ' + d.instructorName + '</p>' +
                       '<p>Section: ' + d.section + '</p>' +
