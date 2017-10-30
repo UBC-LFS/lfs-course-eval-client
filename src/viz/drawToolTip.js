@@ -11,7 +11,7 @@ const drawToolTip = (filter, x) => d3.tip().html(function (d) {
   const histHTML = tmp.innerHTML
   console.log(d)
   return "<div class='d3ToolTip'>" +
-    '<p>instructor: ' + d.instructorName + '</p>' +
+    '<h3 style="text-align:center;"> ' + d.instructorName + '</h3>' +
     '<p>Section: ' + d.section + '</p>' +
     '<p>Question Code: ' + 'UMI' + filter.UMI + ' "' + questionDefinitions['codesAndDef']['UMI' + filter.UMI] +
     '"' + '</p>' +
