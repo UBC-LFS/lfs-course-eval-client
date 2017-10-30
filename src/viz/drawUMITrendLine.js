@@ -25,8 +25,6 @@ const drawCountHistogram = (arr = sampleArr) => {
     .attr('height', height)
 
   const g = svg.append('g')
-
-  
 }
 
 export default drawCountHistogram
