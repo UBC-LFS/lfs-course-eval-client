@@ -4,7 +4,7 @@ import { convertCountIntoArray } from '../util/util'
 
 const drawCountHistogram = (count) => {
   const width = 375 - margin.left - margin.right
-  const height = 200
+  const height = 100
 
   const x = d3.scaleLinear().rangeRound([0, width])
   const y = d3.scaleLinear().range([height, 0])
