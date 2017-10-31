@@ -24,7 +24,7 @@ const drawToolTip = (filter, x) => d3.tip().html(function (d) {
     '</div>'
 }).direction(function (d) {
   if (x(d['UMI' + filter.UMI].dispersionIndex) < 200) return 'e'
-  else return 'n'
+  else return 's'
 })
 
 export default drawToolTip
