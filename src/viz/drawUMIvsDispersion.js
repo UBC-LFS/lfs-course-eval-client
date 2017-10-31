@@ -79,7 +79,9 @@ const drawUMIvsDispersion = (array, filter = { UMI: 6 }) => {
               const circles = document.getElementsByTagName('circle')
               Array.prototype.map.call(circles, (x) => {
                 x.classList.remove('pulse')
-                x.innerHTML = ''
+                while (x.firstChild) {
+                  x.removeChild(x.firstChild)
+                }
               })
               const selectedCircles = document.getElementsByClassName(d.PUID)
               Array.prototype.map.call(selectedCircles, (x) => x.classList.add('pulse'))
