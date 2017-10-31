@@ -45,6 +45,7 @@ const drawUMIvsDispersion = (array, filter = { UMI: 6 }) => {
 
   // removing below min
   array = array.filter(x => x.meetsMin)
+  array = array.filter(x => x.year === 2016)
 
   umiDots.selectAll('dot')
             .data(array)
@@ -75,17 +76,21 @@ const drawUMIvsDispersion = (array, filter = { UMI: 6 }) => {
             .on('mouseover', courseInfoTip.show)
             .on('mouseout', courseInfoTip.hide)
             .on('click', (d) => {
-              d3.selectAll('circle').classed('pulse', false)
-              d3.selectAll('.' + d.PUID).classed('pulse', true)
+              const circles = document.getElementsByTagName('circle')
+              Array.prototype.map.call(circles, (x) => {
+                x.classList.remove('pulse')
+                x.innerHTML = ''
+              })
+              const selectedCircles = document.getElementsByClassName(d.PUID)
+              Array.prototype.map.call(selectedCircles, (x) => x.classList.add('pulse'))
+              // d3.selectAll('.' + d.PUID).classed('pulse', true)
               animate()
             })
 
         // append animation
   const animate = () => {
     const pulseList = document.getElementsByClassName('pulse')
-    Array.prototype.map.call(pulseList, (x) => {
-      x.innerHTML = '<animate attributeType="SVG" attributeName="r" begin="0s" dur="1.5s" repeatCount="indefinite" from="0%" to="10%"/><animate attributeType="CSS" attributeName="stroke-width" begin="0s"  dur="1.5s" repeatCount="indefinite" from="3%" to="0%" /><animate attributeType="CSS" attributeName="opacity" begin="0s"  dur="1.5s" repeatCount="indefinite" from="1" to="0"/>'
-    })
+    Array.prototype.map.call(pulseList, (x) => (x.innerHTML = '<animate attributeType="SVG" attributeName="r" begin="0s" dur="1.5s" repeatCount="indefinite" from="0%" to="10%"/><animate attributeType="CSS" attributeName="stroke-width" begin="0s"  dur="1.5s" repeatCount="indefinite" from="3%" to="0%" /><animate attributeType="CSS" attributeName="opacity" begin="0s"  dur="1.5s" repeatCount="indefinite" from="1" to="0"/>'))
   }
 
   svg.call(courseInfoTip)
