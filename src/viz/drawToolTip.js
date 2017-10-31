@@ -19,7 +19,7 @@ const drawToolTip = (filter, x) => d3.tip().html(function (d) {
     '<p>Dispersion Index: ' + d['UMI' + filter.UMI].dispersionIndex + '</p>' +
     '<p>Class Size: ' + d.enrolment + '</p>' +
     '<p>Response Rate: ' + Math.round(d.responseRate * 100) + '%' + '</p>' +
-    '<p>Percent Favourable: ' + d['UMI' + filter.UMI].percentFavourable + '%' + '</p>' +
+    '<p>Percent Favourable: ' + Math.round(d['UMI' + filter.UMI].percentFavourable * 100) + '%' + '</p>' +
     histHTML +
     '</div>'
 }).direction(function (d) {
