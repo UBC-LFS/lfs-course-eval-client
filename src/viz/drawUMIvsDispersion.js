@@ -43,6 +43,9 @@ const drawUMIvsDispersion = (array, filter = { UMI: 6 }) => {
   // tooltip config
   const courseInfoTip = drawToolTip(filter, x)
 
+  // removing below min
+  array = array.filter(x => x.meetsMin)
+
   umiDots.selectAll('dot')
             .data(array)
             .enter().append('circle')
