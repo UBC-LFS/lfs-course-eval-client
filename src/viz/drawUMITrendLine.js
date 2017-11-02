@@ -19,12 +19,14 @@ let sampleArr = [
 const drawUMITrendLine = (data = sampleArr) => {
   data = data.sort((a, b) => Number(a.year) - Number(b.year))
   // const margin = {top: 20, right: 20, bottom: 30, left: 40}
-  const width = 300 - margin.left - margin.right
-  const height = 200 - margin.top - margin.bottom
+  const w = 300
+  const h = 200
+  const width = w - margin.left - margin.right
+  const height = h - margin.top - margin.bottom
 
   const svg = d3.select(document.createElement('div')).append('svg')
-    .attr('width', width + margin.left + margin.right)
-    .attr('height', height + margin.top + margin.bottom)
+    .attr('width', w)
+    .attr('height', h)
 
   const g = svg.append('g').attr('transform', 'translate(' + margin.left + ',' + margin.top + ')')
 
@@ -58,6 +60,13 @@ const drawUMITrendLine = (data = sampleArr) => {
     .attr('class', 'line')
     .attr('d', line)
 
+  g.selectAll('circle')
+    .data(data)
+  .enter().append('circle')
+    .attr('class', 'circle')
+    .attr('cx', function (d) { return x(d.year) })
+    .attr('cy', function (d) { return y(d.UMI) })
+    .attr('r', 4)
   return svg
 }
 
