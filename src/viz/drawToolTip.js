@@ -1,4 +1,5 @@
 import drawCountHistogram from './drawCountHistogram'
+import { stripMiddleName } from '../util/util'
 import * as questionDefinitions from '../constants/questionDefinitions'
 
 import * as d3 from 'd3'
@@ -11,7 +12,7 @@ const drawToolTip = (filter, x) => d3.tip().html(function (d) {
   const histHTML = tmp.innerHTML
   console.log(d)
   return "<div class='d3ToolTip'>" +
-    '<h3 style="text-align:center;"> ' + d.instructorName + '</h3>' +
+    '<h3 style="text-align:center;"> ' + stripMiddleName(d.instructorName) + '</h3>' +
     '<p>Course: ' + d.course + ' ' + d.section + '</p>' +
     '<p>Question Code: ' + 'UMI' + filter.UMI + ' "' + questionDefinitions['codesAndDef']['UMI' + filter.UMI] +
     '"' + '</p>' +
