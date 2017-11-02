@@ -1,8 +1,9 @@
 /* global $ */
+import { stripMiddleName } from '../util/util'
 
 const drawOverallInstructor = (tableData) => {
   const data = tableData.map(x => (
-    [x.instructorName, x.dept, x.UMI6.average, Math.round(x.UMI6.percentFavourable * 100) + '%', x.numCoursesTaught, x.numStudentsTaught]
+    [stripMiddleName(x.instructorName), x.dept, x.UMI6.average, Math.round(x.UMI6.percentFavourable * 100) + '%', x.numCoursesTaught, x.numStudentsTaught]
   ))
 
   $('#OverallInstructors').DataTable({

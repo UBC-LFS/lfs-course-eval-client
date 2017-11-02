@@ -16,6 +16,12 @@ describe('stripMiddleName', () => {
     const stripFullName = util.stripMiddleName(data)
     assert.deepEqual(expected, stripFullName)
   })
+  it('should return the name if it does not have a middle name', () => {
+    const data = 'Callie Torres'
+    const expected = 'Callie Torres'
+    const stripFullName = util.stripMiddleName(data)
+    assert.deepEqual(expected, stripFullName)
+  })
 })
 
 describe('roundToTwoDecimal', () => {
