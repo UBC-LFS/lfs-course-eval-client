@@ -74,12 +74,12 @@ const chartController = (filterSettings) => {
   // drawCoursePerformance(undefined, 'UMI6')
   const OverallInstructorData = loadOverallInstructorData()
   OverallInstructorData.then(data => {
-    console.log(data)
+    console.log('overallInstructor data:', data)
     drawOverallInstructor(data)
   })
   const UMIInstructorData = loadUMIInstructor()
   UMIInstructorData.then(data => {
-    console.log(data)
+    console.log('umiInstructor data:', data)
     drawUMIInstructor(data)
   })
   // const coursePerformanceData = loadCoursePerformance()
@@ -94,7 +94,7 @@ const chartController = (filterSettings) => {
 
   const umiDispersionData = loadUMIDispersion()
   umiDispersionData.then(data => {
-    // console.log(data)
+    console.log('umiVsDispersion data:', data)
     drawUMIVsDispersion(data)
   })
   // call chart2data, chart3data from here?

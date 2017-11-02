@@ -1,7 +1,6 @@
 /* global $ */
 import R from 'ramda'
 
-
 const drawUMIInstructor = (UMIInstructorData, PUID = 'X53VU8MB9D08') => {
   const tableData = R.find(x => {
     return x.hasOwnProperty(PUID)
@@ -20,7 +19,7 @@ const drawUMIInstructor = (UMIInstructorData, PUID = 'X53VU8MB9D08') => {
       { 'sTitle': 'UMI4' },
       { 'sTitle': 'UMI5' },
       { 'sTitle': 'UMI6' },
-      { 'sTitle': 'Year'}
+      { 'sTitle': 'Year' }
     ],
     'aoColumnDefs': [
       { 'bSortable': false, 'aTargets': [0] },
