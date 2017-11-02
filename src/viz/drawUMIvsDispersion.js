@@ -48,40 +48,40 @@ const drawUMIvsDispersion = (array, filter = { UMI: 6 }) => {
   array = array.filter(x => x.year === 2016)
 
   umiDots.selectAll('dot')
-            .data(array)
-            .enter().append('circle')
-            .attr('cx', (d) => x(Math.min(d['UMI' + filter.UMI].dispersionIndex, 0.8)))
-            .attr('cy', (d) => y(Math.max(d['UMI' + filter.UMI].average, 2)))
-            .attr('r', (d) => Math.pow(Math.log(d.enrolment), 1.7))
-            .style('fill', (d) => {
-              const percentFavourable = d['UMI' + filter.UMI].percentFavourable
-              if (percentFavourable >= 0.90) {
-                return percentFavourableColor6.first
-              } else if (percentFavourable >= 0.80 && percentFavourable < 0.90) {
-                return percentFavourableColor6.second
-              } else if (percentFavourable >= 0.70 && percentFavourable < 0.80) {
-                return percentFavourableColor6.third
-              } else if (percentFavourable >= 0.60 && percentFavourable < 0.70) {
-                return percentFavourableColor6.fourth
-              } else if (percentFavourable >= 0.50 && percentFavourable < 0.60) {
-                return percentFavourableColor6.fifth
-              } else return percentFavourableColor6.sixth
-            })
-            .attr('class', (d) => d.PUID)
-            .on('mouseover', courseInfoTip.show)
-            .on('mouseout', courseInfoTip.hide)
-            .on('click', (d) => {
-              const circles = document.getElementsByTagName('circle')
-              Array.prototype.map.call(circles, (x) => {
-                x.classList.remove('pulse')
-                while (x.firstChild) {
-                  x.removeChild(x.firstChild)
-                }
-              })
-              const selectedCircles = document.getElementsByClassName(d.PUID)
-              Array.prototype.map.call(selectedCircles, (x) => x.classList.add('pulse'))
-              animate()
-            })
+    .data(array)
+    .enter().append('circle')
+    .attr('cx', (d) => x(Math.min(d['UMI' + filter.UMI].dispersionIndex, 0.8)))
+    .attr('cy', (d) => y(Math.max(d['UMI' + filter.UMI].average, 2)))
+    .attr('r', (d) => Math.pow(Math.log(d.enrolment), 1.7))
+    .style('fill', (d) => {
+      const percentFavourable = d['UMI' + filter.UMI].percentFavourable
+      if (percentFavourable >= 0.90) {
+        return percentFavourableColor6.first
+      } else if (percentFavourable >= 0.80 && percentFavourable < 0.90) {
+        return percentFavourableColor6.second
+      } else if (percentFavourable >= 0.70 && percentFavourable < 0.80) {
+        return percentFavourableColor6.third
+      } else if (percentFavourable >= 0.60 && percentFavourable < 0.70) {
+        return percentFavourableColor6.fourth
+      } else if (percentFavourable >= 0.50 && percentFavourable < 0.60) {
+        return percentFavourableColor6.fifth
+      } else return percentFavourableColor6.sixth
+    })
+    .attr('class', (d) => d.PUID)
+    .on('mouseover', courseInfoTip.show)
+    .on('mouseout', courseInfoTip.hide)
+    .on('click', (d) => {
+      const circles = document.getElementsByTagName('circle')
+      Array.prototype.map.call(circles, (x) => {
+        x.classList.remove('pulse')
+        while (x.firstChild) {
+          x.removeChild(x.firstChild)
+        }
+      })
+      const selectedCircles = document.getElementsByClassName(d.PUID)
+      Array.prototype.map.call(selectedCircles, (x) => x.classList.add('pulse'))
+      animate()
+    })
 
   const animate = () => {
     const pulseList = document.getElementsByClassName('pulse')
