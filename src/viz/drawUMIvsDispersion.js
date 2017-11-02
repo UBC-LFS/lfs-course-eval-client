@@ -1,12 +1,8 @@
 /* global $ */
 
 import { margin, height, percentFavourableColor6 } from '../constants/constants'
-import * as questionDefinitions from '../constants/questionDefinitions'
-import * as util from '../util/util.js'
-import R from 'ramda'
+import drawToolTip from './drawToolTip'
 import * as d3 from 'd3'
-import d3Tip from 'd3-tip'
-d3.tip = d3Tip
 
 const drawUMIvsDispersion = (array, filter = { UMI: 6 }) => {
   const graphWidth = $('#UMIvsDispersionGraph').width()
@@ -44,56 +40,53 @@ const drawUMIvsDispersion = (array, filter = { UMI: 6 }) => {
 
   const umiDots = g.append('g').attr('id', 'umiDots')
 
-  const courseInfoTip = d3.tip().html(function (d) {
-    return "<div class='d3ToolTip'>" +
-                '<p>instructor: ' + d.instructorName + '</p>' +
-                '<p>Section: ' + d.section + '</p>' +
-                '<p>Question Code: ' + 'UMI' + filter.UMI + ' "' + questionDefinitions['codesAndDef']['UMI' + filter.UMI] +
-                '"' + '</p>' +
-                '<p>Average: ' + d['UMI' + filter.UMI].average + '</p>' +
-                '<p>Dispersion Index: ' + d['UMI' + filter.UMI].dispersionIndex + '</p>' +
-                // '<p>Class Size: ' + d.classSize + '</p>' +
-                // '<p>Response Rate: ' + util.roundToTwoDecimal(d.percentResponses * 100) + '%' + '</p>' +
-                '<p>Percent Favourable: ' + d['UMI' + filter.UMI].percentFavourable + '%' + '</p>' +
-                '</div>'
-  }).direction(function (d) {
-    if (x(d['UMI' + filter.UMI].dispersionIndex) < 200) return 'e'
-    else return 'n'
-  })
+  // tooltip config
+  const courseInfoTip = drawToolTip(filter, x)
+
+  // removing below min
+  array = array.filter(x => x.meetsMin)
+  array = array.filter(x => x.year === 2016)
 
   umiDots.selectAll('dot')
-            .data(array)
-            .enter().append('circle')
-            .attr('cx', (d) => x(Math.min(d['UMI' + filter.UMI].dispersionIndex, 0.8)))
-            .attr('cy', (d) => y(Math.max(d['UMI' + filter.UMI].average, 2)))
-            .attr('r', (d) => 12) // Math.pow(Math.log(d['classSize']), 1.7))
-            .style('fill', (d) => {
-              const percentFavourable = d['UMI' + filter.UMI].percentFavourable
-              if (percentFavourable >= 0.90) {
-                return percentFavourableColor6.first
-              } else if (percentFavourable >= 0.80 && percentFavourable < 0.90) {
-                return percentFavourableColor6.second
-              } else if (percentFavourable >= 0.70 && percentFavourable < 0.80) {
-                return percentFavourableColor6.third
-              } else if (percentFavourable >= 0.60 && percentFavourable < 0.70) {
-                return percentFavourableColor6.fourth
-              } else if (percentFavourable >= 0.50 && percentFavourable < 0.60) {
-                return percentFavourableColor6.fifth
-              } else return percentFavourableColor6.sixth
-            })
-            // .attr('class', (d) => {
-            //   if (util.stripMiddleName(d.instructorName) === name) {
-            //     return 'pulse'
-            //   }
-            // })
-            .on('mouseover', courseInfoTip.show)
-            .on('mouseout', courseInfoTip.hide)
+    .data(array)
+    .enter().append('circle')
+    .attr('cx', (d) => x(Math.min(d['UMI' + filter.UMI].dispersionIndex, 0.8)))
+    .attr('cy', (d) => y(Math.max(d['UMI' + filter.UMI].average, 2)))
+    .attr('r', (d) => Math.pow(Math.log(d.enrolment), 1.7))
+    .style('fill', (d) => {
+      const percentFavourable = d['UMI' + filter.UMI].percentFavourable
+      if (percentFavourable >= 0.90) {
+        return percentFavourableColor6.first
+      } else if (percentFavourable >= 0.80 && percentFavourable < 0.90) {
+        return percentFavourableColor6.second
+      } else if (percentFavourable >= 0.70 && percentFavourable < 0.80) {
+        return percentFavourableColor6.third
+      } else if (percentFavourable >= 0.60 && percentFavourable < 0.70) {
+        return percentFavourableColor6.fourth
+      } else if (percentFavourable >= 0.50 && percentFavourable < 0.60) {
+        return percentFavourableColor6.fifth
+      } else return percentFavourableColor6.sixth
+    })
+    .attr('class', (d) => d.PUID)
+    .on('mouseover', courseInfoTip.show)
+    .on('mouseout', courseInfoTip.hide)
+    .on('click', (d) => {
+      const circles = document.getElementsByTagName('circle')
+      Array.prototype.map.call(circles, (x) => {
+        x.classList.remove('pulse')
+        while (x.firstChild) {
+          x.removeChild(x.firstChild)
+        }
+      })
+      const selectedCircles = document.getElementsByClassName(d.PUID)
+      Array.prototype.map.call(selectedCircles, (x) => x.classList.add('pulse'))
+      animate()
+    })
 
-        // append animation
-  const pulseList = document.getElementsByClassName('pulse')
-  Array.prototype.map.call(pulseList, (x) => {
-    x.innerHTML = '<animate attributeType="SVG" attributeName="r" begin="0s" dur="1.5s" repeatCount="indefinite" from="0%" to="10%"/><animate attributeType="CSS" attributeName="stroke-width" begin="0s"  dur="1.5s" repeatCount="indefinite" from="3%" to="0%" /><animate attributeType="CSS" attributeName="opacity" begin="0s"  dur="1.5s" repeatCount="indefinite" from="1" to="0"/>'
-  })
+  const animate = () => {
+    const pulseList = document.getElementsByClassName('pulse')
+    Array.prototype.map.call(pulseList, (x) => (x.innerHTML = '<animate attributeType="SVG" attributeName="r" begin="0s" dur="1.5s" repeatCount="indefinite" from="0%" to="10%"/><animate attributeType="CSS" attributeName="stroke-width" begin="0s"  dur="1.5s" repeatCount="indefinite" from="3%" to="0%" /><animate attributeType="CSS" attributeName="opacity" begin="0s"  dur="1.5s" repeatCount="indefinite" from="1" to="0"/>'))
+  }
 
   svg.call(courseInfoTip)
 }

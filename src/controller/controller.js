@@ -3,6 +3,7 @@ import drawUMIVsDispersion from '../viz/drawUMIVsDispersion'
 import drawOverallInstructor from '../viz/drawOverallInstructorTable'
 import drawUMIInstructor from '../viz/drawUMIInstructorTable'
 import drawCoursePerformance from '../viz/drawCoursePerformanceTable'
+import drawUMITrendLine from '../viz/drawUMITrendLine'
 import * as questionDefinitions from '../constants/questionDefinitions'
 
 const eventListeners = (filterSetting, ids, callback) => {
@@ -88,16 +89,22 @@ const chartController = (filterSettings) => {
   })
   const chart1Data = loadData(undefined, 'c1')
   chart1Data.then(data => {
-    console.log(data)
+    // console.log(data)
   })
 
   const umiDispersionData = loadUMIDispersion()
   umiDispersionData.then(data => {
-    console.log(data)
+    // console.log(data)
     drawUMIVsDispersion(data)
   })
-
   // call chart2data, chart3data from here?
+
+  // code to test drawUMITrendLine
+  // const tmp = document.createElement('div')
+  // tmp.appendChild(.node())
+
+  const umiTrendLine = document.getElementById('umiTrendLine')
+  umiTrendLine.appendChild(drawUMITrendLine().node())
 }
 
 const dashboardController = (filterSettings) => {

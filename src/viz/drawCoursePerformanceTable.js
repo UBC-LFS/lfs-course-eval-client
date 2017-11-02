@@ -4,6 +4,7 @@ import * as d3 from 'd3'
 import R from 'ramda'
 
 
+
 const drawCoursePerformance = (coursePerformanceData, questionCode, PUID='X53VU8MB9D08') => {
   const tableData = R.find(x => {
     return x.hasOwnProperty(PUID)
@@ -30,12 +31,12 @@ const drawCoursePerformance = (coursePerformanceData, questionCode, PUID='X53VU8
             }).css({
               'width': (row[2] / 5) * 100 + '%'
             }))
-            bars.push($('<div></div>', { 'class': 'line' }).css({ 'left': (row[5] / 5) * 100 + '%' }).css({'color': '#ccc'}).append(function(){
+            bars.push($('<div></div>', { 'class': 'line' }).css({ 'left': (row[5] / 5) * 100 + '%' }).css({'color': '#ccc'}).append(function () {
               return $('<span></span>', {
                 'class': 'tooltiptext'
               }).append('Department Average: ' + row[5]).prop('outerHTML')
             }))
-            bars.push($('<div></div>', { 'class': 'line' }).css({ 'left': (row[6] / 5) * 100 + '%' }).css({'color': 'gold'}).append(function(){
+            bars.push($('<div></div>', { 'class': 'line' }).css({ 'left': (row[6] / 5) * 100 + '%' }).css({'color': 'gold'}).append(function () {
               return $('<span></span>', {
                 'class': 'tooltiptext'
               }).append('Faculty Average: ' + row[6]).prop('outerHTML')
