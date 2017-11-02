@@ -3,20 +3,20 @@ import * as d3 from 'd3'
 
 let sampleArr = [
   {
-    period: '2015W1',
+    year: '2015',
     UMI: 4
   },
   {
-    period: '2015W2',
+    year: '2014',
     UMI: 5
   },
   {
-    period: '2016W1',
+    year: '2013',
     UMI: 3
   }
 ]
 
-const drawCountHistogram = (arr = sampleArr) => {
+const drawUMITrendLine = (data = sampleArr) => {
   const width = 375 - margin.left - margin.right
   const height = 200
 
@@ -25,6 +25,39 @@ const drawCountHistogram = (arr = sampleArr) => {
     .attr('height', height)
 
   const g = svg.append('g')
+    .attr('transform', 'translate(' + margin.left + ',' + margin.top + ')')
+
+  const x = d3.scaleBand().rangeRound([0, width])
+  const y = d3.scaleLinear().rangeRound([height, 0])
+
+  const line = d3.line()
+    .x((d) => x(d.year))
+    .y((d) => y(d.UMI))
+
+  x.domain(data.map((d) => d.year))
+  y.domain([0, d3.max(data, (d) => d.UMI)])
+
+  g.append('g')
+    .attr('class', 'axis axis--x')
+    .attr('transform', 'translate(0," + height + ")')
+    .call(d3.axisBottom(x))
+
+  g.append('g')
+    .attr('class', 'axis axis--y')
+    .call(d3.axisLeft(y).ticks(10, '%'))
+    .append('text')
+    .attr('transform', 'rotate(-90)')
+    .attr('y', 6)
+    .attr('dy', '0.71em')
+    .attr('text-anchor', 'end')
+    .text('Frequency')
+
+  g.append('path')
+    .datum(data)
+    .attr('class', 'line')
+    .attr('d', line)
+
+  return svg
 }
 
-export default drawCountHistogram
+export default drawUMITrendLine

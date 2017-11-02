@@ -20,7 +20,6 @@ const drawGenderBalance = (gender = testGender) => {
 
   const g = svg.append('g')
 
-
   return svg
 }
 
