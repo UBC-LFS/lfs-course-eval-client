@@ -1,4 +1,4 @@
-import { loadData, fetchJSON, loadUMIInstructor, loadOverallInstructorData, loadCoursePerformance } from '../service/dataService'
+import { loadData, fetchJSON, loadUMIInstructor, loadOverallInstructorData, loadCoursePerformance, loadUMIDispersion } from '../service/dataService'
 import drawUMIVsDispersion from '../viz/drawUMIVsDispersion'
 import drawOverallInstructor from '../viz/drawOverallInstructorTable'
 import drawUMIInstructor from '../viz/drawUMIInstructorTable'
@@ -68,34 +68,34 @@ const initEventListenerController = (filterSetting, ids) => {
 }
 
 const chartController = (filterSettings) => {
-  drawOverallInstructor()
-  drawUMIInstructor()
-  drawCoursePerformance(undefined, 'UMI6')
-  // const OverallInstructorData = loadOverallInstructorData()
-  // OverallInstructorData.then(data => {
-  //   console.log(data)
-  //   drawOverallInstructor(data)
-  // })
-  // const UMIInstructorData = loadUMIInstructor()
-  // UMIInstructorData.then(data => {
-  //   console.log(data)
-  //   drawUMIInstructor(data)
-  // })
-  // const coursePerformanceData = loadCoursePerformance()
-  // coursePerformanceData.then(data => {
-  //   console.log(data)
-  //   drawCoursePerformance(data, 'UMI6')
-  // })
+  // drawOverallInstructor()
+  // drawUMIInstructor()
+  // drawCoursePerformance(undefined, 'UMI6')
+  const OverallInstructorData = loadOverallInstructorData()
+  OverallInstructorData.then(data => {
+    console.log(data)
+    drawOverallInstructor(data)
+  })
+  const UMIInstructorData = loadUMIInstructor()
+  UMIInstructorData.then(data => {
+    console.log(data)
+    drawUMIInstructor(data)
+  })
+  const coursePerformanceData = loadCoursePerformance()
+  coursePerformanceData.then(data => {
+    console.log(data)
+    drawCoursePerformance(data, 'UMI6')
+  })
   const chart1Data = loadData(undefined, 'c1')
   chart1Data.then(data => {
     console.log(data)
   })
 
-  // const umiDispersionData = fetchJSON('umiDispersion')
-  // umiDispersionData.then(data => {
-  //   console.log(data)
-  //   drawUMIVsDispersion(data)
-  // })
+  const umiDispersionData = loadUMIDispersion()
+  umiDispersionData.then(data => {
+    console.log(data)
+    drawUMIVsDispersion(data)
+  })
 
   // call chart2data, chart3data from here?
 }

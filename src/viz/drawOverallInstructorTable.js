@@ -1,24 +1,22 @@
 /* global $ */
 
-import * as instructorData from '../data/mockInstructorData'
-
-const drawOverallInstructor = (tableData = instructorData) => {
-  const data = tableData.default.map(x => (
-    [x.instructorName, x.dept, x.percentileRankingByFaculty, x.percentileRankingByDept, x.numberOfCoursesTaught, x.numberOfStudentsTaught]
+const drawOverallInstructor = (tableData) => {
+  const data = tableData.map(x => (
+    [x.instructorName, x.dept, x.UMI6.average, x.UMI6.percentFavourable, x.numCoursesTaught, x.numStudentsTaught]
   ))
 
   $('#OverallInstructors').DataTable({
     'aaData': data,
     'aoColumns':
     [
-                { 'sTitle': 'Instructor Name' },
-                { 'sTitle': 'Department' },
-                { 'sTitle': 'Percentile Ranking By Faculty' },
-                { 'sTitle': 'Percentile Ranking By Department' },
-                { 'sTitle': 'Number of Courses Taught' },
-                { 'sTitle': 'Number of Students Taught' }
+      { 'sTitle': 'Instructor Name' },
+      { 'sTitle': 'Departments' },
+      { 'sTitle': 'Average' },
+      { 'sTitle': 'Percent Favourable' },
+      { 'sTitle': 'Number of Courses Taught' },
+      { 'sTitle': 'Number of Students Taught' }
     ],
-    'order': [[ 0, 'asc' ]]
+    'order': [[0, 'asc']]
   })
 }
 

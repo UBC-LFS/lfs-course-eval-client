@@ -1,19 +1,23 @@
 /* global $ */
 
-import * as courseData from '../data/mockCoursePerformanceData'
 import * as d3 from 'd3'
+import R from 'ramda'
 
-const drawCoursePerformance = (tableData = courseData.courses, questionCode) => {
+
+const drawCoursePerformance = (coursePerformanceData, questionCode, PUID='X53VU8MB9D08') => {
+  const tableData = R.find(x => {
+    return x.hasOwnProperty(PUID)
+  }, coursePerformanceData)[PUID]
   const data = []
   tableData.map(x => data.push(
-    [x.course + ' ' + x.section, x.classSize, x[questionCode].average, x.percentResponses * 100 + '%', x.year, courseData.courseAvg[x.course], courseData.deptAvg[x.dept]]
+    [x.course + ' ' + x.section, x.enrolment, x[questionCode].average, x.responseRate * 100 + '%', x.year, x.deptAverage[questionCode], x.facultyAverage[questionCode]]
   ))
   $('#CoursePerformance').DataTable({
     'aaData': data,
     'aoColumns':
     [
       { 'sTitle': '' },
-      { 'sTitle': 'Class Size' },
+      { 'sTitle': 'Enrolment' },
       {
         'sTitle': 'UMI Average',
         'render': function (data, type, row, meta) {
@@ -29,12 +33,12 @@ const drawCoursePerformance = (tableData = courseData.courses, questionCode) => 
             bars.push($('<div></div>', { 'class': 'line' }).css({ 'left': (row[5] / 5) * 100 + '%' }).css({'color': '#ccc'}).append(function(){
               return $('<span></span>', {
                 'class': 'tooltiptext'
-              }).append('Course Average: ' + row[5]).prop('outerHTML')
+              }).append('Department Average: ' + row[5]).prop('outerHTML')
             }))
             bars.push($('<div></div>', { 'class': 'line' }).css({ 'left': (row[6] / 5) * 100 + '%' }).css({'color': 'gold'}).append(function(){
               return $('<span></span>', {
                 'class': 'tooltiptext'
-              }).append('Department Average: ' + row[6]).prop('outerHTML')
+              }).append('Faculty Average: ' + row[6]).prop('outerHTML')
             }))
             return bars
           }).prop('outerHTML')).prop('outerHTML')
@@ -42,8 +46,8 @@ const drawCoursePerformance = (tableData = courseData.courses, questionCode) => 
       },
       { 'sTitle': 'Response Rate' },
       { 'sTitle': 'Year' },
-      { 'sTitle': 'Course Average' },
-      { 'sTitle': 'Department Average' }
+      { 'sTitle': 'Department Average' },
+      { 'sTitle': 'Faculty Average' }
     ],
     'aoColumnDefs': [
       { 'bSortable': false, 'aTargets': [0] },
