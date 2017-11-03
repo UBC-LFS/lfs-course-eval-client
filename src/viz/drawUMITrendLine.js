@@ -22,14 +22,6 @@ let sampleArr = [
   {
     year: '2013S',
     UMI: 1
-  },
-  {
-    year: '2011S',
-    UMI: 1
-  },
-  {
-    year: '2017W2',
-    UMI: 5
   }
 ]
 

@@ -2,18 +2,28 @@ import { margin } from '../constants/constants'
 import * as d3 from 'd3'
 import { convertCountIntoArray } from '../util/util'
 
-const drawCountHistogram = (count) => {
-  const width = 375 - margin.left - margin.right
-  const height = 100
+let sampleCount = {
+  '1': 1,
+  '2': 2,
+  '3': 3,
+  '4': 4,
+  '5': 5
+}
+
+const drawCountHistogram = (count = sampleCount) => {
+  const w = 300
+  const h = 150
+  const width = w - margin.left - margin.right
+  const height = h - margin.top - margin.bottom
+
+  const svg = d3.select(document.createElement('div')).append('svg')
+    .attr('width', w)
+    .attr('height', h)
+
+  const g = svg.append('g').attr('transform', 'translate(' + margin.left + ',' + margin.top + ')')
 
   const x = d3.scaleLinear().rangeRound([0, width])
   const y = d3.scaleLinear().range([height, 0])
-
-  const svg = d3.select(document.createElement('div')).append('svg')
-    .attr('width', width)
-    .attr('height', height)
-
-  const g = svg.append('g')
 
   const arrayOfCounts = convertCountIntoArray(count)
 
@@ -34,7 +44,7 @@ const drawCountHistogram = (count) => {
 
   bar.append('text')
     .attr('dy', '.75em')
-    .attr('y', 6)
+    .attr('y', -15)
     .attr('x', (x(bins[0].x1 / 5) - x(bins[0].x0 / 5)) / 2)
     .attr('text-anchor', 'middle')
     .text((d) => d.length)
