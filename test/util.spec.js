@@ -93,33 +93,33 @@ describe('sortByTerm', () => {
     assert.deepEqual(expected, util.sortByTerm(data))
   })
   it('takes an array and returns the sorted version of the array by year and term', () => {
-    const data = ['2009W1', '2009W2', '2010W1', '2010W2', '2011W2', '2011W1', '2012W1', '2012W2', '2013SA', '2013WA', '2013W1', '2013W2', '2014SA', '2014W2', '2016W2', '2016W1']
-    const expected = ['2009W1', '2009W2', '2010W1', '2010W2', '2011W1', '2011W2', '2012W1', '2012W2', '2013SA', '2013W1', '2013WA', '2013W2', '2014SA', '2014W2', '2016W1', '2016W2']
+    const data = [{year: '2009W1'}, {year: '2009W2'}, {year: '2010W1'}, {year: '2010W2'}, {year: '2011W2'}, {year: '2011W1'}, {year: '2012W1'}, {year: '2012W2'}, {year: '2013SA'}, {year: '2013WA'}, {year: '2013W1'}, {year: '2013W2'}, {year: '2014SA'}, {year: '2014W2'}, {year: '2016W2'}, {year: '2016W1'}]
+    const expected = [{year: '2009W1'}, {year: '2009W2'}, {year: '2010W1'}, {year: '2010W2'}, {year: '2011W1'}, {year: '2011W2'}, {year: '2012W1'}, {year: '2012W2'}, {year: '2013SA'}, {year: '2013W1'}, {year: '2013WA'}, {year: '2013W2'}, {year: '2014SA'}, {year: '2014W2'}, {year: '2016W1'}, {year: '2016W2'}]
     assert.deepEqual(expected, util.sortByTerm(data))
   })
   it('takes an array of 2 and sorts accordingly', () => {
-    const simpleData = ['2009W2', '2009W1']
-    const expected = ['2009W1', '2009W2']
+    const simpleData = [{year: '2009W2'}, {year: '2009W1'}]
+    const expected = [{year: '2009W1'}, {year: '2009W2'}]
     assert.deepEqual(expected, util.sortByTerm(simpleData))
   })
   it('takes an array of 3 with different years and sorts accordingly', () => {
-    const data = ['2009W2', '2009W1', '2010SA']
-    const expected = ['2009W1', '2009W2', '2010SA']
+    const data = [{year: '2009W2'}, {year: '2009W1'}, {year: '2010SA'}]
+    const expected = [{year: '2009W1'}, {year: '2009W2'}, {year: '2010SA'}]
     assert.deepEqual(expected, util.sortByTerm(data))
   })
   it('takes an array of 4 with different years but same terms and sorts accorindgly', () => {
-    const data = ['2017WC', '2015WC', '2011WC', '2013WC']
-    const expected = ['2011WC', '2013WC', '2015WC', '2017WC']
+    const data = [{year: '2017WC'}, {year: '2015WC'}, {year: '2011WC'}, {year: '2013WC'}]
+    const expected = [{year: '2011WC'}, {year: '2013WC'}, {year: '2015WC'}, {year: '2017WC'}]
     assert.deepEqual(expected, util.sortByTerm(data))
   })
   it('takes an array of 7 with same year but different terms and sorts accordingly', () => {
-    const data = ['2011WC', '2011S2', '2011S1', '2011W2', '2011SA', '2011WA', '2011W1']
-    const expected = ['2011S1', '2011SA', '2011S2', '2011W1', '2011WA', '2011W2', '2011WC']
+    const data = [{year: '2011WC'}, {year: '2011S2'}, {year: '2011S1'}, {year: '2011W2'}, {year: '2011SA'}, {year: '2011WA'}, {year: '2011W1'}]
+    const expected = [{year: '2011S1'}, {year: '2011SA'}, {year: '2011S2'}, {year: '2011W1'}, {year: '2011WA'}, {year: '2011W2'}, {year: '2011WC'}]
     assert.deepEqual(expected, util.sortByTerm(data))
   })
   it('takes an array of 9 with different years and various terms, sorts accordingly', () => {
-    const data = ['2015W1', '2009WC', '2016W1', '2020W1', '2016W2', '2011S2', '2009WA', '2017S2', '2011S1']
-    const expected = ['2009WA', '2009WC', '2011S1', '2011S2', '2015W1', '2016W1', '2016W2', '2017S2', '2020W1']
+    const data = [{year: '2015W1'}, {year: '2009WC'}, {year: '2016W1'}, {year: '2020W1'}, {year: '2016W2'}, {year: '2011S2'}, {year: '2009WA'}, {year: '2017S2'}, {year: '2011S1'}]
+    const expected = [{year: '2009WA'}, {year: '2009WC'}, {year: '2011S1'}, {year: '2011S2'}, {year: '2015W1'}, {year: '2016W1'}, {year: '2016W2'}, {year: '2017S2'}, {year: '2020W1'}]
     assert.deepEqual(expected, util.sortByTerm(data))
   })
 })

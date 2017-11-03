@@ -1,4 +1,5 @@
 import { margin } from '../constants/constants'
+import { sortByTerm } from '../util/util'
 import * as d3 from 'd3'
 
 let sampleArr = [

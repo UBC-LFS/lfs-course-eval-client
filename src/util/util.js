@@ -42,11 +42,11 @@ const sortByTerm = (arr) => {
     'W': 8
   }
   return R.sort((a, b) => {
-    if (a.slice(0, 4) === b.slice(0, 4)) {
-      return (order[a.slice(4, 6)] < order[b.slice(4, 6)]) ? -1
-                   : (order[a.slice(4, 6)] > order[b.slice(4, 6)]) ? 1 : 0
+    if (a.year.slice(0, 4) === b.year.slice(0, 4)) {
+      return (order[a.year.slice(4, 6)] < order[b.year.slice(4, 6)]) ? -1
+                   : (order[a.year.slice(4, 6)] > order[b.year.slice(4, 6)]) ? 1 : 0
     } else {
-      return (a.slice(0, 4) < b.slice(0, 4) ? -1 : 1)
+      return (a.year.slice(0, 4) < b.year.slice(0, 4) ? -1 : 1)
     }
   }, arr)
 }
