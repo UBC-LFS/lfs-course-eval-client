@@ -20,7 +20,7 @@ const drawUMITrendLine = (data = sampleArr) => {
   data = data.sort((a, b) => Number(a.year) - Number(b.year))
   // const margin = {top: 20, right: 20, bottom: 30, left: 40}
   const w = 300
-  const h = 200
+  const h = 150
   const width = w - margin.left - margin.right
   const height = h - margin.top - margin.bottom
 
@@ -34,7 +34,7 @@ const drawUMITrendLine = (data = sampleArr) => {
   const y = d3.scaleLinear().rangeRound([height, 0])
 
   const line = d3.line()
-    .x((d) => x(d.year))
+    .x((d) => x(d.year) + margin.left)
     .y((d) => y(d.UMI))
 
   x.domain(data.map((d) => d.year))
@@ -64,8 +64,8 @@ const drawUMITrendLine = (data = sampleArr) => {
     .data(data)
   .enter().append('circle')
     .attr('class', 'circle')
-    .attr('cx', function (d) { return x(d.year) })
-    .attr('cy', function (d) { return y(d.UMI) })
+    .attr('cx', (d) => x(d.year) + margin.left)
+    .attr('cy', (d) => y(d.UMI))
     .attr('r', 4)
   return svg
 }
