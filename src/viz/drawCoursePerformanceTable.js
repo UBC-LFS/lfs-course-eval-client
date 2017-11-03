@@ -3,9 +3,7 @@
 import * as d3 from 'd3'
 import R from 'ramda'
 
-
-
-const drawCoursePerformance = (coursePerformanceData, questionCode, PUID='X53VU8MB9D08') => {
+const drawCoursePerformance = (coursePerformanceData, questionCode, PUID = 'X53VU8MB9D08') => {
   const tableData = R.find(x => {
     return x.hasOwnProperty(PUID)
   }, coursePerformanceData)[PUID]
