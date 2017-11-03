@@ -12,13 +12,29 @@ let sampleArr = [
     UMI: 5
   },
   {
-    year: '2013',
+    year: '2013W1',
     UMI: 3
+  },
+  {
+    year: '2013W2',
+    UMI: 4
+  },
+  {
+    year: '2013S',
+    UMI: 1
+  },
+  {
+    year: '2011S',
+    UMI: 1
+  },
+  {
+    year: '2017W2',
+    UMI: 5
   }
 ]
 
 const drawUMITrendLine = (data = sampleArr) => {
-  data = data.sort((a, b) => Number(a.year) - Number(b.year))
+  data = sortByTerm(data)
   // const margin = {top: 20, right: 20, bottom: 30, left: 40}
   const w = 300
   const h = 150
@@ -35,7 +51,7 @@ const drawUMITrendLine = (data = sampleArr) => {
   const y = d3.scaleLinear().rangeRound([height, 0])
 
   const line = d3.line()
-    .x((d) => x(d.year) + margin.left)
+    .x((d) => (x(data[1].year) - x(data[0].year)) / 2 + x(d.year))
     .y((d) => y(d.UMI))
 
   x.domain(data.map((d) => d.year))
@@ -65,7 +81,7 @@ const drawUMITrendLine = (data = sampleArr) => {
     .data(data)
   .enter().append('circle')
     .attr('class', 'circle')
-    .attr('cx', (d) => x(d.year) + margin.left)
+    .attr('cx', (d) => (x(data[1].year) - x(data[0].year)) / 2 + x(d.year))
     .attr('cy', (d) => y(d.UMI))
     .attr('r', 4)
   return svg
