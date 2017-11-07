@@ -2,6 +2,7 @@
 
 import * as d3 from 'd3'
 import R from 'ramda'
+import * as util from '../util/util.js'
 
 const drawCoursePerformance = (coursePerformanceData, questionCode, PUID = 'X53VU8MB9D08') => {
   const tableData = R.find(x => {
@@ -9,7 +10,7 @@ const drawCoursePerformance = (coursePerformanceData, questionCode, PUID = 'X53V
   }, coursePerformanceData).Courses
   const data = []
   tableData.map(x => data.push(
-    [x.course + ' ' + x.section, x.enrolment, x[questionCode].average, x.responseRate * 100 + '%', x.year, x.deptAverage[questionCode], x.facultyAverage[questionCode]]
+    [x.course + ' ' + x.section, x.enrolment, util.roundToTwoDecimal(x[questionCode].average), util.roundToTwoDecimal(x.responseRate * 100) + '%', x.year, util.roundToTwoDecimal(x.deptAverage[questionCode]), util.roundToTwoDecimal(x.facultyAverage[questionCode])]
   ))
   $('#CoursePerformance').DataTable({
     'aaData': data,

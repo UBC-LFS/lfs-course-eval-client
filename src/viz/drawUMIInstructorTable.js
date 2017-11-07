@@ -1,11 +1,12 @@
 /* global $ */
 import R from 'ramda'
+import * as util from '../util/util.js'
 
 const drawUMIInstructor = (UMIInstructorData, PUID = 'X53VU8MB9D08') => {
   const tableData = R.find(x => x.PUID === PUID, UMIInstructorData).Courses
   const data = tableData.map(x => 
     (
-    [x.course + ' ' + x.section, x.UMI1.average, x.UMI2.average, x.UMI3.average, x.UMI4.average, x.UMI5.average, x.UMI6.average, x.year]
+    [x.course + ' ' + x.section, util.roundToTwoDecimal(x.UMI1.average), util.roundToTwoDecimal(x.UMI2.average), util.roundToTwoDecimal(x.UMI3.average), util.roundToTwoDecimal(x.UMI4.average), util.roundToTwoDecimal(x.UMI5.average), util.roundToTwoDecimal(x.UMI6.average), x.year]
   ))
   $('#UMIInstructors').DataTable({
     'aaData': data,
