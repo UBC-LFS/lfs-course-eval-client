@@ -83,11 +83,11 @@ const chartController = (filterSettings) => {
     console.log('umiInstructor data:', data)
     drawUMIInstructor(data)
   })
-  // const coursePerformanceData = loadCoursePerformance()
-  // coursePerformanceData.then(data => {
-  //   console.log(data)
-  //   drawCoursePerformance(data, 'UMI6')
-  // })
+  const coursePerformanceData = loadCoursePerformance()
+  coursePerformanceData.then(data => {
+    console.log(data)
+    drawCoursePerformance(data, 'UMI6')
+  })
   const chart1Data = loadData(undefined, 'c1')
   chart1Data.then(data => {
     // console.log(data)

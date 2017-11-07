@@ -5,8 +5,8 @@ import R from 'ramda'
 
 const drawCoursePerformance = (coursePerformanceData, questionCode, PUID = 'X53VU8MB9D08') => {
   const tableData = R.find(x => {
-    return x.hasOwnProperty(PUID)
-  }, coursePerformanceData)[PUID]
+    return x.PUID === PUID
+  }, coursePerformanceData).Courses
   const data = []
   tableData.map(x => data.push(
     [x.course + ' ' + x.section, x.enrolment, x[questionCode].average, x.responseRate * 100 + '%', x.year, x.deptAverage[questionCode], x.facultyAverage[questionCode]]
