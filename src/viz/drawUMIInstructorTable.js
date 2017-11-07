@@ -2,9 +2,7 @@
 import R from 'ramda'
 
 const drawUMIInstructor = (UMIInstructorData, PUID = 'X53VU8MB9D08') => {
-  const tableData = R.find(x => {
-    return x.hasOwnProperty(PUID)
-  }, UMIInstructorData)[PUID]
+  const tableData = R.find(x => x.hasOwnProperty(PUID), UMIInstructorData)[PUID]
   const data = tableData.map(x => (
     [x.course + ' ' + x.section, x.UMI1.average, x.UMI2.average, x.UMI3.average, x.UMI4.average, x.UMI5.average, x.UMI6.average, x.year]
   ))
