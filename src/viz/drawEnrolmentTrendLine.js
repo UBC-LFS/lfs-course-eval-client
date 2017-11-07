@@ -25,7 +25,7 @@ let sampleArr = [
   }
 ]
 
-const drawEnrolmentTrendLine = (data = sampleArr, course = "FNH 250") => {
+const drawEnrolmentTrendLine = (data = sampleArr, course = 'FNH 250') => {
   data = sortByTerm(data)
   // const margin = {top: 20, right: 20, bottom: 30, left: 40}
   const w = 300
