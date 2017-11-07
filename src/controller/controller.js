@@ -85,24 +85,14 @@ const chartController = (filterSettings) => {
   })
   const coursePerformanceData = loadCoursePerformance()
   coursePerformanceData.then(data => {
-    console.log(data)
+    console.log('coursePerformanceData data:', data)
     drawCoursePerformance(data, 'UMI6')
   })
-  const chart1Data = loadData(undefined, 'c1')
-  chart1Data.then(data => {
-    // console.log(data)
-  })
-
   const umiDispersionData = loadUMIDispersion()
   umiDispersionData.then(data => {
     console.log('umiVsDispersion data:', data)
     drawUMIVsDispersion(data)
   })
-  // call chart2data, chart3data from here?
-
-  // code to test drawUMITrendLine
-  // const tmp = document.createElement('div')
-  // tmp.appendChild(.node())
 
   const umiTrendLine = document.getElementById('umiTrendLine')
   umiTrendLine.appendChild(drawUMITrendLine().node())
