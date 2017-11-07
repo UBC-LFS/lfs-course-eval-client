@@ -12,7 +12,7 @@ const drawOverallInstructor = (tableData) => {
     [
       { 'sTitle': 'Instructor Name' },
       { 'sTitle': 'Departments' },
-      { 'sTitle': 'Average' },
+      { 'sTitle': 'UMI6 Average' },
       { 'sTitle': 'Percent Favourable' },
       { 'sTitle': 'Number of Courses Taught' },
       { 'sTitle': 'Number of Students Taught' }

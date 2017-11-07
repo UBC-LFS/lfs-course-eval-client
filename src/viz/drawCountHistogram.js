@@ -3,7 +3,7 @@ import * as d3 from 'd3'
 import { convertCountIntoArray } from '../util/util'
 
 let sampleCount = {
-  '1': 0, '2': 0, '3': 0, '4': 0, '5': 11
+  '1': 10, '2': 4, '3': 1, '4': 27, '5': 11
 }
 
 const drawCountHistogram = (count = sampleCount) => {
@@ -44,6 +44,12 @@ const drawCountHistogram = (count = sampleCount) => {
     .attr('x', 48 / 2)
     .attr('text-anchor', 'middle')
     .text((d) => d.length)
+
+  // bar.append('text')
+  //   .attr('x', 48 / 2)
+  //   .attr('y', 0)
+  //   .attr('dy', '.75em')
+  //   .text((d) => d)
 
   return svg
 }
