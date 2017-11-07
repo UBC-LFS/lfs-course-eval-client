@@ -5,6 +5,7 @@ import drawUMIInstructor from '../viz/drawUMIInstructorTable'
 import drawCoursePerformance from '../viz/drawCoursePerformanceTable'
 import drawUMITrendLine from '../viz/drawUMITrendLine'
 import drawCountHistogram from '../viz/drawCountHistogram'
+import drawEnrolmentTrendLine from '../viz/drawEnrolmentTrendLine'
 import * as questionDefinitions from '../constants/questionDefinitions'
 
 const eventListeners = (filterSetting, ids, callback) => {
@@ -107,6 +108,9 @@ const chartController = (filterSettings) => {
   const umiTrendLine = document.getElementById('umiTrendLine')
   umiTrendLine.appendChild(drawUMITrendLine().node())
   umiTrendLine.appendChild(drawCountHistogram().node())
+
+  const enrolmentTrendLine = document.getElementById('enrolmentTrendLine')
+  enrolmentTrendLine.appendChild(drawEnrolmentTrendLine().node())
 }
 
 const dashboardController = (filterSettings) => {
