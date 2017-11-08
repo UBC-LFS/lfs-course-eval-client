@@ -1,4 +1,4 @@
-import { loadData, fetchJSON, loadUMIInstructor, loadOverallInstructorData, loadCoursePerformance, loadUMIDispersion } from '../service/dataService'
+import { loadUMIInstructor, loadOverallInstructorData, loadCoursePerformance, loadUMIDispersion } from '../service/dataService'
 import drawUMIVsDispersion from '../viz/drawUMIVsDispersion'
 import drawOverallInstructor from '../viz/drawOverallInstructorTable'
 import drawUMIInstructor from '../viz/drawUMIInstructorTable'
@@ -66,8 +66,8 @@ const initEventListeners = (initialFilterSetting, filterObj, ids) => {
 }
 
 const initEventListenerController = (filterSetting, ids) => {
-  const filterData = fetchJSON('filterData')
-  filterData.then(filterObj => initEventListeners(filterSetting, filterObj, ids))
+  // const filterData = fetchJSON('filterData')
+  // filterData.then(filterObj => initEventListeners(filterSetting, filterObj, ids))
 }
 
 const chartController = (filterSettings) => {
@@ -104,8 +104,8 @@ const chartController = (filterSettings) => {
 }
 
 const dashboardController = (filterSettings) => {
-  const dashboardData = loadData(undefined, 'dashboard')
-    // dashboardData.then(data => initEventListeners(data))
+  // const dashboardData = loadData(undefined, 'dashboard')
+  // dashboardData.then(data => initEventListeners(data))
 }
 
 const controller = () => {
