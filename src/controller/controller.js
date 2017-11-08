@@ -1,4 +1,4 @@
-import { loadUMIInstructor, loadOverallInstructorData, loadCoursePerformance, loadUMIDispersion, loadEnrolmentTrend } from '../service/dataService'
+import { loadUMIInstructor, loadOverallInstructorData, loadCoursePerformance, loadUMIDispersion, loadEnrolmentTrend, loadFacultyDept } from '../service/dataService'
 import drawUMIVsDispersion from '../viz/drawUMIVsDispersion'
 import drawOverallInstructor from '../viz/drawOverallInstructorTable'
 import drawUMIInstructor from '../viz/drawUMIInstructorTable'
@@ -7,6 +7,7 @@ import drawUMITrendLine from '../viz/drawUMITrendLine'
 import drawCountHistogram from '../viz/drawCountHistogram'
 import drawEnrolmentTrendLine from '../viz/drawEnrolmentTrendLine'
 import * as questionDefinitions from '../constants/questionDefinitions'
+import R from 'ramda'
 
 const eventListeners = (filterSetting, ids, callback) => {
   ids.yearSelection.addEventListener('change', function () {
@@ -71,36 +72,46 @@ const initEventListenerController = (filterSetting, ids) => {
 }
 
 const chartController = (filterSettings) => {
-  // drawOverallInstructor()
-  // drawUMIInstructor()
-  // drawCoursePerformance(undefined, 'UMI6')
-  const OverallInstructorData = loadOverallInstructorData()
-  OverallInstructorData.then(data => {
+  loadOverallInstructorData().then(data => {
     console.log('overallInstructor data:', data)
     drawOverallInstructor(data)
   })
-  const UMIInstructorData = loadUMIInstructor()
-  UMIInstructorData.then(data => {
+
+  loadUMIInstructor().then(data => {
     console.log('umiInstructor data:', data)
     drawUMIInstructor(data)
   })
-  const coursePerformanceData = loadCoursePerformance()
-  coursePerformanceData.then(data => {
+
+  loadCoursePerformance().then(data => {
     console.log('coursePerformanceData data:', data)
     drawCoursePerformance(data, 'UMI6')
   })
-  const umiDispersionData = loadUMIDispersion()
-  umiDispersionData.then(data => {
+
+  loadUMIDispersion().then(data => {
     console.log('umiVsDispersion data:', data)
     drawUMIVsDispersion(data)
   })
 
-  const umiTrendLine = document.getElementById('umiTrendLine')
-  umiTrendLine.appendChild(drawUMITrendLine().node())
-  umiTrendLine.appendChild(drawCountHistogram().node())
+  loadFacultyDept().then(data => {
+    console.log('facultyDept data:', data)
+
+    const years = R.flatten(data.map(x => R.keys(x).filter(x => x !== '_id')))
+
+    const facultyUMI6 = years.map(year => ({ year, 'UMI': data.find(x => x.hasOwnProperty(String(year)))[year].facultyAverage.UMI6 }))
+    const apbiUMI6 = years.map(year => ({ year, 'UMI': data.find(x => x.hasOwnProperty(String(year)))[year].APBIAverage.UMI6 }))
+    console.log(apbiUMI6)
+
+    const facultyUMITrend = document.getElementById('facultyUMITrend')
+    facultyUMITrend.appendChild(drawUMITrendLine(facultyUMI6).node())
+
+    const APIBUMITrend = document.getElementById('apbiUMITrend')
+    APIBUMITrend.appendChild(drawUMITrendLine(apbiUMI6).node())
+    // do something with data later
+  })
   
   const enrolmentTrendData = loadEnrolmentTrend()
   enrolmentTrendData.then(data => {
+    console.log('enrolmentTrend data:', data)
     const enrolmentTrendLine = document.getElementById('enrolmentTrendLine')
     enrolmentTrendLine.appendChild(drawEnrolmentTrendLine().node())
   })

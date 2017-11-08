@@ -5,9 +5,7 @@ import R from 'ramda'
 import * as util from '../util/util.js'
 
 const drawCoursePerformance = (coursePerformanceData, questionCode, PUID = 'X53VU8MB9D08') => {
-  const tableData = R.find(x => {
-    return x.PUID === PUID
-  }, coursePerformanceData).Courses
+  const tableData = R.find(x => x.PUID === PUID, coursePerformanceData).Courses
   const data = []
   tableData.map(x => data.push(
     [x.course + ' ' + x.section, x.enrolment, util.roundToTwoDecimal(x[questionCode].average), util.roundToTwoDecimal(x.responseRate * 100) + '%', x.year, util.roundToTwoDecimal(x.deptAverage[questionCode]), util.roundToTwoDecimal(x.facultyAverage[questionCode])]
