@@ -6,7 +6,7 @@ import * as d3 from 'd3'
 import d3Tip from 'd3-tip'
 d3.tip = d3Tip
 
-const drawToolTip = (filter, x) => d3.tip().html(function (d) {
+const drawToolTip = (filter, x) => d3.tip().html(d => {
   const tmp = document.createElement('div')
   tmp.appendChild(drawCountHistogram(d['UMI' + filter.UMI].count).node())
   const histHTML = tmp.innerHTML
@@ -23,7 +23,7 @@ const drawToolTip = (filter, x) => d3.tip().html(function (d) {
     '<p>Percent Favourable: ' + Math.round(d['UMI' + filter.UMI].percentFavourable * 100) + '%' + '</p>' +
     histHTML +
     '</div>'
-}).direction(function (d) {
+}).direction(d => {
   if (x(d['UMI' + filter.UMI].dispersionIndex) < 200) return 'e'
   else return 's'
 })

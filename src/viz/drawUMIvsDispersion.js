@@ -55,10 +55,10 @@ const drawUMIvsDispersion = (array, filter = { UMI: 6 }) => {
   umiDots.selectAll('dot')
     .data(array)
     .enter().append('circle')
-    .attr('cx', (d) => x(Math.min(d['UMI' + filter.UMI].dispersionIndex, 0.8)))
-    .attr('cy', (d) => y(Math.max(d['UMI' + filter.UMI].average, 2)))
-    .attr('r', (d) => Math.pow(Math.log(d.enrolment), 1.7))
-    .style('fill', (d) => {
+    .attr('cx', d => x(Math.min(d['UMI' + filter.UMI].dispersionIndex, 0.8)))
+    .attr('cy', d => y(Math.max(d['UMI' + filter.UMI].average, 2)))
+    .attr('r', d => Math.pow(Math.log(d.enrolment), 1.7))
+    .style('fill', d => {
       const percentFavourable = d['UMI' + filter.UMI].percentFavourable
       if (percentFavourable >= 0.90) {
         return percentFavourableColor6.first
@@ -72,10 +72,10 @@ const drawUMIvsDispersion = (array, filter = { UMI: 6 }) => {
         return percentFavourableColor6.fifth
       } else return percentFavourableColor6.sixth
     })
-    .attr('class', (d) => d.PUID)
+    .attr('class', d => d.PUID)
     .on('mouseover', courseInfoTip.show)
     .on('mouseout', courseInfoTip.hide)
-    .on('click', (d) => {
+    .on('click', d => {
       const circles = document.getElementsByTagName('circle')
       Array.prototype.map.call(circles, (x) => {
         x.classList.remove('pulse')
