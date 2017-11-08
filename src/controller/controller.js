@@ -95,13 +95,22 @@ const chartController = (filterSettings) => {
     console.log('facultyDept data:', data)
 
     const years = R.flatten(data.map(x => R.keys(x).filter(x => x !== '_id')))
+    const terms = ['S', 'S1', 'S2', 'SA', 'W', 'W1', 'W2', 'WA', 'WC']
 
-    const facultyUMI6 = years.map(year => ({ year, 'UMI': data.find(x => x.hasOwnProperty(String(year)))[year].facultyAverage.UMI6 }))
+    const facultyAvgData = []
+    years.map(year => {
+      const yearObj = data.find(x => x.hasOwnProperty(String(year)))[year]
+      const pickTerms = R.pick(terms, yearObj)
+
+      console.log(Object.keys(pickTerms).map((term, i) => ({ 'year': year + term, 'UMI': pickTerms[term].facultyAverage.UMI6 })))
+      facultyAvgData.push(Object.keys(pickTerms).map((term, i) => ({ 'year': year + term, 'UMI': pickTerms[term].facultyAverage.UMI6 })))
+      facultyAvgData.push({ year, 'UMI': data.find(x => x.hasOwnProperty(String(year)))[year].facultyAverage.UMI6 })
+    })
     const apbiUMI6 = years.map(year => ({ year, 'UMI': data.find(x => x.hasOwnProperty(String(year)))[year].APBIAverage.UMI6 }))
     console.log(apbiUMI6)
 
     const facultyUMITrend = document.getElementById('facultyUMITrend')
-    facultyUMITrend.appendChild(drawUMITrendLine(facultyUMI6).node())
+    facultyUMITrend.appendChild(drawUMITrendLine(R.flatten(facultyAvgData)).node())
 
     const APIBUMITrend = document.getElementById('apbiUMITrend')
     APIBUMITrend.appendChild(drawUMITrendLine(apbiUMI6).node())
