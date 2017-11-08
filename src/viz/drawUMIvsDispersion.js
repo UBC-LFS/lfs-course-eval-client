@@ -4,6 +4,11 @@ import { margin, height, percentFavourableColor6 } from '../constants/constants'
 import drawToolTip from './drawToolTip'
 import * as d3 from 'd3'
 
+const animate = () => {
+  const pulseList = document.getElementsByClassName('pulse')
+  Array.prototype.map.call(pulseList, (x) => (x.innerHTML = '<animate attributeType="SVG" attributeName="r" begin="0s" dur="1.5s" repeatCount="indefinite" from="0%" to="10%"/><animate attributeType="CSS" attributeName="stroke-width" begin="0s"  dur="1.5s" repeatCount="indefinite" from="3%" to="0%" /><animate attributeType="CSS" attributeName="opacity" begin="0s"  dur="1.5s" repeatCount="indefinite" from="1" to="0"/>'))
+}
+
 const drawUMIvsDispersion = (array, filter = { UMI: 6 }) => {
   const graphWidth = $('#UMIvsDispersionGraph').width()
   const svg = d3.select('#UMIvsDispersionGraph')
@@ -82,11 +87,6 @@ const drawUMIvsDispersion = (array, filter = { UMI: 6 }) => {
       Array.prototype.map.call(selectedCircles, (x) => x.classList.add('pulse'))
       animate()
     })
-
-  const animate = () => {
-    const pulseList = document.getElementsByClassName('pulse')
-    Array.prototype.map.call(pulseList, (x) => (x.innerHTML = '<animate attributeType="SVG" attributeName="r" begin="0s" dur="1.5s" repeatCount="indefinite" from="0%" to="10%"/><animate attributeType="CSS" attributeName="stroke-width" begin="0s"  dur="1.5s" repeatCount="indefinite" from="3%" to="0%" /><animate attributeType="CSS" attributeName="opacity" begin="0s"  dur="1.5s" repeatCount="indefinite" from="1" to="0"/>'))
-  }
 
   svg.call(courseInfoTip)
 }
