@@ -23,6 +23,7 @@ const loadUMIInstructor = () => fetchJSON('data/UMIInstructor')
 const loadOverallInstructorData = () => fetchJSON('data/OverallInstructor')
 const loadCoursePerformance = () => fetchJSON('data/CoursePerformance')
 const loadUMIDispersion = () => fetchJSON('data/UMIDispersion')
+const loadEnrolmentTrend = () => fetchJSON('data/EnrolmentTrend')
 export {
     loadData,
     createFilterString,
@@ -30,5 +31,6 @@ export {
     loadUMIInstructor,
     loadOverallInstructorData,
     loadCoursePerformance,
-    loadUMIDispersion
+    loadUMIDispersion,
+    loadEnrolmentTrend
 }

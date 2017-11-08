@@ -1,4 +1,4 @@
-import { loadUMIInstructor, loadOverallInstructorData, loadCoursePerformance, loadUMIDispersion } from '../service/dataService'
+import { loadUMIInstructor, loadOverallInstructorData, loadCoursePerformance, loadUMIDispersion, loadEnrolmentTrend } from '../service/dataService'
 import drawUMIVsDispersion from '../viz/drawUMIVsDispersion'
 import drawOverallInstructor from '../viz/drawOverallInstructorTable'
 import drawUMIInstructor from '../viz/drawUMIInstructorTable'
@@ -98,9 +98,12 @@ const chartController = (filterSettings) => {
   const umiTrendLine = document.getElementById('umiTrendLine')
   umiTrendLine.appendChild(drawUMITrendLine().node())
   umiTrendLine.appendChild(drawCountHistogram().node())
-
-  const enrolmentTrendLine = document.getElementById('enrolmentTrendLine')
-  enrolmentTrendLine.appendChild(drawEnrolmentTrendLine().node())
+  
+  const enrolmentTrendData = loadEnrolmentTrend()
+  enrolmentTrendData.then(data => {
+    const enrolmentTrendLine = document.getElementById('enrolmentTrendLine')
+    enrolmentTrendLine.appendChild(drawEnrolmentTrendLine().node())
+  })
 }
 
 const dashboardController = (filterSettings) => {
@@ -134,13 +137,13 @@ const controller = () => {
     classSizeMax: document.getElementById('classSizeMax')
   }
 
-    // initial draw
+  // initial draw
   chartController(filterSetting)
   dashboardController()
 
   initEventListenerController(filterSetting, ids)
   eventListeners(filterSetting, ids, (newFilter) => {
-        // call chart controller here
+    // call chart controller here
   })
 }
 
