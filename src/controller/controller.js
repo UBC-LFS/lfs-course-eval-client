@@ -106,11 +106,9 @@ const chartController = (filterSettings) => {
 
     const APIBUMITrend = document.getElementById('apbiUMITrend')
     APIBUMITrend.appendChild(drawUMITrendLine(apbiUMI6).node())
-    // do something with data later
   })
-  
-  const enrolmentTrendData = loadEnrolmentTrend()
-  enrolmentTrendData.then(data => {
+
+  loadEnrolmentTrend().then(data => {
     console.log('enrolmentTrend data:', data)
     const enrolmentTrendLine = document.getElementById('enrolmentTrendLine')
     enrolmentTrendLine.appendChild(drawEnrolmentTrendLine().node())
