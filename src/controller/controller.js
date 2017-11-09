@@ -115,10 +115,10 @@ const chartController = (filterSettings) => {
     })
 
     const facultyUMITrend = document.getElementById('facultyUMITrend')
-    facultyUMITrend.appendChild(drawUMITrendLine(R.flatten(facultyAvgData)).node())
+    facultyUMITrend.appendChild(drawUMITrendLine(facultyAvgData).node())
 
     const APIBUMITrend = document.getElementById('apbiUMITrend')
-    APIBUMITrend.appendChild(drawUMITrendLine(R.flatten(apbiUMI6Data)).node())
+    APIBUMITrend.appendChild(drawUMITrendLine(apbiUMI6Data).node())
   })
 
   loadEnrolmentTrend().then(data => {
