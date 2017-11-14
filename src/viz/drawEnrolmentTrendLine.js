@@ -3,11 +3,18 @@ import { sortByTerm } from '../util/util'
 import * as d3 from 'd3'
 import R from 'ramda'
 
-const drawEnrolmentTrendLine = (data, course = 'APBI 418') => {
+const filterByTerm = (term) => R.filter(x => x.year.slice(-2) === term)
+
+const drawEnrolmentTrendLine = (data, course = 'FNH 200', term = 'all') => {
   const courseData = data.find(x => x.Course === course)
-  const terms = sortByTerm(courseData.Terms)
-  console.log(terms)
-  // const margin = {top: 20, right: 20, bottom: 30, left: 40}
+  let terms = sortByTerm(courseData.Terms)
+
+  if (term !== 'all') {
+    terms = filterByTerm(term)(terms).slice(-15)
+  } else {
+    terms = terms.slice(-15)
+  }
+
   const w = 1000
   const h = 600
   const width = w - margin.left - margin.right
