@@ -1,19 +1,11 @@
 import { margin } from '../constants/constants'
 import { sortByTerm } from '../util/util'
+import { filterByTerm } from '../util/filter'
 import * as d3 from 'd3'
-import R from 'ramda'
-
-const filterByTerm = (term) => R.filter(x => x.year.slice(-2) === term)
 
 const drawEnrolmentTrendLine = (data, course = 'FNH 200', term = 'all') => {
   const courseData = data.find(x => x.Course === course)
-  let terms = sortByTerm(courseData.Terms)
-
-  if (term !== 'all') {
-    terms = filterByTerm(term)(terms).slice(-15)
-  } else {
-    terms = terms.slice(-15)
-  }
+  data = filterByTerm(term, sortByTerm(courseData.Terms))
 
   const w = 1000
   const h = 600
@@ -30,11 +22,11 @@ const drawEnrolmentTrendLine = (data, course = 'FNH 200', term = 'all') => {
   const y = d3.scaleLinear().rangeRound([height, 0])
 
   const line = d3.line()
-    .x(d => (x(terms[1].year) - x(terms[0].year)) / 2 + x(d.year))
+    .x(d => (x(data[1].year) - x(data[0].year)) / 2 + x(d.year))
     .y(d => y(d.enrolment))
 
-  x.domain(terms.map(d => d.year))
-  y.domain([0, d3.max(terms, d => d.enrolment)])
+  x.domain(data.map(d => d.year))
+  y.domain([0, d3.max(data, d => d.enrolment)])
 
   g.append('g')
     .attr('class', 'axis axis--y')
@@ -52,15 +44,15 @@ const drawEnrolmentTrendLine = (data, course = 'FNH 200', term = 'all') => {
     .call(d3.axisBottom(x))
 
   g.append('path')
-    .datum(terms)
+    .datum(data)
     .attr('class', 'line')
     .attr('d', line)
 
   g.selectAll('circle')
-    .data(terms)
+    .data(data)
   .enter().append('circle')
     .attr('class', 'circle')
-    .attr('cx', d => (x(terms[1].year) - x(terms[0].year)) / 2 + x(d.year))
+    .attr('cx', d => (x(data[1].year) - x(data[0].year)) / 2 + x(d.year))
     .attr('cy', d => y(d.enrolment))
     .attr('r', 4)
   return svg

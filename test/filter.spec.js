@@ -64,3 +64,49 @@ describe('byYear', () => {
     assert.deepEqual(expected, filterYear2016(data))
   })
 })
+
+describe('filterByTerm', () => {
+  it('takes an array and a term a and returns a new array with only objects that contain that term, and it only returns the last 15 entries', () => {
+    let array = [
+      {year: '2016W1', data: 'hi'},
+      {year: '2016W1', data: 'hi'},
+      {year: '2016W1', data: 'hi'},
+      {year: '2016W1', data: 'hi'},
+      {year: '2016W1', data: 'hi'},
+      {year: '2016W1', data: 'hi'},
+      {year: '2016W1', data: 'hi'},
+      {year: '2016W1', data: 'hi'},
+      {year: '2016W1', data: 'hi'},
+      {year: '2016W1', data: 'hi'},
+      {year: '2016W1', data: 'hi'},
+      {year: '2016W1', data: 'hi'},
+      {year: '2016W1', data: 'hi'},
+      {year: '2016W1', data: 'hi'},
+      {year: '2016W1', data: 'hi'},
+      {year: '2016W1', data: 'hi'},
+      {year: '2016W6', data: ''},
+      {year: '2016W5', data: ''},
+      {year: '2016W4', data: ''},
+      {year: '2016W3', data: ''},
+      {year: '2016W2', data: ''}
+    ]
+    let output = [
+      {year: '2016W1', data: 'hi'},
+      {year: '2016W1', data: 'hi'},
+      {year: '2016W1', data: 'hi'},
+      {year: '2016W1', data: 'hi'},
+      {year: '2016W1', data: 'hi'},
+      {year: '2016W1', data: 'hi'},
+      {year: '2016W1', data: 'hi'},
+      {year: '2016W1', data: 'hi'},
+      {year: '2016W1', data: 'hi'},
+      {year: '2016W1', data: 'hi'},
+      {year: '2016W1', data: 'hi'},
+      {year: '2016W1', data: 'hi'},
+      {year: '2016W1', data: 'hi'},
+      {year: '2016W1', data: 'hi'},
+      {year: '2016W1', data: 'hi'}
+    ]
+    assert.deepEqual(filter.filterByTerm('W1', array), output)
+  })
+})
