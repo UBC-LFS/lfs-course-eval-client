@@ -4,6 +4,11 @@ import { margin, height, percentFavourableColor6 } from '../constants/constants'
 import drawToolTip from './drawToolTip'
 import * as d3 from 'd3'
 
+const animate = () => {
+  const pulseList = document.getElementsByClassName('pulse')
+  Array.prototype.map.call(pulseList, (x) => (x.innerHTML = '<animate attributeType="SVG" attributeName="r" begin="0s" dur="1.5s" repeatCount="indefinite" from="0%" to="10%"/><animate attributeType="CSS" attributeName="stroke-width" begin="0s"  dur="1.5s" repeatCount="indefinite" from="3%" to="0%" /><animate attributeType="CSS" attributeName="opacity" begin="0s"  dur="1.5s" repeatCount="indefinite" from="1" to="0"/>'))
+}
+
 const drawUMIvsDispersion = (array, filter = { UMI: 6 }) => {
   const graphWidth = $('#UMIvsDispersionGraph').width()
   const svg = d3.select('#UMIvsDispersionGraph')
@@ -50,10 +55,10 @@ const drawUMIvsDispersion = (array, filter = { UMI: 6 }) => {
   umiDots.selectAll('dot')
     .data(array)
     .enter().append('circle')
-    .attr('cx', (d) => x(Math.min(d['UMI' + filter.UMI].dispersionIndex, 0.8)))
-    .attr('cy', (d) => y(Math.max(d['UMI' + filter.UMI].average, 2)))
-    .attr('r', (d) => Math.pow(Math.log(d.enrolment), 1.7))
-    .style('fill', (d) => {
+    .attr('cx', d => x(Math.min(d['UMI' + filter.UMI].dispersionIndex, 0.8)))
+    .attr('cy', d => y(Math.max(d['UMI' + filter.UMI].average, 2)))
+    .attr('r', d => Math.pow(Math.log(d.enrolment), 1.7))
+    .style('fill', d => {
       const percentFavourable = d['UMI' + filter.UMI].percentFavourable
       if (percentFavourable >= 0.90) {
         return percentFavourableColor6.first
@@ -67,10 +72,10 @@ const drawUMIvsDispersion = (array, filter = { UMI: 6 }) => {
         return percentFavourableColor6.fifth
       } else return percentFavourableColor6.sixth
     })
-    .attr('class', (d) => d.PUID)
+    .attr('class', d => d.PUID)
     .on('mouseover', courseInfoTip.show)
     .on('mouseout', courseInfoTip.hide)
-    .on('click', (d) => {
+    .on('click', d => {
       const circles = document.getElementsByTagName('circle')
       Array.prototype.map.call(circles, (x) => {
         x.classList.remove('pulse')
@@ -82,11 +87,6 @@ const drawUMIvsDispersion = (array, filter = { UMI: 6 }) => {
       Array.prototype.map.call(selectedCircles, (x) => x.classList.add('pulse'))
       animate()
     })
-
-  const animate = () => {
-    const pulseList = document.getElementsByClassName('pulse')
-    Array.prototype.map.call(pulseList, (x) => (x.innerHTML = '<animate attributeType="SVG" attributeName="r" begin="0s" dur="1.5s" repeatCount="indefinite" from="0%" to="10%"/><animate attributeType="CSS" attributeName="stroke-width" begin="0s"  dur="1.5s" repeatCount="indefinite" from="3%" to="0%" /><animate attributeType="CSS" attributeName="opacity" begin="0s"  dur="1.5s" repeatCount="indefinite" from="1" to="0"/>'))
-  }
 
   svg.call(courseInfoTip)
 }

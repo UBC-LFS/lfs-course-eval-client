@@ -1,5 +1,5 @@
-import controller from './controller/controller'
+import init from './controller/init'
 
 document.addEventListener('DOMContentLoaded', function () {
-  controller()
+  init()
 }, false)

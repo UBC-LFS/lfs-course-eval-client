@@ -21,11 +21,11 @@ const drawEnrolmentTrendLine = (data, course = 'FNH 330') => {
   const y = d3.scaleLinear().rangeRound([height, 0])
 
   const line = d3.line()
-    .x((d) => (x(data[1].year) - x(data[0].year)) / 2 + x(d.year))
-    .y((d) => y(d.Enrolment))
+    .x(d => (x(data[1].year) - x(data[0].year)) / 2 + x(d.year))
+    .y(d => y(d.Enrolment))
 
-  x.domain(data.map((d) => d.year))
-  y.domain([0, d3.max(data, (d) => d.Enrolment)])
+  x.domain(data.map(d => d.year))
+  y.domain([0, d3.max(data, d => d.Enrolment)])
 
   g.append('g')
     .attr('class', 'axis axis--y')
@@ -51,8 +51,8 @@ const drawEnrolmentTrendLine = (data, course = 'FNH 330') => {
     .data(data)
   .enter().append('circle')
     .attr('class', 'circle')
-    .attr('cx', (d) => (x(data[1].year) - x(data[0].year)) / 2 + x(d.year))
-    .attr('cy', (d) => y(d.Enrolment))
+    .attr('cx', d => (x(data[1].year) - x(data[0].year)) / 2 + x(d.year))
+    .attr('cy', d => y(d.Enrolment))
     .attr('r', 4)
   return svg
 }

@@ -25,31 +25,31 @@ const drawCountHistogram = (count = sampleCount) => {
 
   const bins = d3.histogram().thresholds([1, 2, 3, 4, 5])(arrayOfCounts)
 
-  y.domain([0, d3.max(bins, (d) => d.length)])
+  y.domain([0, d3.max(bins, d => d.length)])
 
   const bar = g.selectAll('.bar')
     .data(bins)
     .enter().append('g')
       .attr('class', 'bar')
-      .attr('transform', (d) => 'translate(' + x((d.x0 - 1) / 5) + ',' + y(d.length) + ')')
+      .attr('transform', d => 'translate(' + x((d.x0 - 1) / 5) + ',' + y(d.length) + ')')
 
   bar.append('rect')
     .attr('x', 1)
-    .attr('width', (d) => 48)
-    .attr('height', (d) => height - y(d.length))
+    .attr('width', d => 48)
+    .attr('height', d => height - y(d.length))
 
   bar.append('text')
     .attr('dy', '.75em')
     .attr('y', -15)
     .attr('x', 48 / 2)
     .attr('text-anchor', 'middle')
-    .text((d) => d.length)
+    .text(d => d.length)
 
   // bar.append('text')
   //   .attr('x', 48 / 2)
   //   .attr('y', 0)
   //   .attr('dy', '.75em')
-  //   .text((d) => d)
+  //   .text(d => d)
 
   return svg
 }
