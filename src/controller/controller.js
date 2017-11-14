@@ -1,13 +1,10 @@
-import { loadEnrolmentTrend, loadFacultyDept } from '../service/dataService'
-import drawUMITrendLine from '../viz/drawUMITrendLine'
-import drawEnrolmentTrendLine from '../viz/drawEnrolmentTrendLine'
 import * as questionDefinitions from '../constants/questionDefinitions'
-import R from 'ramda'
 
 import initOverallInstructor from './overallInstructorDataController'
 import initUMIDispersion from './UMIDispersionController'
 import initCoursePerformance from './coursePerformanceController'
 import initFacultyDept from './facultyDeptController'
+import initEnrolmentTrend from './enrolmentTrendController'
 
 const eventListeners = (filterSetting, ids, callback) => {
   ids.yearSelection.addEventListener('change', function () {
@@ -71,22 +68,6 @@ const initEventListenerController = (filterSetting, ids) => {
   // filterData.then(filterObj => initEventListeners(filterSetting, filterObj, ids))
 }
 
-const chartController = (filterSettings) => {
-  initOverallInstructor()
-
-  initUMIDispersion()
-
-  initCoursePerformance()
-  
-  initFacultyDept()
-  
-  loadEnrolmentTrend().then(data => {
-    console.log('enrolmentTrend data:', data)
-    const enrolmentTrendLine = document.getElementById('enrolmentTrendLine')
-    enrolmentTrendLine.appendChild(drawEnrolmentTrendLine().node())
-  })
-}
-
 const dashboardController = (filterSettings) => {
   // const dashboardData = loadData(undefined, 'dashboard')
   // dashboardData.then(data => initEventListeners(data))
@@ -119,8 +100,18 @@ const controller = () => {
   }
 
   // initial draw
-  chartController(filterSetting)
+
   dashboardController()
+
+  initOverallInstructor()
+
+  initUMIDispersion()
+
+  initCoursePerformance()
+
+  initFacultyDept()
+
+  initEnrolmentTrend()
 
   initEventListenerController(filterSetting, ids)
   eventListeners(filterSetting, ids, (newFilter) => {
