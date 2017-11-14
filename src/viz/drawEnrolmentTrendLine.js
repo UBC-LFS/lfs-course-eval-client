@@ -2,9 +2,9 @@ import { margin } from '../constants/constants'
 import { sortByTerm } from '../util/util'
 import * as d3 from 'd3'
 
-
-const drawEnrolmentTrendLine = (data, course = 'FNH 330') => {
-  data = sortByTerm(data)
+const drawEnrolmentTrendLine = (data, course = 'APBI 418') => {
+  const courseData = data.find(x => x.Course === course)
+  const terms = sortByTerm(courseData.Terms)
   // const margin = {top: 20, right: 20, bottom: 30, left: 40}
   const w = 1000
   const h = 600
@@ -21,11 +21,11 @@ const drawEnrolmentTrendLine = (data, course = 'FNH 330') => {
   const y = d3.scaleLinear().rangeRound([height, 0])
 
   const line = d3.line()
-    .x(d => (x(data[1].year) - x(data[0].year)) / 2 + x(d.year))
-    .y(d => y(d.Enrolment))
+    .x(d => x(data[1].year) - x(data[0].year) / 2 + x(d.year))
+    .y(d => y(d.enrolment))
 
-  x.domain(data.map(d => d.year))
-  y.domain([0, d3.max(data, d => d.Enrolment)])
+  x.domain(terms.map(d => d.year))
+  y.domain([0, d3.max(data, d => d.enrolment)])
 
   g.append('g')
     .attr('class', 'axis axis--y')
@@ -43,16 +43,16 @@ const drawEnrolmentTrendLine = (data, course = 'FNH 330') => {
     .call(d3.axisBottom(x))
 
   g.append('path')
-    .datum(data)
+    .datum(terms)
     .attr('class', 'line')
     .attr('d', line)
 
   g.selectAll('circle')
-    .data(data)
+    .data(terms)
   .enter().append('circle')
     .attr('class', 'circle')
     .attr('cx', d => (x(data[1].year) - x(data[0].year)) / 2 + x(d.year))
-    .attr('cy', d => y(d.Enrolment))
+    .attr('cy', d => y(d.enrolment))
     .attr('r', 4)
   return svg
 }
