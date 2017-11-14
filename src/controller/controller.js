@@ -1,12 +1,14 @@
-import { loadUMIInstructor, loadOverallInstructorData, loadCoursePerformance, loadUMIDispersion, loadEnrolmentTrend, loadFacultyDept } from '../service/dataService'
+import { loadUMIInstructor, loadOverallInstructorData, loadUMIDispersion, loadEnrolmentTrend, loadFacultyDept } from '../service/dataService'
 import drawUMIVsDispersion from '../viz/drawUMIVsDispersion'
 import drawOverallInstructor from '../viz/drawOverallInstructorTable'
 import drawUMIInstructor from '../viz/drawUMIInstructorTable'
-import drawCoursePerformance from '../viz/drawCoursePerformanceTable'
 import drawUMITrendLine from '../viz/drawUMITrendLine'
 import drawEnrolmentTrendLine from '../viz/drawEnrolmentTrendLine'
 import * as questionDefinitions from '../constants/questionDefinitions'
 import R from 'ramda'
+
+import coursePerformance from './coursePerformanceController'
+import UMIDispersion from './UMIDispersionController'
 
 const eventListeners = (filterSetting, ids, callback) => {
   ids.yearSelection.addEventListener('change', function () {
@@ -76,20 +78,9 @@ const chartController = (filterSettings) => {
     drawOverallInstructor(data)
   })
 
-  loadUMIInstructor().then(data => {
-    console.log('umiInstructor data:', data)
-    drawUMIInstructor(data)
-  })
+  UMIDispersion()
 
-  loadCoursePerformance().then(data => {
-    console.log('coursePerformanceData data:', data)
-    drawCoursePerformance(data, 'UMI6')
-  })
-
-  loadUMIDispersion().then(data => {
-    console.log('umiVsDispersion data:', data)
-    drawUMIVsDispersion(data)
-  })
+  coursePerformance()
 
   loadFacultyDept().then(data => {
     console.log('facultyDept data:', data)
