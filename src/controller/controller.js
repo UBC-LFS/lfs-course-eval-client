@@ -101,6 +101,7 @@ const chartController = (filterSettings) => {
   
   const enrolmentTrendData = loadEnrolmentTrend()
   enrolmentTrendData.then(data => {
+    console.log('EnrolmentTrend data:', data)
     const enrolmentTrendLine = document.getElementById('enrolmentTrendLine')
     enrolmentTrendLine.appendChild(drawEnrolmentTrendLine().node())
   })

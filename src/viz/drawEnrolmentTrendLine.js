@@ -2,30 +2,8 @@ import { margin } from '../constants/constants'
 import { sortByTerm } from '../util/util'
 import * as d3 from 'd3'
 
-let sampleArr = [
-  {
-    year: '2015W2',
-    Enrolment: 300
-  },
-  {
-    year: '2015W1',
-    Enrolment: 60
-  },
-  {
-    year: '2013W1',
-    Enrolment: 90
-  },
-  {
-    year: '2013W2',
-    Enrolment: 50
-  },
-  {
-    year: '2013S',
-    Enrolment: 80
-  }
-]
 
-const drawEnrolmentTrendLine = (data = sampleArr, course = 'FNH 250') => {
+const drawEnrolmentTrendLine = (data, course = 'FNH 330') => {
   data = sortByTerm(data)
   // const margin = {top: 20, right: 20, bottom: 30, left: 40}
   const w = 1000
