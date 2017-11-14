@@ -2,31 +2,8 @@ import { margin } from '../constants/constants'
 import { sortByTerm } from '../util/util'
 import * as d3 from 'd3'
 
-let sampleArr = [
-  {
-    year: '2015',
-    UMI: 4
-  },
-  {
-    year: '2014',
-    UMI: 5
-  },
-  {
-    year: '2013W1',
-    UMI: 3
-  },
-  {
-    year: '2013W2',
-    UMI: 4
-  },
-  {
-    year: '2013S',
-    UMI: 1
-  }
-]
-
-const drawUMITrendLine = (data = sampleArr) => {
-  data = sortByTerm(data)
+const drawUMITrendLine = (data) => {
+  data = sortByTerm(data).slice(-15)
   // const margin = {top: 20, right: 20, bottom: 30, left: 40}
   const w = 1000
   const h = 600
