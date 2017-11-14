@@ -1,10 +1,9 @@
 /* global $ */
 
-import R from 'ramda'
 import * as util from '../util/util.js'
 
 const drawCoursePerformance = (coursePerformanceData, questionCode, PUID = 'X53VU8MB9D08') => {
-  const tableData = R.find(x => x.PUID === PUID, coursePerformanceData).Courses
+  const tableData = coursePerformanceData.find(x => x.PUID === PUID).Courses
   const data = tableData.map(x => (
     [ x.course + ' ' + x.section,
       x.enrolment,
