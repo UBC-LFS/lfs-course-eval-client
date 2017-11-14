@@ -2,7 +2,7 @@ import { margin } from '../constants/constants'
 import { sortByTerm } from '../util/util'
 import * as d3 from 'd3'
 
-const drawUMITrendLine = (data) => {
+const drawUMITrendLine = (data, term = 'all') => {
   data = sortByTerm(data).slice(-15)
   // const margin = {top: 20, right: 20, bottom: 30, left: 40}
   const w = 1000
