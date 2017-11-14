@@ -17,7 +17,6 @@ const init = () => {
   initUMIInstructor()
 
   initEnrolmentTrend()
-
 }
 
 export default init

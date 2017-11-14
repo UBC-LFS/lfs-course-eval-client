@@ -6,6 +6,7 @@ import R from 'ramda'
 const drawEnrolmentTrendLine = (data, course = 'APBI 418') => {
   const courseData = data.find(x => x.Course === course)
   const terms = sortByTerm(courseData.Terms)
+  console.log(terms)
   // const margin = {top: 20, right: 20, bottom: 30, left: 40}
   const w = 1000
   const h = 600
@@ -22,11 +23,11 @@ const drawEnrolmentTrendLine = (data, course = 'APBI 418') => {
   const y = d3.scaleLinear().rangeRound([height, 0])
 
   const line = d3.line()
-    .x(d => (x(data[1].year) - x(data[0].year)) / 2 + x(d.year))
+    .x(d => (x(terms[1].year) - x(terms[0].year)) / 2 + x(d.year))
     .y(d => y(d.enrolment))
 
-  x.domain(data.map(d => d.year))
-  y.domain([0, d3.max(data, d => d.enrolment)])
+  x.domain(terms.map(d => d.year))
+  y.domain([0, d3.max(terms, d => d.enrolment)])
 
   g.append('g')
     .attr('class', 'axis axis--y')
@@ -52,7 +53,7 @@ const drawEnrolmentTrendLine = (data, course = 'APBI 418') => {
     .data(terms)
   .enter().append('circle')
     .attr('class', 'circle')
-    .attr('cx', d => (x(data[1].year) - x(data[0].year)) / 2 + x(d.year))
+    .attr('cx', d => (x(terms[1].year) - x(terms[0].year)) / 2 + x(d.year))
     .attr('cy', d => y(d.enrolment))
     .attr('r', 4)
   return svg

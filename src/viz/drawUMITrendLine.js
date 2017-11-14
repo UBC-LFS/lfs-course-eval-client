@@ -4,6 +4,7 @@ import * as d3 from 'd3'
 
 const drawUMITrendLine = (data, term = 'all') => {
   data = sortByTerm(data).slice(-15)
+  console.log('trend data', data)
   // const margin = {top: 20, right: 20, bottom: 30, left: 40}
   const w = 1000
   const h = 600
