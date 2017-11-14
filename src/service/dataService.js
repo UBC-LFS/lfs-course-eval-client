@@ -10,7 +10,6 @@ const loadEnrolmentTrend = () => fetchJSON('data/EnrolmentTrend')
 const loadFacultyDept = () => fetchJSON('/data/FacultyDept')
 
 export {
-    fetchJSON,
     loadUMIInstructor,
     loadOverallInstructorData,
     loadCoursePerformance,
