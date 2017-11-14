@@ -1,6 +1,7 @@
 import { margin } from '../constants/constants'
 import { sortByTerm } from '../util/util'
 import * as d3 from 'd3'
+import R from 'ramda'
 
 const drawEnrolmentTrendLine = (data, course = 'APBI 418') => {
   const courseData = data.find(x => x.Course === course)
@@ -21,10 +22,10 @@ const drawEnrolmentTrendLine = (data, course = 'APBI 418') => {
   const y = d3.scaleLinear().rangeRound([height, 0])
 
   const line = d3.line()
-    .x(d => x(data[1].year) - x(data[0].year) / 2 + x(d.year))
+    .x(d => (x(data[1].year) - x(data[0].year)) / 2 + x(d.year))
     .y(d => y(d.enrolment))
 
-  x.domain(terms.map(d => d.year))
+  x.domain(data.map(d => d.year))
   y.domain([0, d3.max(data, d => d.enrolment)])
 
   g.append('g')
