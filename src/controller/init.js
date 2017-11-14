@@ -3,6 +3,7 @@ import initUMIDispersion from './UMIDispersionController'
 import initCoursePerformance from './coursePerformanceController'
 import initFacultyDept from './facultyDeptController'
 import initEnrolmentTrend from './enrolmentTrendController'
+import initUMIInstructor from './UMIInstructorController'
 
 const init = () => {
   initOverallInstructor()
@@ -13,7 +14,10 @@ const init = () => {
 
   initFacultyDept()
 
+  initUMIInstructor()
+
   initEnrolmentTrend()
+
 }
 
 export default init
