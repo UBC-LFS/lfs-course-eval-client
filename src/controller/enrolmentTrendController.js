@@ -11,16 +11,23 @@ const initFilterHandler = (data) => {
   courseSelect.innerHTML = courses.map(x => '<option value="' + x + '">' + x + '</option>').join(' ')
 
   const courseTerms = R.uniq((data.find(x => x.Course === courseSelect.value)).Terms.map(x => x.year.slice(-2)))
+  courseTerms.push('all')
   termSelect.innerHTML = courseTerms.map(x => '<option value="' + x + '">' + x + '</option>').join(' ')
 
   courseSelect.addEventListener('change', function () {
+    const graph = document.getElementById('enrolmentTrendGraph')
+    graph.parentElement.removeChild(graph)
     const courseTerms = R.uniq((data.find(x => x.Course === courseSelect.value)).Terms.map(x => x.year.slice(-2)))
+    courseTerms.push('all')
     termSelect.innerHTML = courseTerms.map(x => '<option value="' + x + '">' + x + '</option>').join(' ')
+    termSelect.value = 'all'
     const enrolmentTrendLine = document.getElementById('enrolmentTrendLine')
     enrolmentTrendLine.appendChild(drawEnrolmentTrendLine(data, courseSelect.value, termSelect.value).node())
   })
 
   termSelect.addEventListener('change', function () {
+    const graph = document.getElementById('enrolmentTrendGraph')
+    graph.parentElement.removeChild(graph)
     const enrolmentTrendLine = document.getElementById('enrolmentTrendLine')
     enrolmentTrendLine.appendChild(drawEnrolmentTrendLine(data, courseSelect.value, termSelect.value).node())
   })

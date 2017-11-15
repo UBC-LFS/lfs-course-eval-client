@@ -4,8 +4,11 @@ import { filterByTerm } from '../util/filter'
 import * as d3 from 'd3'
 
 const drawEnrolmentTrendLine = (data, course = 'FNH 200', term = 'all') => {
+  console.log(course, term)
   const courseData = data.find(x => x.Course === course)
   data = filterByTerm(term, sortByTerm(courseData.Terms))
+
+  console.log(data)
 
   const w = 1000
   const h = 600
@@ -13,6 +16,7 @@ const drawEnrolmentTrendLine = (data, course = 'FNH 200', term = 'all') => {
   const height = h - margin.top - margin.bottom
 
   const svg = d3.select(document.createElement('div')).append('svg')
+    .attr('id', 'enrolmentTrendGraph')
     .attr('width', w)
     .attr('height', h)
 
