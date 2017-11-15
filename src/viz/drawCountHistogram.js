@@ -2,11 +2,7 @@ import { margin } from '../constants/constants'
 import * as d3 from 'd3'
 import { convertCountIntoArray } from '../util/util'
 
-let sampleCount = {
-  '1': 10, '2': 4, '3': 1, '4': 27, '5': 11
-}
-
-const drawCountHistogram = (count = sampleCount) => {
+const drawCountHistogram = (count) => {
   const w = 300
   const h = 150
   const width = w - margin.left - margin.right
