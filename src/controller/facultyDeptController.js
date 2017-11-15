@@ -10,12 +10,11 @@ const initFacultyDept = () => loadFacultyDept().then(data => {
     R.map(x => R.keys(x).filter(x => x !== '_id'))
   )(data)
 
-  const terms = ['S', 'S1', 'S2', 'SA', 'W', 'W1', 'W2', 'WA', 'WC']
-
   const facultyAvgData = []
   const apbiUMI6Data = []
   years.map(year => {
     const yearObj = data.find(x => x.hasOwnProperty(String(year)))[year]
+    const terms = ['S', 'S1', 'S2', 'SA', 'W', 'W1', 'W2', 'WA', 'WC']
     const pickTerms = R.pick(terms, yearObj)
 
     Object.keys(pickTerms).map(term => {
