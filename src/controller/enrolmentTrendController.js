@@ -20,18 +20,15 @@ const initFilterHandler = (data) => {
   const termSelect = document.getElementById('enrolmentTrendTerm')
   const courses = data.map(x => x.Course).sort(compareCourse)
   courseSelect.innerHTML = attachOptions(courses)
-
-  const courseTerms = getUniqCourseTerms(data, courseSelect.value)
-  courseTerms.push('all')
+  const courseTerms = ['all'].concat(getUniqCourseTerms(data, courseSelect.value))
   termSelect.innerHTML = attachOptions(courseTerms)
   $('#enrolmentTrendCourse.selectpicker').selectpicker('refresh')    
   $('#enrolmentTrendTerm.selectpicker').selectpicker('refresh')    
+  
   courseSelect.addEventListener('change', function () {
-    const courseTerms = getUniqCourseTerms(data, courseSelect.value)
-    courseTerms.push('all')
+    const courseTerms = ['all'].concat(getUniqCourseTerms(data, courseSelect.value))
     termSelect.innerHTML = attachOptions(courseTerms)
     $('#enrolmentTrendTerm.selectpicker').selectpicker('refresh')      
-    $('#enrolmentTrendTerm.selectpicker').selectpicker('val','all')
     attachGraph(data, courseSelect.value, termSelect.value)
   })
 
@@ -41,10 +38,12 @@ const initFilterHandler = (data) => {
 }
 
 const initEnrolmentTrend = () => loadEnrolmentTrend().then(data => {
+  const courseSelect = document.getElementById('enrolmentTrendCourse')
+  const termSelect = document.getElementById('enrolmentTrendTerm')
   initFilterHandler(data)
   console.log('enrolmentTrend data:', data)
   const enrolmentTrendLine = document.getElementById('enrolmentTrendLine')
-  enrolmentTrendLine.appendChild(drawEnrolmentTrendLine(data).node())
+  enrolmentTrendLine.appendChild(drawEnrolmentTrendLine(data,courseSelect.value,termSelect.value).node())
 })
 
 export default initEnrolmentTrend
