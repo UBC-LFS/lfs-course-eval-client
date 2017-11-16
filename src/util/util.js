@@ -44,7 +44,7 @@ const compareCourse = (course1, course2) => {
   return compare(dept1, dept2) || compare(courseCode1, courseCode2)
 }
 
-const compareLastNameFirstName = (instructor1, instructor2) => {
+const compareLastNameThenFirstName = (instructor1, instructor2) => {
   const nameArray1 = instructor1.name.split(', ')
   const nameArray2 = instructor2.name.split(', ')
   const lastName1 = nameArray1[0]
@@ -81,6 +81,6 @@ export {
   roundToTwoDecimal,
   convertCountIntoArray,
   sortByTerm,
-  compareLastNameFirstName,
+  compareLastNameThenFirstName,
   compareCourse
 }

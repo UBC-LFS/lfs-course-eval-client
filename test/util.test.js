@@ -134,3 +134,19 @@ describe('compareCourse', () => {
     assert.deepEqual(input.sort(util.compareCourse), output)
   })
 })
+
+describe('compareLastNameThenFirstName', () => {
+  it('takes a object with name and returns it sorted by last name, then first name', () => {
+    let input = [
+      { name: 'Lee, Justin' },
+      { name: 'Chu, Clara' },
+      { name: 'Lin, Patrick' }
+    ]
+    let output = [
+      { name: 'Chu, Clara' },
+      { name: 'Lee, Justin' },
+      { name: 'Lin, Patrick' }
+    ]
+    assert.deepEqual(input.sort(util.compareLastNameThenFirstName), output)
+  })
+})
