@@ -33,6 +33,16 @@ const compare = (a, b) => {
   if (a < b) return -1
   return 0
 }
+
+const compareCourse = (course1, course2) => {
+  const courseArray1 = course1.split(' ')
+  const courseArray2 = course2.split(' ')
+  const faculty1 = courseArray1[0]
+  const code1 = courseArray1[1]
+  const faculty2 = courseArray2[0]
+  const code2 = courseArray2[1]
+  return compare(faculty1, faculty2) || compare(code1, code2)
+}
 const compareLastNameFirstName = (instructor1, instructor2) => {
   const nameArray1 = instructor1.name.split(', ')
   const nameArray2 = instructor2.name.split(', ')
@@ -70,5 +80,6 @@ export {
   convertCountIntoArray,
   sortByTerm,
   compare,
-  compareLastNameFirstName
+  compareLastNameFirstName,
+  compareCourse
 }

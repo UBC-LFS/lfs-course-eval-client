@@ -1,5 +1,6 @@
 import { loadEnrolmentTrend } from '../service/dataService'
 import drawEnrolmentTrendLine from '../viz/drawEnrolmentTrendLine'
+import {compareCourse} from '../util/util'
 import R from 'ramda'
 
 const attachGraph = (data, course, term) => {
@@ -17,18 +18,20 @@ const attachOptions = (arr) => arr.map(x => '<option value="' + x + '">' + x + '
 const initFilterHandler = (data) => {
   const courseSelect = document.getElementById('enrolmentTrendCourse')
   const termSelect = document.getElementById('enrolmentTrendTerm')
-  const courses = data.map(x => x.Course).sort((a, b) => (a - b))
+  const courses = data.map(x => x.Course).sort(compareCourse)
   courseSelect.innerHTML = attachOptions(courses)
 
   const courseTerms = getUniqCourseTerms(data, courseSelect.value)
   courseTerms.push('all')
   termSelect.innerHTML = attachOptions(courseTerms)
-
+  $('#enrolmentTrendCourse.selectpicker').selectpicker('refresh')    
+  $('#enrolmentTrendTerm.selectpicker').selectpicker('refresh')    
   courseSelect.addEventListener('change', function () {
     const courseTerms = getUniqCourseTerms(data, courseSelect.value)
     courseTerms.push('all')
     termSelect.innerHTML = attachOptions(courseTerms)
-    termSelect.value = 'all'
+    $('#enrolmentTrendTerm.selectpicker').selectpicker('refresh')      
+    $('#enrolmentTrendTerm.selectpicker').selectpicker('val','all')
     attachGraph(data, courseSelect.value, termSelect.value)
   })
 

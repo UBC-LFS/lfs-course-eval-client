@@ -13,7 +13,7 @@ const initFilterHandler = (data) => {
     'PUID': x.PUID
   })).sort(compareLastNameFirstName)
   instructorSelect.innerHTML = attachOptions(instructors)
-  $('.selectpicker').selectpicker('refresh')
+  $('#cpInstructorFilter.selectpicker').selectpicker('refresh')
   instructorSelect.addEventListener('change', function () {
     redrawCoursePerformance(data, questionSelect.value, instructorSelect.value)
   })

@@ -12,7 +12,7 @@ const initFilterHandler = (data) => {
     'PUID': x.PUID
   })).sort(compareLastNameFirstName)
   instructorSelect.innerHTML = attachOptions(instructors)
-  $('.selectpicker').selectpicker('refresh')  
+  $('#umiInstructorFilter.selectpicker').selectpicker('refresh')  
   instructorSelect.addEventListener('change', function () {
     redrawUMIInstructor(data, instructorSelect.value)
   })
