@@ -57,7 +57,7 @@ const sortByTerm = (arr) => {
   return R.sort((a, b) => {
     if (a.year.slice(0, 4) === b.year.slice(0, 4)) {
       return (order[a.year.slice(4, 6)] < order[b.year.slice(4, 6)]) ? -1
-        : (order[a.year.slice(4, 6)] > order[b.year.slice(4, 6)]) ? 1 : 0
+           : (order[a.year.slice(4, 6)] > order[b.year.slice(4, 6)]) ? 1 : 0
     } else {
       return (a.year.slice(0, 4) < b.year.slice(0, 4) ? -1 : 1)
     }
