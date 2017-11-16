@@ -13,7 +13,6 @@ const filterCPData = (coursePerformanceData, questionCode, PUID) => {
       util.roundToTwoDecimal(x.facultyAverage[questionCode])
     ]
   ))
-
 }
 const drawCoursePerformance = (coursePerformanceData, questionCode, PUID) => {
   const data = filterCPData(coursePerformanceData, questionCode, PUID)

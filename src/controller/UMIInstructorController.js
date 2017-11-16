@@ -1,7 +1,7 @@
 /* global $ */
 import { loadUMIInstructorData } from '../service/dataService'
 import { drawUMIInstructor, redrawUMIInstructor } from '../viz/drawUMIInstructorTable'
-import { stripMiddleName, compareLastNameFirstName } from '../util/util'
+import { stripMiddleName, compareLastNameThenFirstName } from '../util/util'
 
 const attachOptions = (arr) => arr.map(x =>
   '<option value=' + x.PUID + '>' + x.name + '</option>').join(' ')
@@ -11,7 +11,7 @@ const initFilterHandler = (data) => {
   const instructors = data.map(x => ({
     'name': stripMiddleName(x.Courses[0].instructorName),
     'PUID': x.PUID
-  })).sort(compareLastNameFirstName)
+  })).sort(compareLastNameThenFirstName)
   instructorSelect.innerHTML = attachOptions(instructors)
   $('#umiInstructorFilter.selectpicker').selectpicker('refresh')
   instructorSelect.addEventListener('change', function () {

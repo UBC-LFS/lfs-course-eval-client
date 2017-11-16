@@ -1,3 +1,4 @@
+/* global $ */
 import initOverallInstructor from './overallInstructorDataController'
 import initUMIDispersion from './UMIDispersionController'
 import initCoursePerformance from './coursePerformanceController'

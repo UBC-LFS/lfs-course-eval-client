@@ -148,5 +148,18 @@ describe('compareLastNameThenFirstName', () => {
       { name: 'Lin, Patrick' }
     ]
     assert.deepEqual(input.sort(util.compareLastNameThenFirstName), output)
+    input = [
+      { name: 'Lee, Justin' },
+      { name: 'Chu, Clara' },
+      { name: 'Lin, Patrick' },
+      { name: 'Lee, Bob' }
+    ]
+    output = [
+      { name: 'Chu, Clara' },
+      { name: 'Lee, Bob' },
+      { name: 'Lee, Justin' },
+      { name: 'Lin, Patrick' }
+    ]
+    assert.deepEqual(input.sort(util.compareLastNameThenFirstName), output)
   })
 })
