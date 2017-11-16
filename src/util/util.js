@@ -37,11 +37,11 @@ const compare = (a, b) => {
 const compareCourse = (course1, course2) => {
   const courseArray1 = course1.split(' ')
   const courseArray2 = course2.split(' ')
-  const faculty1 = courseArray1[0]
-  const faculty2 = courseArray2[0]
-  const code1 = courseArray1[1]
-  const code2 = courseArray2[1]
-  return compare(faculty1, faculty2) || compare(code1, code2)
+  const dept1 = courseArray1[0]
+  const dept2 = courseArray2[0]
+  const courseCode1 = courseArray1[1]
+  const courseCode2 = courseArray2[1]
+  return compare(dept1, dept2) || compare(courseCode1, courseCode2)
 }
 
 const compareLastNameFirstName = (instructor1, instructor2) => {
@@ -81,7 +81,6 @@ export {
   roundToTwoDecimal,
   convertCountIntoArray,
   sortByTerm,
-  compare,
   compareLastNameFirstName,
   compareCourse
 }

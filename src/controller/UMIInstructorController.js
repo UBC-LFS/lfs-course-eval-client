@@ -1,3 +1,4 @@
+/* global $ */
 import { loadUMIInstructorData } from '../service/dataService'
 import { drawUMIInstructor, redrawUMIInstructor } from '../viz/drawUMIInstructorTable'
 import { stripMiddleName, compareLastNameFirstName } from '../util/util'
@@ -12,14 +13,14 @@ const initFilterHandler = (data) => {
     'PUID': x.PUID
   })).sort(compareLastNameFirstName)
   instructorSelect.innerHTML = attachOptions(instructors)
-  $('#umiInstructorFilter.selectpicker').selectpicker('refresh')  
+  $('#umiInstructorFilter.selectpicker').selectpicker('refresh')
   instructorSelect.addEventListener('change', function () {
     redrawUMIInstructor(data, instructorSelect.value)
   })
 }
 
 const initUMIInstructor = () => loadUMIInstructorData().then(data => {
-  const instructorSelect = document.getElementById('umiInstructorFilter')  
+  const instructorSelect = document.getElementById('umiInstructorFilter')
   initFilterHandler(data)
   console.log('UMIInstructer data:', data)
   drawUMIInstructor(data, instructorSelect.value)

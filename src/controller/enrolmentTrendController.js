@@ -1,6 +1,7 @@
+/* global $ */
 import { loadEnrolmentTrend } from '../service/dataService'
 import drawEnrolmentTrendLine from '../viz/drawEnrolmentTrendLine'
-import {compareCourse} from '../util/util'
+import { compareCourse } from '../util/util'
 import R from 'ramda'
 
 const attachGraph = (data, course, term) => {
@@ -22,13 +23,13 @@ const initFilterHandler = (data) => {
   courseSelect.innerHTML = attachOptions(courses)
   const courseTerms = ['all'].concat(getUniqCourseTerms(data, courseSelect.value))
   termSelect.innerHTML = attachOptions(courseTerms)
-  $('#enrolmentTrendCourse.selectpicker').selectpicker('refresh')    
-  $('#enrolmentTrendTerm.selectpicker').selectpicker('refresh')    
-  
+  $('#enrolmentTrendCourse.selectpicker').selectpicker('refresh')
+  $('#enrolmentTrendTerm.selectpicker').selectpicker('refresh')
+
   courseSelect.addEventListener('change', function () {
     const courseTerms = ['all'].concat(getUniqCourseTerms(data, courseSelect.value))
     termSelect.innerHTML = attachOptions(courseTerms)
-    $('#enrolmentTrendTerm.selectpicker').selectpicker('refresh')      
+    $('#enrolmentTrendTerm.selectpicker').selectpicker('refresh')
     attachGraph(data, courseSelect.value, termSelect.value)
   })
 
@@ -43,7 +44,7 @@ const initEnrolmentTrend = () => loadEnrolmentTrend().then(data => {
   initFilterHandler(data)
   console.log('enrolmentTrend data:', data)
   const enrolmentTrendLine = document.getElementById('enrolmentTrendLine')
-  enrolmentTrendLine.appendChild(drawEnrolmentTrendLine(data,courseSelect.value,termSelect.value).node())
+  enrolmentTrendLine.appendChild(drawEnrolmentTrendLine(data, courseSelect.value, termSelect.value).node())
 })
 
 export default initEnrolmentTrend

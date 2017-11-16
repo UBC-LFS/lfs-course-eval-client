@@ -123,3 +123,14 @@ describe('sortByTerm', () => {
     assert.deepEqual(expected, util.sortByTerm(data))
   })
 })
+
+describe('compareCourse', () => {
+  it('takes a course and sorts it first according to its dept and then according to its courseCode', () => {
+    let input = ['APBI 400', 'APBI 350A']
+    let output = ['APBI 350A', 'APBI 400']
+    assert.deepEqual(input.sort(util.compareCourse), output)
+    input = ['FNH 400', 'FNH 300', 'APBI 400', 'APBI 350A']
+    output = ['APBI 350A', 'APBI 400', 'FNH 300', 'FNH 400']
+    assert.deepEqual(input.sort(util.compareCourse), output)
+  })
+})
