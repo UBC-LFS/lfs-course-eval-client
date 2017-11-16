@@ -6,7 +6,10 @@ import initEnrolmentTrend from './enrolmentTrendController'
 import initUMIInstructor from './UMIInstructorController'
 
 const init = () => {
-  
+  $('.selectpicker').selectpicker()
+  $('.bootstrap-select').click(function () {
+    $(this).addClass('open')
+  })
   initOverallInstructor()
 
   initUMIDispersion()

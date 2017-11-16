@@ -1,11 +1,8 @@
 import { loadUMIInstructorData } from '../service/dataService'
 import { drawUMIInstructor, redrawUMIInstructor } from '../viz/drawUMIInstructorTable'
 import { stripMiddleName, compareLastNameFirstName } from '../util/util'
-import R from 'ramda'
-
 
 const attachOptions = (arr) => arr.map(x =>
-
   '<option value=' + x.PUID + '>' + x.name + '</option>').join(' ')
 
 const initFilterHandler = (data) => {
@@ -23,10 +20,6 @@ const initFilterHandler = (data) => {
 
 const initUMIInstructor = () => loadUMIInstructorData().then(data => {
   const instructorSelect = document.getElementById('umiInstructorFilter')  
-  $('.selectpicker').selectpicker()
-  $('.bootstrap-select').click(function () {
-    $(this).addClass('open')
-  })
   initFilterHandler(data)
   console.log('UMIInstructer data:', data)
   drawUMIInstructor(data, instructorSelect.value)

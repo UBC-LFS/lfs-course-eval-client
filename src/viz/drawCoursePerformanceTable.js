@@ -1,10 +1,9 @@
 /* global $ */
 
 import * as util from '../util/util.js'
-
-const drawCoursePerformance = (coursePerformanceData, questionCode, PUID = 'X53VU8MB9D08') => {
+const filterCPData = (coursePerformanceData, questionCode, PUID) => {
   const tableData = coursePerformanceData.find(x => x.PUID === PUID).Courses
-  const data = tableData.map(x => (
+  return tableData.map(x => (
     [ x.course + ' ' + x.section,
       x.enrolment,
       util.roundToTwoDecimal(x[questionCode].average),
@@ -15,6 +14,9 @@ const drawCoursePerformance = (coursePerformanceData, questionCode, PUID = 'X53V
     ]
   ))
 
+}
+const drawCoursePerformance = (coursePerformanceData, questionCode, PUID) => {
+  const data = filterCPData(coursePerformanceData, questionCode, PUID)
   $('#CoursePerformance').DataTable({
     'aaData': data,
     'aoColumns':
@@ -68,4 +70,11 @@ const drawCoursePerformance = (coursePerformanceData, questionCode, PUID = 'X53V
   })
 }
 
-export default drawCoursePerformance
+const redrawCoursePerformance = (coursePerformanceData, questionCode, PUID) => {
+  const data = filterCPData(coursePerformanceData, questionCode, PUID)
+  const CPTable = $('#CoursePerformance').dataTable()
+  CPTable.fnClearTable()
+  CPTable.fnAddData(data)
+}
+
+export { drawCoursePerformance, redrawCoursePerformance }
