@@ -1,40 +1,35 @@
 import { loadUMIInstructorData } from '../service/dataService'
-import drawUMIInstructor from '../viz/drawUMIInstructorTable'
+import { drawUMIInstructor, redrawUMIInstructor } from '../viz/drawUMIInstructorTable'
+import { stripMiddleName, compareLastNameFirstName } from '../util/util'
+import R from 'ramda'
 
+
+const attachOptions = (arr) => arr.map(x =>
+
+  '<option value=' + x.PUID + '>' + x.name + '</option>').join(' ')
 
 const initFilterHandler = (data) => {
-  const instructors = data.map(x => x.Courses[0].instructorName).sort((a, b) => (a - b))
-
   const instructorSelect = document.getElementById('umiInstructorFilter')
-
-  instructorSelect.innerHTML = instructors.map(x => '<option value="' + x + '">' + x + '</option>').join(' ')
-
-  const courseTerms = R.uniq((data.find(x => x.Course === instructorSelect.value)).Terms.map(x => x.year.slice(-2)))
-  courseTerms.push('all')
-  termSelect.innerHTML = courseTerms.map(x => '<option value="' + x + '">' + x + '</option>').join(' ')
-
+  const instructors = data.map(x => ({
+    'name': stripMiddleName(x.Courses[0].instructorName),
+    'PUID': x.PUID
+  })).sort(compareLastNameFirstName)
+  instructorSelect.innerHTML = attachOptions(instructors)
+  $('.selectpicker').selectpicker('refresh')  
   instructorSelect.addEventListener('change', function () {
-    const graph = document.getElementById('enrolmentTrendGraph')
-    graph.parentElement.removeChild(graph)
-    const courseTerms = R.uniq((data.find(x => x.Course === instructorSelect.value)).Terms.map(x => x.year.slice(-2)))
-    courseTerms.push('all')
-    termSelect.innerHTML = courseTerms.map(x => '<option value="' + x + '">' + x + '</option>').join(' ')
-    termSelect.value = 'all'
-    const enrolmentTrendLine = document.getElementById('enrolmentTrendLine')
-    enrolmentTrendLine.appendChild(drawEnrolmentTrendLine(data, instructorSelect.value, termSelect.value).node())
-  })
-
-  termSelect.addEventListener('change', function () {
-    const graph = document.getElementById('enrolmentTrendGraph')
-    graph.parentElement.removeChild(graph)
-    const enrolmentTrendLine = document.getElementById('enrolmentTrendLine')
-    enrolmentTrendLine.appendChild(drawEnrolmentTrendLine(data, instructorSelect.value, termSelect.value).node())
+    redrawUMIInstructor(data, instructorSelect.value)
   })
 }
 
 const initUMIInstructor = () => loadUMIInstructorData().then(data => {
-  console.log('UMIInstructor data:', data)
-  drawUMIInstructor(data)
+  const instructorSelect = document.getElementById('umiInstructorFilter')  
+  $('.selectpicker').selectpicker()
+  $('.bootstrap-select').click(function () {
+    $(this).addClass('open')
+  })
+  initFilterHandler(data)
+  console.log('UMIInstructer data:', data)
+  drawUMIInstructor(data, instructorSelect.value)
 })
 
 export default initUMIInstructor

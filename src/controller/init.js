@@ -6,6 +6,7 @@ import initEnrolmentTrend from './enrolmentTrendController'
 import initUMIInstructor from './UMIInstructorController'
 
 const init = () => {
+  
   initOverallInstructor()
 
   initUMIDispersion()

@@ -28,7 +28,20 @@ const convertCountIntoArray = (count) => {
   }
   return resultArray
 }
-
+const compare = (a, b) => {
+  if (a > b) return 1
+  if (a < b) return -1
+  return 0
+}
+const compareLastNameFirstName = (instructor1, instructor2) => {
+  const nameArray1 = instructor1.name.split(', ')
+  const nameArray2 = instructor2.name.split(', ')
+  const lastName1 = nameArray1[0]
+  const firstName1 = nameArray1[1]
+  const lastName2 = nameArray2[0]
+  const firstName2 = nameArray2[1]
+  return compare(lastName1, lastName2) || compare(firstName1, firstName2)
+}
 const sortByTerm = (arr) => {
   const order = {
     'S1': 0,
@@ -44,7 +57,7 @@ const sortByTerm = (arr) => {
   return R.sort((a, b) => {
     if (a.year.slice(0, 4) === b.year.slice(0, 4)) {
       return (order[a.year.slice(4, 6)] < order[b.year.slice(4, 6)]) ? -1
-                   : (order[a.year.slice(4, 6)] > order[b.year.slice(4, 6)]) ? 1 : 0
+        : (order[a.year.slice(4, 6)] > order[b.year.slice(4, 6)]) ? 1 : 0
     } else {
       return (a.year.slice(0, 4) < b.year.slice(0, 4) ? -1 : 1)
     }
@@ -52,8 +65,10 @@ const sortByTerm = (arr) => {
 }
 
 export {
-    stripMiddleName,
-    roundToTwoDecimal,
-    convertCountIntoArray,
-    sortByTerm
+  stripMiddleName,
+  roundToTwoDecimal,
+  convertCountIntoArray,
+  sortByTerm,
+  compare,
+  compareLastNameFirstName
 }

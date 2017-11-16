@@ -2,9 +2,6 @@ import { loadEnrolmentTrend } from '../service/dataService'
 import drawEnrolmentTrendLine from '../viz/drawEnrolmentTrendLine'
 import R from 'ramda'
 
-const courseSelect = document.getElementById('enrolmentTrendCourse')
-const termSelect = document.getElementById('enrolmentTrendTerm')
-
 const attachGraph = (data, course, term) => {
   const graph = document.getElementById('enrolmentTrendGraph')
   if (graph) graph.parentElement.removeChild(graph)
@@ -18,6 +15,8 @@ const getUniqCourseTerms = (data, value) =>
 const attachOptions = (arr) => arr.map(x => '<option value="' + x + '">' + x + '</option>').join(' ')
 
 const initFilterHandler = (data) => {
+  const courseSelect = document.getElementById('enrolmentTrendCourse')
+  const termSelect = document.getElementById('enrolmentTrendTerm')
   const courses = data.map(x => x.Course).sort((a, b) => (a - b))
   courseSelect.innerHTML = attachOptions(courses)
 
