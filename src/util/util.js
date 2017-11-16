@@ -38,20 +38,22 @@ const compareCourse = (course1, course2) => {
   const courseArray1 = course1.split(' ')
   const courseArray2 = course2.split(' ')
   const faculty1 = courseArray1[0]
-  const code1 = courseArray1[1]
   const faculty2 = courseArray2[0]
+  const code1 = courseArray1[1]
   const code2 = courseArray2[1]
   return compare(faculty1, faculty2) || compare(code1, code2)
 }
+
 const compareLastNameFirstName = (instructor1, instructor2) => {
   const nameArray1 = instructor1.name.split(', ')
   const nameArray2 = instructor2.name.split(', ')
   const lastName1 = nameArray1[0]
-  const firstName1 = nameArray1[1]
   const lastName2 = nameArray2[0]
+  const firstName1 = nameArray1[1]
   const firstName2 = nameArray2[1]
   return compare(lastName1, lastName2) || compare(firstName1, firstName2)
 }
+
 const sortByTerm = (arr) => {
   const order = {
     'S1': 0,
