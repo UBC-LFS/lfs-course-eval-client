@@ -2,8 +2,9 @@ import { loadUMIDispersion } from '../service/dataService'
 import drawUMIVsDispersion from '../viz/drawUMIVsDispersion'
 
 const attachGraph = (data, umi) => {
+  const svg = document.getElementById('UMIVsDispersionSVG')
+  if (svg) svg.parentElement.removeChild(svg)
   const graph = document.getElementById('UMIvsDispersionGraph')
-  // if (graph) graph.parentElement.removeChild(graph)
   graph.appendChild(drawUMIVsDispersion(data, umi).node())
 }
 

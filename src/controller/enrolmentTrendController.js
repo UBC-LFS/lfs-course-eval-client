@@ -5,9 +5,11 @@ import { compareCourse } from '../util/util'
 import R from 'ramda'
 
 const attachGraph = (data, course, term) => {
-  const graph = document.getElementById('enrolmentTrendGraph')
-  if (graph) graph.parentElement.removeChild(graph)
-  graph.appendChild(drawEnrolmentTrendLine(data, course, term).node())
+  const svg = document.getElementById('enrolmentTrendGraphSVG')
+  if (svg) svg.parentElement.removeChild(svg)
+
+  const enrolmentTrendLine = document.getElementById('enrolmentTrendLine')
+  enrolmentTrendLine.appendChild(drawEnrolmentTrendLine(data, course, term).node())
 }
 
 const getUniqCourseTerms = (data, value) =>

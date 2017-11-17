@@ -15,7 +15,7 @@ const drawEnrolmentTrendLine = (data, course, term) => {
   const height = h - margin.top - margin.bottom
 
   const svg = d3.select(document.createElement('div')).append('svg')
-    .attr('id', 'enrolmentTrendGraph')
+    .attr('id', 'enrolmentTrendGraphSVG')
     .attr('width', w)
     .attr('height', h)
 

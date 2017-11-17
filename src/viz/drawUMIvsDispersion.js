@@ -15,6 +15,7 @@ const drawUMIvsDispersion = (array, filter = { UMI: 6 }) => {
 
   const svg = d3.select(document.createElement('div')).append('svg')
     .attr('style', 'display: block; margin: auto; margin-top: 30px;')
+    .attr('id', 'UMIVsDispersionSVG')
     .attr('width', w)
     .attr('height', h)
 
