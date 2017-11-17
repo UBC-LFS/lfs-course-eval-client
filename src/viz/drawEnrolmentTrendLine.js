@@ -4,7 +4,6 @@ import { filterByTerm } from '../util/filter'
 import * as d3 from 'd3'
 
 const drawEnrolmentTrendLine = (data, course, term) => {
-  console.log(course, term)
   const courseData = data.find(x => x.Course === course)
   data = filterByTerm(term, sortByTerm(courseData.Terms))
 
