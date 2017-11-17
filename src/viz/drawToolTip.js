@@ -23,9 +23,6 @@ const drawToolTip = (filter, x) => d3.tip().html(d => {
     '<p>Percent Favourable: ' + Math.round(d['UMI' + filter.UMI].percentFavourable * 100) + '%' + '</p>' +
     histHTML +
     '</div>'
-}).direction(d => {
-  if (x(d['UMI' + filter.UMI].dispersionIndex) < 200) return 'e'
-  else return 's'
-})
+}).direction(d => 's')
 
 export default drawToolTip
