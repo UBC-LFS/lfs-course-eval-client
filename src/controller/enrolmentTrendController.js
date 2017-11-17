@@ -7,8 +7,7 @@ import R from 'ramda'
 const attachGraph = (data, course, term) => {
   const graph = document.getElementById('enrolmentTrendGraph')
   if (graph) graph.parentElement.removeChild(graph)
-  const enrolmentTrendLine = document.getElementById('enrolmentTrendLine')
-  enrolmentTrendLine.appendChild(drawEnrolmentTrendLine(data, course, term).node())
+  graph.appendChild(drawEnrolmentTrendLine(data, course, term).node())
 }
 
 const getUniqCourseTerms = (data, value) =>
@@ -30,6 +29,7 @@ const initFilterHandler = (data) => {
     const courseTerms = ['all'].concat(getUniqCourseTerms(data, courseSelect.value))
     termSelect.innerHTML = attachOptions(courseTerms)
     $('#enrolmentTrendTerm.selectpicker').selectpicker('refresh')
+
     attachGraph(data, courseSelect.value, termSelect.value)
   })
 

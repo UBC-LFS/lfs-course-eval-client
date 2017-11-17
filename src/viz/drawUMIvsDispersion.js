@@ -1,6 +1,4 @@
-/* global $ */
-
-import { margin, height, percentFavourableColor6 } from '../constants/constants'
+import { margin, percentFavourableColor6 } from '../constants/constants'
 import drawToolTip from './drawToolTip'
 import * as d3 from 'd3'
 
@@ -10,18 +8,19 @@ const animate = () => {
 }
 
 const drawUMIvsDispersion = (array, filter = { UMI: 6 }) => {
-  const graphWidth = $('#UMIvsDispersionGraph').width()
-  const svg = d3.select('#UMIvsDispersionGraph')
-    .append('svg')
+  const w = 1000
+  const h = 600
+  const width = w - margin.left - margin.right
+  const height = h - margin.top - margin.bottom
+
+  const svg = d3.select(document.createElement('div')).append('svg')
     .attr('style', 'display: block; margin: auto; margin-top: 30px;')
-    .attr('width', '100%')
-    .attr('height', height)
-    .attr('viewBox', '0 0 ' + Math.min(graphWidth, height) + ' ' + 700)
-    .attr('preserveAspectRatio', 'xMinYMin')
+    .attr('width', w)
+    .attr('height', h)
 
   const g = svg.append('g').attr('transform', 'translate(' + margin.left + ',' + margin.top + ')')
 
-  const x = d3.scaleLinear().rangeRound([0, graphWidth])
+  const x = d3.scaleLinear().rangeRound([0, width])
   const y = d3.scaleLinear().rangeRound([height, 0])
 
   x.domain([0, 0.8])
@@ -89,6 +88,8 @@ const drawUMIvsDispersion = (array, filter = { UMI: 6 }) => {
     })
 
   svg.call(courseInfoTip)
+
+  return svg
 }
 
 export default drawUMIvsDispersion
