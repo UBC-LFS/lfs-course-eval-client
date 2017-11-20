@@ -45,8 +45,7 @@ const initEnrolmentTrend = () => loadEnrolmentTrend().then(data => {
   const termSelect = document.getElementById('enrolmentTrendTerm')
   initFilterHandler(data)
   console.log('enrolmentTrend data:', data)
-  const enrolmentTrendLine = document.getElementById('enrolmentTrendLine')
-  enrolmentTrendLine.appendChild(drawEnrolmentTrendLine(data, courseSelect.value, termSelect.value).node())
+  attachGraph(data, courseSelect.value, termSelect.value)
 })
 
 export default initEnrolmentTrend

@@ -46,7 +46,7 @@ const drawUMIvsDispersion = (array, filter = { UMI: 6 }) => {
   const umiDots = g.append('g').attr('id', 'umiDots')
 
   // tooltip config
-  const courseInfoTip = drawToolTip(filter, x)
+  const courseInfoTip = drawToolTip(filter)
 
   // removing below min
   array = array.filter(x => x.meetsMin)
