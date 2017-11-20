@@ -24,10 +24,6 @@ const drawEnrolmentTrendLine = (data, course, term) => {
   const x = d3.scaleBand().rangeRound([0, width])
   const y = d3.scaleLinear().rangeRound([height, 0])
 
-  const line = d3.line()
-    .x(d => (x(data[1].year) - x(data[0].year)) / 2 + x(d.year))
-    .y(d => y(d.enrolment))
-
   x.domain(data.map(d => d.year))
   y.domain([0, d3.max(data, d => d.enrolment)])
 
@@ -46,18 +42,33 @@ const drawEnrolmentTrendLine = (data, course, term) => {
     .attr('transform', 'translate(0,' + height + ')')
     .call(d3.axisBottom(x))
 
-  g.append('path')
-    .datum(data)
-    .attr('class', 'line')
-    .attr('d', line)
+  if (data.length > 1) {
+    const line = d3.line()
+      .x(d => (x(data[1].year) - x(data[0].year)) / 2 + x(d.year))
+      .y(d => y(d.enrolment))
 
-  g.selectAll('circle')
+    g.append('path')
+      .datum(data)
+      .attr('class', 'line')
+      .attr('d', line)
+
+    g.selectAll('circle')
+      .data(data)
+    .enter().append('circle')
+      .attr('class', 'circle')
+      .attr('cx', d => (x(data[1].year) - x(data[0].year)) / 2 + x(d.year))
+      .attr('cy', d => y(d.enrolment))
+      .attr('r', 4)
+  } else {
+    g.selectAll('circle')
     .data(data)
   .enter().append('circle')
     .attr('class', 'circle')
-    .attr('cx', d => (x(data[1].year) - x(data[0].year)) / 2 + x(d.year))
+    .attr('cx', d => x(data[0].year))
     .attr('cy', d => y(d.enrolment))
     .attr('r', 4)
+  }
+
   return svg
 }
 
