@@ -28,6 +28,9 @@ const initFilterHandler = (data) => {
   $('#enrolmentTrendTerm.selectpicker').selectpicker('refresh')
 
   courseSelect.addEventListener('change', function () {
+    const courseTerms = ['all'].concat(getUniqCourseTerms(data, courseSelect.value))
+    termSelect.innerHTML = attachOptions(courseTerms)
+    $('#enrolmentTrendTerm.selectpicker').selectpicker('refresh')
     attachGraph(data, courseSelect.value, termSelect.value)
   })
 
