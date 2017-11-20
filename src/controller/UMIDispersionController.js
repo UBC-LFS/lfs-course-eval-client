@@ -16,10 +16,13 @@ const initFilterHandler = (data) => {
   const deptSelect = document.getElementById('umiVsDispersionDept')
   const depts = ['all'].concat(R.uniq(data.map(x => x.dept).sort()))
   deptSelect.innerHTML = attachOptions(depts)
+
+  const draw = () => attachGraph(data, { dept: deptSelect.value, year: Number(yearSelect.value), term: termSelect.value, UMI: umiSelect.value.slice(-1), meetsMin: true })
+
   $('#umiVsDispersionDept.selectpicker').selectpicker('refresh')
   deptSelect.addEventListener('change', function () {
     $('#umiVsDispersionDept.selectpicker').selectpicker('refresh')
-    attachGraph(data, { dept: deptSelect.value, year: Number(yearSelect.value), term: termSelect.value, UMI: umiSelect.value.slice(-1), meetsMin: true })
+    draw()
   })
 
   const yearSelect = document.getElementById('umiVsDispersionYear')
@@ -28,7 +31,7 @@ const initFilterHandler = (data) => {
   $('#umiVsDispersionYear.selectpicker').selectpicker('refresh')
   yearSelect.addEventListener('change', function () {
     $('#umiVsDispersionYear.selectpicker').selectpicker('refresh')
-    attachGraph(data, { dept: deptSelect.value, year: Number(yearSelect.value), term: termSelect.value, UMI: umiSelect.value.slice(-1), meetsMin: true })
+    draw()
   })
 
   const termSelect = document.getElementById('umiVsDispersionTerm')
@@ -37,7 +40,7 @@ const initFilterHandler = (data) => {
   $('#umiVsDispersionTerm.selectpicker').selectpicker('refresh')
   termSelect.addEventListener('change', function () {
     $('#umiVsDispersionTerm.selectpicker').selectpicker('refresh')
-    attachGraph(data, { dept: deptSelect.value, year: Number(yearSelect.value), term: termSelect.value, UMI: umiSelect.value.slice(-1), meetsMin: true })
+    draw()
   })
 
   const umiSelect = document.getElementById('umiVsDispersionUMI')
@@ -46,7 +49,7 @@ const initFilterHandler = (data) => {
   $('#umiVsDispersionUMI.selectpicker').selectpicker('refresh')
   umiSelect.addEventListener('change', function () {
     $('#umiVsDispersionUMI.selectpicker').selectpicker('refresh')
-    attachGraph(data, { dept: deptSelect.value, year: Number(yearSelect.value), term: termSelect.value, UMI: umiSelect.value.slice(-1), meetsMin: true })
+    draw()
   })
 }
 
