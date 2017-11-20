@@ -7,8 +7,6 @@ const drawEnrolmentTrendLine = (data, course, term) => {
   const courseData = data.find(x => x.Course === course)
   data = filterByTerm(term, sortByTerm(courseData.Terms))
 
-  console.log(data)
-
   const w = 1000
   const h = 600
   const width = w - margin.left - margin.right
@@ -25,7 +23,7 @@ const drawEnrolmentTrendLine = (data, course, term) => {
   const y = d3.scaleLinear().rangeRound([height, 0])
 
   x.domain(data.map(d => d.year))
-  y.domain([0, d3.max(data, d => d.enrolment)])
+  y.domain([0, d3.max(data, d => d.enrolment) * 1.2])
 
   g.append('g')
     .attr('class', 'axis axis--y')

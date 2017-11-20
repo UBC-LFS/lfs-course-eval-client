@@ -31,7 +31,6 @@ const initFilterHandler = (data) => {
     const courseTerms = ['all'].concat(getUniqCourseTerms(data, courseSelect.value))
     termSelect.innerHTML = attachOptions(courseTerms)
     $('#enrolmentTrendTerm.selectpicker').selectpicker('refresh')
-
     attachGraph(data, courseSelect.value, termSelect.value)
   })
 
