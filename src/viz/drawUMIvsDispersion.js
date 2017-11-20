@@ -8,8 +8,12 @@ const animate = () => {
   Array.prototype.map.call(pulseList, (x) => (x.innerHTML = '<animate attributeType="SVG" attributeName="r" begin="0s" dur="1.5s" repeatCount="indefinite" from="0%" to="10%"/><animate attributeType="CSS" attributeName="stroke-width" begin="0s"  dur="1.5s" repeatCount="indefinite" from="3%" to="0%" /><animate attributeType="CSS" attributeName="opacity" begin="0s"  dur="1.5s" repeatCount="indefinite" from="1" to="0"/>'))
 }
 
-const filterData = (data, { year, term, UMI, meetsMin }) => {
+const filterData = (data, { dept, year, term, UMI, meetsMin }) => {
   return R.compose(
+    R.filter(x => {
+      if (dept === 'all') return true
+      return x.dept === dept
+    }),
     R.filter(x => x.year === year),
     R.filter(x => {
       if (term === 'all') return true
@@ -21,9 +25,9 @@ const filterData = (data, { year, term, UMI, meetsMin }) => {
 
 const drawUMIvsDispersion = (data, filter) => {
   const UMI = filter.UMI
-
+  console.log('before filter', data, filter)
   data = filterData(data, filter)
-
+  console.log('after filter', data)
   const w = 1000
   const h = 600
   const width = w - margin.left - margin.right

@@ -34,24 +34,29 @@ const initFilterHandler = (data) => {
 
   deptSelect.addEventListener('change', function () {
     $('#umiVsDispersionDept.selectpicker').selectpicker('refresh')
-    attachGraph(data, { year: yearSelect.value, term: termSelect.value, UMI: umiSelect.value, meetsMin: true })
+    attachGraph(data, { dept: deptSelect.value, year: Number(yearSelect.value), term: termSelect.value, UMI: umiSelect.value.slice(-1), meetsMin: true })
   })
 
   yearSelect.addEventListener('change', function () {
     $('#umiVsDispersionYear.selectpicker').selectpicker('refresh')
-    attachGraph(data, { year: yearSelect.value, term: termSelect.value, UMI: umiSelect.value, meetsMin: true })
+    attachGraph(data, { dept: deptSelect.value, year: Number(yearSelect.value), term: termSelect.value, UMI: umiSelect.value.slice(-1), meetsMin: true })
   })
 
   termSelect.addEventListener('change', function () {
     $('#umiVsDispersionTerm.selectpicker').selectpicker('refresh')
-    attachGraph(data, { year: yearSelect.value, term: termSelect.value, UMI: umiSelect.value, meetsMin: true })
+    attachGraph(data, { dept: deptSelect.value, year: Number(yearSelect.value), term: termSelect.value, UMI: umiSelect.value.slice(-1), meetsMin: true })
+  })
+
+  umiSelect.addEventListener('change', function () {
+    $('#umiVsDispersionUMI.selectpicker').selectpicker('refresh')
+    attachGraph(data, { dept: deptSelect.value, year: Number(yearSelect.value), term: termSelect.value, UMI: umiSelect.value.slice(-1), meetsMin: true })
   })
 }
 
 const initUMIDispersion = () => loadUMIDispersion().then(data => {
   console.log('umiVsDispersion data:', data)
   initFilterHandler(data)
-  attachGraph(data, { year: 2017, term: 'all', UMI: 6, meetsMin: false })
+  attachGraph(data, { dept: 'all', year: 2017, term: 'all', UMI: 6, meetsMin: false })
 })
 
 export default initUMIDispersion
