@@ -1,13 +1,29 @@
 import { margin, percentFavourableColor6 } from '../constants/constants'
 import drawToolTip from './drawToolTip'
 import * as d3 from 'd3'
+import R from 'ramda'
 
 const animate = () => {
   const pulseList = document.getElementsByClassName('pulse')
   Array.prototype.map.call(pulseList, (x) => (x.innerHTML = '<animate attributeType="SVG" attributeName="r" begin="0s" dur="1.5s" repeatCount="indefinite" from="0%" to="10%"/><animate attributeType="CSS" attributeName="stroke-width" begin="0s"  dur="1.5s" repeatCount="indefinite" from="3%" to="0%" /><animate attributeType="CSS" attributeName="opacity" begin="0s"  dur="1.5s" repeatCount="indefinite" from="1" to="0"/>'))
 }
 
-const drawUMIvsDispersion = (array, filter = { UMI: 6 }) => {
+const filterData = (data, { year, term, UMI, meetsMin }) => {
+  return R.compose(
+    R.filter(x => x.year === year),
+    R.filter(x => {
+      if (term === 'all') return true
+      return x.term === term
+    }),
+    R.filter(x => x.meetsMin === meetsMin)
+  )(data)
+}
+
+const drawUMIvsDispersion = (data, filter) => {
+  const UMI = filter.UMI
+
+  data = filterData(data, filter)
+
   const w = 1000
   const h = 600
   const width = w - margin.left - margin.right
@@ -46,20 +62,16 @@ const drawUMIvsDispersion = (array, filter = { UMI: 6 }) => {
   const umiDots = g.append('g').attr('id', 'umiDots')
 
   // tooltip config
-  const courseInfoTip = drawToolTip(filter)
-
-  // removing below min
-  array = array.filter(x => x.meetsMin)
-  array = array.filter(x => x.year === 2016)
+  const courseInfoTip = drawToolTip(UMI)
 
   umiDots.selectAll('dot')
-    .data(array)
+    .data(data)
     .enter().append('circle')
-    .attr('cx', d => x(Math.min(d['UMI' + filter.UMI].dispersionIndex, 0.8)))
-    .attr('cy', d => y(Math.max(d['UMI' + filter.UMI].average, 2)))
+    .attr('cx', d => x(Math.min(d['UMI' + UMI].dispersionIndex, 0.8)))
+    .attr('cy', d => y(Math.max(d['UMI' + UMI].average, 2)))
     .attr('r', d => Math.pow(Math.log(d.enrolment), 1.7))
     .style('fill', d => {
-      const percentFavourable = d['UMI' + filter.UMI].percentFavourable
+      const percentFavourable = d['UMI' + UMI].percentFavourable
       if (percentFavourable >= 0.90) {
         return percentFavourableColor6.first
       } else if (percentFavourable >= 0.80 && percentFavourable < 0.90) {
