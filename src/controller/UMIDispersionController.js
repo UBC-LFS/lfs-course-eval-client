@@ -14,39 +14,36 @@ const attachOptions = (arr) => arr.map(x => '<option value="' + x + '">' + x + '
 
 const initFilterHandler = (data) => {
   const deptSelect = document.getElementById('umiVsDispersionDept')
-  const yearSelect = document.getElementById('umiVsDispersionYear')
-  const termSelect = document.getElementById('umiVsDispersionTerm')
-  const umiSelect = document.getElementById('umiVsDispersionUMI')
-
   const depts = ['all'].concat(R.uniq(data.map(x => x.dept).sort()))
   deptSelect.innerHTML = attachOptions(depts)
-  const years = R.uniq(data.map(x => x.year).sort())
-  yearSelect.innerHTML = attachOptions(years)
-  const terms = ['all'].concat(R.uniq((data.map(x => x.term))).sort())
-  termSelect.innerHTML = attachOptions(terms)
-  const UMI = ['UMI1', 'UMI2', 'UMI3', 'UMI4', 'UMI5', 'UMI6']
-  umiSelect.innerHTML = attachOptions(UMI)
-
   $('#umiVsDispersionDept.selectpicker').selectpicker('refresh')
-  $('#umiVsDispersionYear.selectpicker').selectpicker('refresh')
-  $('#umiVsDispersionTerm.selectpicker').selectpicker('refresh')
-  $('#umiVsDispersionUMI.selectpicker').selectpicker('refresh')
-
   deptSelect.addEventListener('change', function () {
     $('#umiVsDispersionDept.selectpicker').selectpicker('refresh')
     attachGraph(data, { dept: deptSelect.value, year: Number(yearSelect.value), term: termSelect.value, UMI: umiSelect.value.slice(-1), meetsMin: true })
   })
 
+  const yearSelect = document.getElementById('umiVsDispersionYear')
+  const years = R.uniq(data.map(x => x.year).sort())
+  yearSelect.innerHTML = attachOptions(years)
+  $('#umiVsDispersionYear.selectpicker').selectpicker('refresh')
   yearSelect.addEventListener('change', function () {
     $('#umiVsDispersionYear.selectpicker').selectpicker('refresh')
     attachGraph(data, { dept: deptSelect.value, year: Number(yearSelect.value), term: termSelect.value, UMI: umiSelect.value.slice(-1), meetsMin: true })
   })
 
+  const termSelect = document.getElementById('umiVsDispersionTerm')
+  const terms = ['all'].concat(R.uniq((data.map(x => x.term))).sort())
+  termSelect.innerHTML = attachOptions(terms)
+  $('#umiVsDispersionTerm.selectpicker').selectpicker('refresh')
   termSelect.addEventListener('change', function () {
     $('#umiVsDispersionTerm.selectpicker').selectpicker('refresh')
     attachGraph(data, { dept: deptSelect.value, year: Number(yearSelect.value), term: termSelect.value, UMI: umiSelect.value.slice(-1), meetsMin: true })
   })
 
+  const umiSelect = document.getElementById('umiVsDispersionUMI')
+  const UMI = ['UMI1', 'UMI2', 'UMI3', 'UMI4', 'UMI5', 'UMI6']
+  umiSelect.innerHTML = attachOptions(UMI)
+  $('#umiVsDispersionUMI.selectpicker').selectpicker('refresh')
   umiSelect.addEventListener('change', function () {
     $('#umiVsDispersionUMI.selectpicker').selectpicker('refresh')
     attachGraph(data, { dept: deptSelect.value, year: Number(yearSelect.value), term: termSelect.value, UMI: umiSelect.value.slice(-1), meetsMin: true })

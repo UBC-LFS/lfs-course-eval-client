@@ -11,6 +11,7 @@ const init = () => {
   $('.bootstrap-select').click(function () {
     $(this).addClass('open')
   })
+
   initOverallInstructor()
 
   initUMIDispersion()
