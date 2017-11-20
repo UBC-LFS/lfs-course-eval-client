@@ -25,30 +25,24 @@ const initFilterHandler = (data) => {
   const deptSelect = document.getElementById('umiVsDispersionDept')
   const depts = ['all'].concat(R.uniq(data.map(x => x.dept).sort()))
   deptSelect.innerHTML = attachOptions(depts)
-  deptSelect.addEventListener('change', function () {
-    draw()
-  })
 
   const yearSelect = document.getElementById('umiVsDispersionYear')
   const years = R.uniq(data.map(x => x.year).sort())
   yearSelect.innerHTML = attachOptions(years)
-  yearSelect.addEventListener('change', function () {
-    draw()
-  })
 
   const termSelect = document.getElementById('umiVsDispersionTerm')
   const terms = ['all'].concat(R.uniq((data.map(x => x.term))).sort())
   termSelect.innerHTML = attachOptions(terms)
-  termSelect.addEventListener('change', function () {
-    draw()
-  })
 
   const umiSelect = document.getElementById('umiVsDispersionUMI')
   const UMI = ['UMI1', 'UMI2', 'UMI3', 'UMI4', 'UMI5', 'UMI6']
   umiSelect.innerHTML = attachOptions(UMI)
-  umiSelect.addEventListener('change', function () {
+
+  const elements = [deptSelect, yearSelect, termSelect, umiSelect]
+
+  elements.map(el => el.addEventListener('change', function () {
     draw()
-  })
+  }))
 
   refreshPicker()
 }
