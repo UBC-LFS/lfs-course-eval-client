@@ -64,7 +64,7 @@ const drawEnrolmentTrendLine = (data, course, term) => {
     .data(data)
   .enter().append('circle')
     .attr('class', 'circle')
-    .attr('cx', d => x(data[0].year))
+    .attr('cx', d => width / 2)
     .attr('cy', d => y(d.enrolment))
     .attr('r', 4)
   }
