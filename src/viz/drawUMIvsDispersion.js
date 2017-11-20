@@ -5,7 +5,8 @@ import R from 'ramda'
 
 const animate = () => {
   const pulseList = document.getElementsByClassName('pulse')
-  Array.prototype.map.call(pulseList, (x) => (x.innerHTML = '<animate attributeType="SVG" attributeName="r" begin="0s" dur="1.5s" repeatCount="indefinite" from="0%" to="10%"/><animate attributeType="CSS" attributeName="stroke-width" begin="0s"  dur="1.5s" repeatCount="indefinite" from="3%" to="0%" /><animate attributeType="CSS" attributeName="opacity" begin="0s"  dur="1.5s" repeatCount="indefinite" from="1" to="0"/>'))
+  Array.prototype.map.call(pulseList, x =>
+    (x.innerHTML = '<animate attributeType="SVG" attributeName="r" begin="0s" dur="1.5s" repeatCount="indefinite" from="0%" to="10%"/><animate attributeType="CSS" attributeName="stroke-width" begin="0s"  dur="1.5s" repeatCount="indefinite" from="3%" to="0%" /><animate attributeType="CSS" attributeName="opacity" begin="0s"  dur="1.5s" repeatCount="indefinite" from="1" to="0"/>'))
 }
 
 const filterData = (data, { dept, year, term, meetsMin }) => {
@@ -93,7 +94,7 @@ const drawUMIvsDispersion = (data, filter) => {
     .on('mouseout', courseInfoTip.hide)
     .on('click', d => {
       const circles = document.getElementsByTagName('circle')
-      Array.prototype.map.call(circles, (x) => {
+      Array.prototype.map.call(circles, x => {
         x.classList.remove('pulse')
         while (x.firstChild) {
           x.removeChild(x.firstChild)
