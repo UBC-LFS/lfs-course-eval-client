@@ -6,7 +6,7 @@ import * as d3 from 'd3'
 import d3Tip from 'd3-tip'
 d3.tip = d3Tip
 
-const drawToolTip = (UMI) => d3.tip().html(d => {
+const drawUMIDispersionToolTip = (UMI) => d3.tip().html(d => {
   const tmp = document.createElement('div')
   tmp.appendChild(drawCountHistogram(d['UMI' + UMI].count).node())
   const histHTML = tmp.innerHTML
@@ -25,4 +25,4 @@ const drawToolTip = (UMI) => d3.tip().html(d => {
     '</div>'
 }).direction(d => 's')
 
-export default drawToolTip
+export default drawUMIDispersionToolTip
