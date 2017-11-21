@@ -13,20 +13,19 @@ const attachGraph = (data, filter) => {
 const attachOptions = (arr) => arr.map(x => '<option value="' + x + '">' + x + '</option>').join(' ')
 
 const refreshPicker = () => {
-  $('#umiVsDispersionDept.selectpicker').selectpicker('refresh')
-  $('#umiVsDispersionYear.selectpicker').selectpicker('refresh')
-  $('#umiVsDispersionTerm.selectpicker').selectpicker('refresh')
-  $('#umiVsDispersionUMI.selectpicker').selectpicker('refresh')
+  $('#umiVsDispersionDept').selectpicker('refresh')
+  $('#umiVsDispersionYear').selectpicker('refresh')
+  $('#umiVsDispersionTerm').selectpicker('refresh')
+  $('#umiVsDispersionUMI').selectpicker('refresh')
 }
 
 const initFilterHandler = (data, defaultFilter) => {
   const deptSelect = document.getElementById('umiVsDispersionDept')
-  deptSelect.value = defaultFilter.dept
+  $(deptSelect).val(defaultFilter.dept)
   const depts = ['all'].concat(R.uniq(data.map(x => x.dept).sort()))
   deptSelect.innerHTML = attachOptions(depts)
 
   const yearSelect = document.getElementById('umiVsDispersionYear')
-  yearSelect.value = defaultFilter.year
   const years = R.uniq(data.map(x => x.year).sort())
   yearSelect.innerHTML = attachOptions(years)
 
@@ -53,6 +52,11 @@ const initFilterHandler = (data, defaultFilter) => {
       meetsMin: belowMinSelect.value === 'true'
     })
   }))
+
+  $('#umiVsDispersionDept').selectpicker('val', defaultFilter.dept)
+  $('#umiVsDispersionYear').selectpicker('val', defaultFilter.year)
+  $('#umiVsDispersionTerm').selectpicker('val', defaultFilter.term)
+  $('#umiVsDispersionUMI').selectpicker('val', 'UMI6')
 
   refreshPicker()
 }
