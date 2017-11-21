@@ -20,7 +20,7 @@ const refreshPicker = () => {
 }
 
 const initFilterHandler = (data) => {
-  const draw = () => attachGraph(data, { dept: deptSelect.value, year: Number(yearSelect.value), term: termSelect.value, UMI: umiSelect.value.slice(-1), meetsMin: true })
+  const draw = () => attachGraph(data, { dept: deptSelect.value, year: Number(yearSelect.value), term: termSelect.value, UMI: umiSelect.value.slice(-1), meetsMin: belowMinSelect.value === 'true' })
 
   const deptSelect = document.getElementById('umiVsDispersionDept')
   const depts = ['all'].concat(R.uniq(data.map(x => x.dept).sort()))
@@ -38,9 +38,12 @@ const initFilterHandler = (data) => {
   const UMI = ['UMI1', 'UMI2', 'UMI3', 'UMI4', 'UMI5', 'UMI6']
   umiSelect.innerHTML = attachOptions(UMI)
 
-  const elements = [deptSelect, yearSelect, termSelect, umiSelect]
+  const belowMinSelect = document.getElementById('umiVsDispersionBelowMin')
+
+  const elements = [deptSelect, yearSelect, termSelect, umiSelect, belowMinSelect]
 
   elements.map(el => el.addEventListener('change', function () {
+    console.log(deptSelect.value, yearSelect.value, termSelect.value, umiSelect.value, belowMinSelect.value)
     draw()
   }))
 
@@ -50,7 +53,7 @@ const initFilterHandler = (data) => {
 const initUMIDispersion = () => loadUMIDispersion().then(data => {
   console.log('umiVsDispersion data:', data)
   initFilterHandler(data)
-  attachGraph(data, { dept: 'all', year: 2017, term: 'all', UMI: 6, meetsMin: false })
+  attachGraph(data, { dept: 'all', year: 2017, term: 'all', UMI: 6, meetsMin: 'false' })
 })
 
 export default initUMIDispersion

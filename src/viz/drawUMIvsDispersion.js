@@ -10,6 +10,7 @@ const animate = () => {
 }
 
 const filterData = (data, { dept, year, term, meetsMin }) => {
+  console.log(meetsMin)
   return R.compose(
     R.filter(x => {
       if (dept === 'all') return true
@@ -20,7 +21,11 @@ const filterData = (data, { dept, year, term, meetsMin }) => {
       if (term === 'all') return true
       return x.term === term
     }),
-    R.filter(x => x.meetsMin === meetsMin)
+    R.filter(x => {
+      if (meetsMin) {
+        return x.meetsMin
+      } else return true
+    })
   )(data)
 }
 
