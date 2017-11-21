@@ -6,13 +6,13 @@ const filterUMIData = (UMIInstructorData, PUID) => {
   const tableData = R.find(x => x.PUID === PUID, UMIInstructorData).Courses
   return tableData.map(x => (
     [x.course + ' ' + x.section,
-    util.roundToTwoDecimal(x.UMI1.average),
-    util.roundToTwoDecimal(x.UMI2.average),
-    util.roundToTwoDecimal(x.UMI3.average),
-    util.roundToTwoDecimal(x.UMI4.average),
-    util.roundToTwoDecimal(x.UMI5.average),
-    util.roundToTwoDecimal(x.UMI6.average),
-    x.year
+      util.roundToTwoDecimal(x.UMI1.average),
+      util.roundToTwoDecimal(x.UMI2.average),
+      util.roundToTwoDecimal(x.UMI3.average),
+      util.roundToTwoDecimal(x.UMI4.average),
+      util.roundToTwoDecimal(x.UMI5.average),
+      util.roundToTwoDecimal(x.UMI6.average),
+      x.year
     ]
   ))
 }
@@ -21,16 +21,16 @@ const drawUMIInstructor = (UMIInstructorData, PUID) => {
   $('#UMIInstructors').DataTable({
     'aaData': data,
     'aoColumns':
-      [
-        { 'sTitle': '' },
-        { 'sTitle': 'UMI1' },
-        { 'sTitle': 'UMI2' },
-        { 'sTitle': 'UMI3' },
-        { 'sTitle': 'UMI4' },
-        { 'sTitle': 'UMI5' },
-        { 'sTitle': 'UMI6' },
-        { 'sTitle': 'Year' }
-      ],
+    [
+      { 'sTitle': '' },
+      { 'sTitle': 'UMI1' },
+      { 'sTitle': 'UMI2' },
+      { 'sTitle': 'UMI3' },
+      { 'sTitle': 'UMI4' },
+      { 'sTitle': 'UMI5' },
+      { 'sTitle': 'UMI6' },
+      { 'sTitle': 'Year' }
+    ],
     'aoColumnDefs': [
       { 'bSortable': false, 'aTargets': [0] },
       {
@@ -53,5 +53,7 @@ const redrawUMIInstructor = (UMIInstructorData, PUID) => {
   instructorTable.fnAddData(data)
 }
 
-export { drawUMIInstructor,
-redrawUMIInstructor }
+export {
+  drawUMIInstructor,
+  redrawUMIInstructor
+}

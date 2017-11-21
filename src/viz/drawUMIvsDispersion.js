@@ -1,27 +1,53 @@
-/* global $ */
-
-import { margin, height, percentFavourableColor6 } from '../constants/constants'
-import drawToolTip from './drawToolTip'
+import { margin, percentFavourableColor6 } from '../constants/constants'
+import drawUMIDispersionToolTip from './drawUMIDispersionToolTip'
 import * as d3 from 'd3'
+import R from 'ramda'
 
 const animate = () => {
   const pulseList = document.getElementsByClassName('pulse')
-  Array.prototype.map.call(pulseList, (x) => (x.innerHTML = '<animate attributeType="SVG" attributeName="r" begin="0s" dur="1.5s" repeatCount="indefinite" from="0%" to="10%"/><animate attributeType="CSS" attributeName="stroke-width" begin="0s"  dur="1.5s" repeatCount="indefinite" from="3%" to="0%" /><animate attributeType="CSS" attributeName="opacity" begin="0s"  dur="1.5s" repeatCount="indefinite" from="1" to="0"/>'))
+  Array.prototype.map.call(pulseList, x =>
+    (x.innerHTML = '<animate attributeType="SVG" attributeName="r" begin="0s" dur="1.5s" repeatCount="indefinite" from="0%" to="10%"/><animate attributeType="CSS" attributeName="stroke-width" begin="0s"  dur="1.5s" repeatCount="indefinite" from="3%" to="0%" /><animate attributeType="CSS" attributeName="opacity" begin="0s"  dur="1.5s" repeatCount="indefinite" from="1" to="0"/>'))
 }
 
-const drawUMIvsDispersion = (array, filter = { UMI: 6 }) => {
-  const graphWidth = $('#UMIvsDispersionGraph').width()
-  const svg = d3.select('#UMIvsDispersionGraph')
-    .append('svg')
+const filterData = (data, { dept, year, term, meetsMin }) => {
+  console.log(meetsMin)
+  return R.compose(
+    R.filter(x => {
+      if (dept === 'all') return true
+      return x.dept === dept
+    }),
+    R.filter(x => x.year === year),
+    R.filter(x => {
+      if (term === 'all') return true
+      return x.term === term
+    }),
+    R.filter(x => {
+      if (meetsMin) {
+        return x.meetsMin
+      } else return true
+    })
+  )(data)
+}
+
+const drawUMIvsDispersion = (data, filter) => {
+  const UMI = filter.UMI
+
+  data = filterData(data, filter)
+
+  const w = 1000
+  const h = 600
+  const width = w - margin.left - margin.right
+  const height = h - margin.top - margin.bottom
+
+  const svg = d3.select(document.createElement('div')).append('svg')
     .attr('style', 'display: block; margin: auto; margin-top: 30px;')
-    .attr('width', '100%')
-    .attr('height', height)
-    .attr('viewBox', '0 0 ' + Math.min(graphWidth, height) + ' ' + 700)
-    .attr('preserveAspectRatio', 'xMinYMin')
+    .attr('id', 'UMIVsDispersionSVG')
+    .attr('width', w)
+    .attr('height', h)
 
   const g = svg.append('g').attr('transform', 'translate(' + margin.left + ',' + margin.top + ')')
 
-  const x = d3.scaleLinear().rangeRound([0, graphWidth])
+  const x = d3.scaleLinear().rangeRound([0, width])
   const y = d3.scaleLinear().rangeRound([height, 0])
 
   x.domain([0, 0.8])
@@ -46,20 +72,16 @@ const drawUMIvsDispersion = (array, filter = { UMI: 6 }) => {
   const umiDots = g.append('g').attr('id', 'umiDots')
 
   // tooltip config
-  const courseInfoTip = drawToolTip(filter, x)
-
-  // removing below min
-  array = array.filter(x => x.meetsMin)
-  array = array.filter(x => x.year === 2016)
+  const courseInfoTip = drawUMIDispersionToolTip(UMI)
 
   umiDots.selectAll('dot')
-    .data(array)
+    .data(data)
     .enter().append('circle')
-    .attr('cx', d => x(Math.min(d['UMI' + filter.UMI].dispersionIndex, 0.8)))
-    .attr('cy', d => y(Math.max(d['UMI' + filter.UMI].average, 2)))
+    .attr('cx', d => x(Math.min(d['UMI' + UMI].dispersionIndex, 0.8)))
+    .attr('cy', d => y(Math.max(d['UMI' + UMI].average, 2)))
     .attr('r', d => Math.pow(Math.log(d.enrolment), 1.7))
     .style('fill', d => {
-      const percentFavourable = d['UMI' + filter.UMI].percentFavourable
+      const percentFavourable = d['UMI' + UMI].percentFavourable
       if (percentFavourable >= 0.90) {
         return percentFavourableColor6.first
       } else if (percentFavourable >= 0.80 && percentFavourable < 0.90) {
@@ -77,7 +99,7 @@ const drawUMIvsDispersion = (array, filter = { UMI: 6 }) => {
     .on('mouseout', courseInfoTip.hide)
     .on('click', d => {
       const circles = document.getElementsByTagName('circle')
-      Array.prototype.map.call(circles, (x) => {
+      Array.prototype.map.call(circles, x => {
         x.classList.remove('pulse')
         while (x.firstChild) {
           x.removeChild(x.firstChild)
@@ -89,6 +111,8 @@ const drawUMIvsDispersion = (array, filter = { UMI: 6 }) => {
     })
 
   svg.call(courseInfoTip)
+
+  return svg
 }
 
 export default drawUMIvsDispersion
