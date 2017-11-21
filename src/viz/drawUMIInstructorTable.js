@@ -53,5 +53,7 @@ const redrawUMIInstructor = (UMIInstructorData, PUID) => {
   instructorTable.fnAddData(data)
 }
 
-export { drawUMIInstructor,
-redrawUMIInstructor }
+export {
+  drawUMIInstructor,
+  redrawUMIInstructor
+}
