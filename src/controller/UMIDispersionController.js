@@ -20,8 +20,6 @@ const refreshPicker = () => {
 }
 
 const initFilterHandler = (data, defaultFilter) => {
-  const draw = () => attachGraph(data, { dept: deptSelect.value, year: Number(yearSelect.value), term: termSelect.value, UMI: umiSelect.value.slice(-1), meetsMin: belowMinSelect.value === 'true' })
-
   const deptSelect = document.getElementById('umiVsDispersionDept')
   deptSelect.value = defaultFilter.dept
   const depts = ['all'].concat(R.uniq(data.map(x => x.dept).sort()))
@@ -47,7 +45,13 @@ const initFilterHandler = (data, defaultFilter) => {
   const elements = [deptSelect, yearSelect, termSelect, umiSelect, belowMinSelect]
 
   elements.map(el => el.addEventListener('change', function () {
-    draw()
+    attachGraph(data, {
+      dept: deptSelect.value,
+      year: Number(yearSelect.value),
+      term: termSelect.value,
+      UMI: umiSelect.value.slice(-1),
+      meetsMin: belowMinSelect.value === 'true'
+    })
   }))
 
   refreshPicker()
