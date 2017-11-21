@@ -3,7 +3,8 @@ import { sortByTerm } from '../util/util'
 import { filterByTerm } from '../util/filter'
 import * as d3 from 'd3'
 
-const drawUMITrendLine = (data, term = 'all') => {
+const drawUMITrendLine = (uniqueTerms, data, term = 'all') => {
+  //TODO: figure out how to sort dataset based on unique terms AND term filter
   data = filterByTerm(term, sortByTerm(data))
 
   const w = 1000
