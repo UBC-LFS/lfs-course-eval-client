@@ -21,7 +21,7 @@ const drawUMIDispersionToolTip = (UMI) => d3.tip().html(d => {
     '<p>Class Size: ' + d.enrolment + '</p>' +
     '<p>Response Rate: ' + Math.round(d.responseRate * 100) + '%' + '</p>' +
     '<p>Percent Favourable: ' + Math.round(d['UMI' + UMI].percentFavourable * 100) + '%' + '</p>' +
-    histHTML +
+    '<p>Distribution of Rating: ' + histHTML + '</p>' +
     '</div>'
 }).direction(d => 's')
 
