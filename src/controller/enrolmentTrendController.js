@@ -15,6 +15,11 @@ const attachGraph = (data, course, term) => {
 const getUniqCourseTerms = (data, value) =>
   R.uniq((data.find(x => x.Course === value)).Terms.map(x => x.year.slice(-2)))
 
+const refreshPicker = () => {
+  $('#enrolmentTrendCourse.selectpicker').selectpicker('refresh')
+  $('#enrolmentTrendTerm.selectpicker').selectpicker('refresh')
+}
+
 const attachOptions = (arr) => arr.map(x => '<option value="' + x + '">' + x + '</option>').join(' ')
 
 const initFilterHandler = (data) => {
@@ -24,19 +29,17 @@ const initFilterHandler = (data) => {
   courseSelect.innerHTML = attachOptions(courses)
   const courseTerms = ['all'].concat(getUniqCourseTerms(data, courseSelect.value))
   termSelect.innerHTML = attachOptions(courseTerms)
-  $('#enrolmentTrendCourse.selectpicker').selectpicker('refresh')
-  $('#enrolmentTrendTerm.selectpicker').selectpicker('refresh')
-
   courseSelect.addEventListener('change', function () {
     const courseTerms = ['all'].concat(getUniqCourseTerms(data, courseSelect.value))
     termSelect.innerHTML = attachOptions(courseTerms)
-    $('#enrolmentTrendTerm.selectpicker').selectpicker('refresh')
+    refreshPicker()
     attachGraph(data, courseSelect.value, termSelect.value)
   })
 
   termSelect.addEventListener('change', function () {
     attachGraph(data, courseSelect.value, termSelect.value)
   })
+  refreshPicker()
 }
 
 const initEnrolmentTrend = () => loadEnrolmentTrend().then(data => {
