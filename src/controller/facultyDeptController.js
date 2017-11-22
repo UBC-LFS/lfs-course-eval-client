@@ -26,23 +26,22 @@ const initFacultyDept = () => loadFacultyDept().then(data => {
     Object.keys(pickTerms).map(term => {
       if (pickTerms[term].APBIAverage) apbiUMI6Data.push({ 'year': year + term, 'UMI': pickTerms[term].APBIAverage.UMI6 })
     })
-    const aggregatedData = [{
-      type: "faculty",
-      values: facultyAvgData
-    },{
-      type: "apbi",
-      values: apbiUMI6Data
-    }]
     //apbiUMI6Data.push({ year, 'UMI': data.find(x => x.hasOwnProperty(String(year)))[year].APBIAverage.UMI6 })
   })
-  
+  const aggregatedData = [{
+    type: "faculty",
+    values: facultyAvgData
+  },{
+    type: "apbi",
+    values: apbiUMI6Data
+  }]
   const allData = sortByTerm(facultyAvgData.concat(apbiUMI6Data))
   const uniqueTerms = R.uniq(allData.map(x => x.year))
   const facultyUMITrend = document.getElementById('facultyUMITrend')
   facultyUMITrend.appendChild(drawUMITrendLine(uniqueTerms, aggregatedData).node())
 
-  const APIBUMITrend = document.getElementById('apbiUMITrend')
-  APIBUMITrend.appendChild(drawUMITrendLine(apbiUMI6Data).node())
+  // const APIBUMITrend = document.getElementById('apbiUMITrend')
+  // APIBUMITrend.appendChild(drawUMITrendLine(apbiUMI6Data).node())
 })
 
 export default initFacultyDept
