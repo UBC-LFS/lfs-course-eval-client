@@ -19,6 +19,7 @@ const createLineChart = (data, course, term) => {
         datasets: [
             {
                 label: "UMI Trendline",
+                lineTension: 0,
                 fillColor: "rgba(151,187,205,0.2)",
                 strokeColor: "rgba(151,187,205,1)",
                 pointColor: "rgba(151,187,205,1)",
