@@ -18,14 +18,15 @@ const createLineChart = (data, course, term) => {
         labels: terms,
         datasets: [
             {
-                label: "UMI Trendline",
+                label: "Enrolment",
                 lineTension: 0,
-                fillColor: "rgba(151,187,205,0.2)",
-                strokeColor: "rgba(151,187,205,1)",
-                pointColor: "rgba(151,187,205,1)",
-                pointStrokeColor: "#fff",
-                pointHighlightFill: "#fff",
-                pointHighlightStroke: "rgba(151,187,205,1)",
+                backgroundColor: "rgba(151,187,205,0.2)",
+                borderColor: "rgba(151,187,205,1)",
+                pointBackgroundColor: "rgba(151,187,205,1)",
+                pointRadius: 5,
+                pointBorderColor: "#fff",
+                pointHoverBackgroundColor: "#fff",
+                pointHoverBorderColor: "rgba(151,187,205,1)",
                 data: enrolment
             }
         ]
