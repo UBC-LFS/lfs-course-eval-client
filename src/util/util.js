@@ -15,7 +15,14 @@ const flattenArray = (array) => array.reduce((acc, cur) => {
     return ([...acc, ...cur])
   } else return ([...acc, cur])
 })
-
+const convertYearTermtoDate = (array) => {
+  for (var i = 0; i < array.length; i++) {
+    const date = new Date(2017, 0, 1, 0, 0)
+    date.setMinutes(date.getMinutes() + i)
+    array[i].date = date.toString()
+  }
+  return array
+}
 const convertCountIntoArray = (count) => {
   let resultArray = []
   for (let i = 1; i <= 5; i++) {
@@ -69,7 +76,7 @@ const sortByTerm = (arr) => {
   return R.sort((a, b) => {
     if (a.year.slice(0, 4) === b.year.slice(0, 4)) {
       return (order[a.year.slice(4, 6)] < order[b.year.slice(4, 6)]) ? -1
-           : (order[a.year.slice(4, 6)] > order[b.year.slice(4, 6)]) ? 1 : 0
+        : (order[a.year.slice(4, 6)] > order[b.year.slice(4, 6)]) ? 1 : 0
     } else {
       return (a.year.slice(0, 4) < b.year.slice(0, 4) ? -1 : 1)
     }
@@ -82,5 +89,6 @@ export {
   convertCountIntoArray,
   sortByTerm,
   compareLastNameThenFirstName,
-  compareCourse
+  compareCourse,
+  convertYearTermtoDate
 }

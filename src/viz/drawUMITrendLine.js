@@ -52,7 +52,7 @@ const drawUMITrendLine = (uniqueTerms, data, term = 'all') => {
       .attr('d', line)
       .attr('stroke', function (d, j) {
         return 'hsl(' + Math.random() * 360 + ',100%,50%)'
-    })
+      })
   })
   const uniqueDataGroup = R.uniq(sortByTerm(dataGroup[0].concat(dataGroup[1])))
   g.selectAll('circle')
