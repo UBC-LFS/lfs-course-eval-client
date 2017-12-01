@@ -9,7 +9,9 @@
     "start": "npm-run-all --parallel watch:build",
     "watch:build": "webpack --watch --display-error-details",
     "build": "webpack -p",
-    "style": "standard --global describe --global it"
+    "style": "standard --global describe --global it",
+    "snyk-protect": "snyk protect",
+    "prepare": "npm run snyk-protect"
   },
   "author": "Justin Lee/Clara Chu",
   "license": "ISC",
@@ -42,6 +44,8 @@
     "d3-selection": "^1.2.0",
     "d3-tip": "^0.7.1",
     "express": "^4.16.2",
-    "ramda": "^0.24.1"
-  }
+    "ramda": "^0.24.1",
+    "snyk": "^1.52.1"
+  },
+  "snyk": true
 }
