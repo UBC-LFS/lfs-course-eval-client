@@ -1,4 +1,4 @@
-/* global $ */
+/* global $, Chart  */
 import { loadEnrolmentTrend } from '../service/dataService'
 import createLineChart from '../viz/drawEnrolmentLineChart'
 import { compareCourse } from '../util/util'
@@ -24,7 +24,7 @@ const initFilterHandler = (data) => {
   const courseTerms = ['all'].concat(getUniqCourseTerms(data, courseSelect.value))
   termSelect.innerHTML = attachOptions(courseTerms)
   courseSelect.addEventListener('change', function () {
-    const myChart = new Chart(grapharea, {})    
+    const myChart = new Chart(grapharea, {})
     const courseTerms = ['all'].concat(getUniqCourseTerms(data, courseSelect.value))
     termSelect.innerHTML = attachOptions(courseTerms)
     refreshPicker()
@@ -33,7 +33,7 @@ const initFilterHandler = (data) => {
   })
 
   termSelect.addEventListener('change', function () {
-    const myChart = new Chart(grapharea, {})    
+    const myChart = new Chart(grapharea, {})
     myChart.destroy()
     createLineChart(data, courseSelect.value, termSelect.value)
   })

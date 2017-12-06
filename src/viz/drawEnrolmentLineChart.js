@@ -1,10 +1,10 @@
 import Chart from 'chart.js'
-import * as d3Selection from 'd3-selection'
-import { sortByTerm, convertYearTermtoDate } from '../util/util'
+// import * as d3Selection from 'd3-selection'
+import { sortByTerm } from '../util/util'
 import { filterByTerm } from '../util/filter'
-import * as d3 from 'd3'
+// import * as d3 from 'd3'
 
-const lineMargin = { top: 60, bottom: 50, left: 50, right: 30 }
+// const lineMargin = { top: 60, bottom: 50, left: 50, right: 30 }
 
 const createLineChart = (data, course, term) => {
   const courseData = data.find(x => x.Course === course)
