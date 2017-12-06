@@ -17,19 +17,24 @@ const refreshPicker = () => {
 const initFilterHandler = (data) => {
   const courseSelect = document.getElementById('enrolmentCourse')
   const termSelect = document.getElementById('enrolmentTerm')
+  const grapharea = document.getElementById('enrolmentLineChartCanvas').getContext('2d')   
   const courses = data.map(x => x.Course).sort(compareCourse)
 
   courseSelect.innerHTML = attachOptions(courses)
   const courseTerms = ['all'].concat(getUniqCourseTerms(data, courseSelect.value))
   termSelect.innerHTML = attachOptions(courseTerms)
   courseSelect.addEventListener('change', function () {
+    const myChart = new Chart(grapharea, {})    
     const courseTerms = ['all'].concat(getUniqCourseTerms(data, courseSelect.value))
     termSelect.innerHTML = attachOptions(courseTerms)
     refreshPicker()
+    myChart.destroy()
     createLineChart(data, courseSelect.value, termSelect.value)
   })
 
   termSelect.addEventListener('change', function () {
+    const myChart = new Chart(grapharea, {})    
+    myChart.destroy()
     createLineChart(data, courseSelect.value, termSelect.value)
   })
   refreshPicker()
