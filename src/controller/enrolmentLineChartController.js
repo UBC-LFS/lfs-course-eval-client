@@ -18,6 +18,7 @@ const initFilterHandler = (data) => {
   const courseSelect = document.getElementById('enrolmentCourse')
   const termSelect = document.getElementById('enrolmentTerm')
   const courses = data.map(x => x.Course).sort(compareCourse)
+
   courseSelect.innerHTML = attachOptions(courses)
   const courseTerms = ['all'].concat(getUniqCourseTerms(data, courseSelect.value))
   termSelect.innerHTML = attachOptions(courseTerms)

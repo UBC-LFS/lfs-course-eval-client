@@ -3,16 +3,17 @@
 import * as util from '../util/util.js'
 const filterCPData = (coursePerformanceData, questionCode, PUID) => {
   const tableData = coursePerformanceData.find(x => x.PUID === PUID).Courses
-  return tableData.map(x => (
-    [ x.course + ' ' + x.section,
+  return tableData.map(x => {
+    console.log('this is important', x)
+    return [ x.course + ' ' + x.section,
       x.enrolment,
       util.roundToTwoDecimal(x[questionCode].average),
       util.roundToTwoDecimal(x.responseRate * 100) + '%',
       x.year,
-      util.roundToTwoDecimal(x.deptAverage[questionCode]),
-      util.roundToTwoDecimal(x.facultyAverage[questionCode])
+      util.roundToTwoDecimal(x.deptAverage[questionCode])
+      // util.roundToTwoDecimal(x.facultyAverage[questionCode])
     ]
-  ))
+  })
 }
 const drawCoursePerformance = (coursePerformanceData, questionCode, PUID) => {
   const data = filterCPData(coursePerformanceData, questionCode, PUID)

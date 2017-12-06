@@ -1,5 +1,5 @@
-import { margin, percentFavourableColor6 } from '../constants/constants'
 import drawUMIDispersionToolTip from './drawUMIDispersionToolTip'
+import { margin, percentFavourableColor6 } from '../constants/constants'
 import * as d3 from 'd3'
 import R from 'ramda'
 
@@ -10,7 +10,6 @@ const animate = () => {
 }
 
 const filterData = (data, { dept, year, term, meetsMin }) => {
-  console.log(meetsMin)
   return R.compose(
     R.filter(x => {
       if (dept === 'all') return true
