@@ -4,7 +4,6 @@ import * as util from '../util/util.js'
 const filterCPData = (coursePerformanceData, questionCode, PUID) => {
   const tableData = coursePerformanceData.find(x => x.PUID === PUID).Courses
   return tableData.map(x => {
-    console.log('this is important', x)
     return [ x.course + ' ' + x.section,
       x.enrolment,
       util.roundToTwoDecimal(x[questionCode].average),
