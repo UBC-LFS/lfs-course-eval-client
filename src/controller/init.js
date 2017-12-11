@@ -6,6 +6,7 @@ import initFacultyDept from './facultyDeptController'
 import initEnrolmentTrend from './enrolmentTrendController'
 import initUMIInstructor from './UMIInstructorController'
 import initEnrolmentLineChart from './enrolmentLineChartController'
+import initFacultyDeptLineChart from './facultyDeptLineChartController'
 
 const init = () => {
   $('.selectpicker').selectpicker()
@@ -26,6 +27,8 @@ const init = () => {
   initEnrolmentTrend()
 
   initEnrolmentLineChart()
+
+  initFacultyDeptLineChart()
 }
 
 export default init
