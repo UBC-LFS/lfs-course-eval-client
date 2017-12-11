@@ -5,7 +5,6 @@ import { sortByTerm } from '../util/util'
 import { compare } from '../util/util'
 import createLineChart from '../viz/drawUMITrendLine'
 
-
 const getUniqCourseTerms = (data, value) =>
   R.uniq((data.find(x => x.department === value)).data.map(x => x.term))
 

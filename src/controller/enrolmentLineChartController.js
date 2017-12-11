@@ -17,7 +17,7 @@ const refreshPicker = () => {
 const initFilterHandler = (data) => {
   const courseSelect = document.getElementById('enrolmentCourse')
   const termSelect = document.getElementById('enrolmentTerm')
-  const grapharea = document.getElementById('enrolmentLineChartCanvas').getContext('2d')   
+  const grapharea = document.getElementById('enrolmentLineChartCanvas').getContext('2d')
   const courses = data.map(x => x.Course).sort(compareCourse)
 
   courseSelect.innerHTML = attachOptions(courses)

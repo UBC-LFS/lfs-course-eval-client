@@ -8,7 +8,7 @@ const loadCoursePerformance = () => fetchJSON('data/CoursePerformance')
 const loadUMIDispersion = () => fetchJSON('data/UMIDispersion')
 const loadEnrolmentTrend = () => fetchJSON('data/EnrolmentTrend')
 const loadFacultyDept = () => fetchJSON('data/FacultyDept')
-const loadStats = () => fetchJSON('data/2014/2016/APBI')
+const loadStats = (filters) => fetchJSON('data/' + filters)
 
 export {
     loadUMIInstructorData,
