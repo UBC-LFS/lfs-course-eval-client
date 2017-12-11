@@ -8,6 +8,7 @@ import initUMIInstructor from './UMIInstructorController'
 import initEnrolmentLineChart from './enrolmentLineChartController'
 import initFacultyDeptLineChart from './facultyDeptLineChartController'
 import initStats from './statsController'
+import initOverview from './overviewController'
 
 const init = () => {
   $('.selectpicker').selectpicker()
@@ -19,7 +20,8 @@ const init = () => {
 
   initUMIDispersion()
 
-  initCoursePerformance()
+  // commented out for now because of annoying error message
+  // initCoursePerformance()
 
   initFacultyDept()
 
@@ -32,6 +34,8 @@ const init = () => {
   initFacultyDeptLineChart()
 
   initStats()
+
+  initOverview()
 }
 
 export default init
