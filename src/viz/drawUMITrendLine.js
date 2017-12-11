@@ -23,7 +23,9 @@ const createLineChart = (data, departments, term) => {
     })
     return dataset
   })
+
   const termLabels = filterByTerm(term, sortByTerm(R.uniq(terms))).map(x => x.year)
+
   const dataRecords = datasets.map(oDataset => {
     const dataset = []
     for (let i = 0; i < termLabels.length; i++) {

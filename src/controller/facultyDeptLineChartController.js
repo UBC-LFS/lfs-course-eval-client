@@ -1,26 +1,26 @@
 import { loadFacultyDept } from '../service/dataService'
 import drawUMITrendLine from '../viz/drawUMITrendLine'
 import R from 'ramda'
-import {sortByTerm} from '../util/util'
+import { sortByTerm } from '../util/util'
 import { compare } from '../util/util'
 import createLineChart from '../viz/drawUMITrendLine'
 
 
 const getUniqCourseTerms = (data, value) =>
-R.uniq((data.find(x => x.department === value)).data.map(x => x.term))
+  R.uniq((data.find(x => x.department === value)).data.map(x => x.term))
 
 const attachOptions = (arr) => arr.map(x => '<option value="' + x + '">' + x + '</option>').join(' ')
 
 const refreshPicker = () => {
-$('#UMIDeptFilter.selectpicker').selectpicker('refresh')
-$('#UMITermFilter.selectpicker').selectpicker('refresh')
+  $('#UMIDeptFilter.selectpicker').selectpicker('refresh')
+  $('#UMITermFilter.selectpicker').selectpicker('refresh')
 }
 const getValues = (x) => x.value
 
-const initFilterHandler = (data) =>  {
+const initFilterHandler = (data) => {
   const deptSelect = document.getElementById('UMIDeptFilter')
   const termSelect = document.getElementById('UMITermFilter')
-  const grapharea = document.getElementById('UMILineChartCanvas').getContext('2d')   
+  const grapharea = document.getElementById('UMILineChartCanvas').getContext('2d')
   const departments = data.map(x => x.department).sort(compare)
   deptSelect.innerHTML = attachOptions(departments)
   deptSelect.options[0].selected = true
@@ -29,9 +29,9 @@ const initFilterHandler = (data) =>  {
   refreshPicker()
 
   deptSelect.addEventListener('change', function () {
-    const myChart = new Chart(grapharea, {}) 
-    const selectedDepartments = R.map(getValues, deptSelect.selectedOptions)   
-    const uniqueTerms = R.uniq(R.flatten(selectedDepartments.map(dept=>getUniqCourseTerms(data,dept))))
+    const myChart = new Chart(grapharea, {})
+    const selectedDepartments = R.map(getValues, deptSelect.selectedOptions)
+    const uniqueTerms = R.uniq(R.flatten(selectedDepartments.map(dept => getUniqCourseTerms(data, dept))))
     const courseTerms = ['all'].concat(uniqueTerms)
     termSelect.innerHTML = attachOptions(courseTerms)
     refreshPicker()
@@ -40,8 +40,8 @@ const initFilterHandler = (data) =>  {
   })
 
   termSelect.addEventListener('change', function () {
-    const myChart = new Chart(grapharea, {})   
-    const selectedDepartments = R.map(getValues, deptSelect.selectedOptions)       
+    const myChart = new Chart(grapharea, {})
+    const selectedDepartments = R.map(getValues, deptSelect.selectedOptions)
     myChart.destroy()
     createLineChart(data, selectedDepartments, termSelect.value)
   })
@@ -52,7 +52,7 @@ const initFacultyDeptLineChart = () => loadFacultyDept().then(data => {
   const termSelect = document.getElementById('UMITermFilter')
   console.log('facultyDept data:', data)
   initFilterHandler(data)
-  const selectedDepartments = R.map(getValues, deptSelect.selectedOptions)           
+  const selectedDepartments = R.map(getValues, deptSelect.selectedOptions)
   createLineChart(data, selectedDepartments, termSelect.value)
 })
 
