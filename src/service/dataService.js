@@ -9,7 +9,7 @@ const loadUMIDispersion = () => fetchJSON('data/UMIDispersion')
 const loadEnrolmentTrend = () => fetchJSON('data/EnrolmentTrend')
 const loadFacultyDept = () => fetchJSON('data/FacultyDept')
 const loadStats = (filters) => fetchJSON('data/' + filters)
-const loadOverview = () => fetchJSON('overview/2016')
+const loadOverview = (year) => fetchJSON('overview/' + year)
 
 export {
     loadUMIInstructorData,
