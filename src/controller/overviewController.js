@@ -6,7 +6,7 @@ const initOverview = () => loadOverview().then(data => {
   const responseRate = document.getElementById('card-response-rate')
   const sections = document.getElementById('card-number-of-sections')
 
-  umi.innerHTML = data.umi
+  umi.innerHTML = data.umi6
   enrolment.innerHTML = data.enrolment
   responseRate.innerHTML = data.responseRate
   sections.innerHTML = data.sections
