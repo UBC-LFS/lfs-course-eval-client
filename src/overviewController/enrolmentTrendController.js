@@ -1,5 +1,5 @@
 /* global $ */
-import { loadEnrolmentTrend } from '../service/dataService'
+import { loadEnrolmentTrend } from '../service/overviewDataService'
 import drawEnrolmentTrendLine from '../viz/drawEnrolmentTrendLine'
 import { compareCourse } from '../util/util'
 import R from 'ramda'

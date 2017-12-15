@@ -1,5 +1,5 @@
 /* global $ */
-import { loadUMIInstructorData } from '../service/dataService'
+import { loadUMIInstructorData } from '../service/overviewDataService'
 import { drawUMIInstructor, redrawUMIInstructor } from '../viz/drawUMIInstructorTable'
 import { stripMiddleName, compareLastNameThenFirstName } from '../util/util'
 

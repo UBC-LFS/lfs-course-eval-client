@@ -1,6 +1,6 @@
 /* global describe, it */
 
-import * as dataService from '../src/service/dataService'
+import * as overviewDataService from '../src/service/overviewDataService'
 import assert from 'assert'
 
 describe('need to test', () => {

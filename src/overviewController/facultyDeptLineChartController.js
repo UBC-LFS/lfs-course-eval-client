@@ -1,4 +1,4 @@
-import { loadFacultyDept } from '../service/dataService'
+import { loadFacultyDept } from '../service/overviewDataService'
 import drawUMITrendLine from '../viz/drawUMITrendLine'
 import R from 'ramda'
 import { sortByTerm } from '../util/util'

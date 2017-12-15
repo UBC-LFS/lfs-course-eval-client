@@ -1,5 +1,5 @@
 /* global $ */
-import { loadUMIDispersion } from '../service/dataService'
+import { loadUMIDispersion } from '../service/overviewDataService'
 import drawUMIVsDispersion from '../viz/drawUMIVsDispersion'
 import R from 'ramda'
 

@@ -1,5 +1,5 @@
 /* global $, Chart  */
-import { loadEnrolmentTrend } from '../service/dataService'
+import { loadEnrolmentTrend } from '../service/overviewDataService'
 import createLineChart from '../viz/drawEnrolmentLineChart'
 import { compareCourse } from '../util/util'
 import R from 'ramda'

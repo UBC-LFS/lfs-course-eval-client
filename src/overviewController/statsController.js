@@ -1,4 +1,4 @@
-import { loadStats } from '../service/dataService'
+import { loadStats } from '../service/overviewDataService'
 
 const initStats = () => loadStats('2014/2016/APBI').then(data => {
   console.log('loadStats', data)

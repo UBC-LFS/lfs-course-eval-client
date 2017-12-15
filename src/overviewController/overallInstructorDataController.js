@@ -1,4 +1,4 @@
-import { loadOverallInstructorData } from '../service/dataService'
+import { loadOverallInstructorData } from '../service/overviewDataService'
 import drawOverallInstructor from '../viz/drawOverallInstructorTable'
 
 const initOverallInstructor = () => loadOverallInstructorData().then(data => {
