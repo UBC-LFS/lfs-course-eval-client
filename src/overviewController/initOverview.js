@@ -8,9 +8,9 @@ import initUMIInstructor from './UMIInstructorController'
 import initEnrolmentLineChart from './enrolmentLineChartController'
 import initFacultyDeptLineChart from './facultyDeptLineChartController'
 import initStats from './statsController'
-import initOverview from './overviewController'
+import initHighLevelOverview from './overviewController'
 
-const init = () => {
+const initOverview = () => {
   $('.selectpicker').selectpicker()
   $('.bootstrap-select').click(function () {
     $(this).addClass('open')
@@ -35,7 +35,7 @@ const init = () => {
 
   initStats()
 
-  initOverview()
+  initHighLevelOverview()
 }
 
-export default init
+export default initOverview

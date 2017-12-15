@@ -1,5 +1,6 @@
-import init from './controller/init'
+import initOverview from './overviewController/initOverview'
 
 document.addEventListener('DOMContentLoaded', function () {
-  init()
+  // call the right code depending on which page we're on
+  initOverview()
 }, false)
