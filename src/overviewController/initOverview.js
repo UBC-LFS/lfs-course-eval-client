@@ -1,4 +1,3 @@
-/* global $ */
 import initOverallInstructor from './overallInstructorDataController'
 import initUMIDispersion from './UMIDispersionController'
 import initCoursePerformance from './coursePerformanceController'
@@ -11,11 +10,6 @@ import initStats from './statsController'
 import initHighLevelOverview from './overviewController'
 
 const initOverview = () => {
-  $('.selectpicker').selectpicker()
-  $('.bootstrap-select').click(function () {
-    $(this).addClass('open')
-  })
-
   initOverallInstructor()
 
   initUMIDispersion()
