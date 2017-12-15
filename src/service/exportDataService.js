@@ -2,7 +2,7 @@
 
 const fetchJSON = (url) => fetch(url).then(response => response.json())
 
-const loadStats = (statsObj) => fetchJSON('export/' + statsObj.startYear + '/' + statsObj.endYear + '/' + statsObj.dept)
+const loadStats = (statsObj) => fetchJSON('export/' + statsObj.fromYear + '/' + statsObj.toYear + '/' + statsObj.dept)
 
 export {
   loadStats

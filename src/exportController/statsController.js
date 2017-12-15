@@ -1,9 +1,13 @@
+import { loadStats } from '../service/exportDataService'
+
 const statsController = () => {
-  const startYear = document.getElementById('export-start-year')
-  const endYear = document.getElementById('export-end-year')
+  const fromYear = document.getElementById('export-from-year')
+  const toYear = document.getElementById('export-to-year')
   const dept = document.getElementById('export-dept')
 
-  
+  document.getElementById('export-button').onclick(() => {
+    console.log(fromYear.value)
+  })
 } 
 
 export default statsController
