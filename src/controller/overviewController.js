@@ -21,7 +21,7 @@ const initOverview = () => {
     elements.map((element, i) => (element.innerHTML = currentYear[i]))
 
     const comparisons = document.getElementsByClassName('card-comparison')
-    Array.from(comparisons).map((x, i) => (x.innerHTML = (toTwoDecimal(currentYear[i] / previousYear[i] * 100 - 100) + '%')))
+    Array.from(comparisons).map((x, i) => (x.innerHTML = (toTwoDecimal(currentYear[i] / previousYear[i] * 100 - 100) + '% from last year')))
   })
 }
 
