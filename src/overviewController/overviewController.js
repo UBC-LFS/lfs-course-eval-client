@@ -3,6 +3,7 @@ import { loadOverview } from '../service/overviewDataService'
 const toTwoDecimal = decimal => Math.round(decimal * 100) / 100
 
 const initHighLevelOverview = () => {
+  console.log('called overview')
   const year = 2016
   loadOverview(year).then(data => {
     console.log(data)

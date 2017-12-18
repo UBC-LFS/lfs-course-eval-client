@@ -6,7 +6,6 @@ import initEnrolmentTrend from './enrolmentTrendController'
 import initUMIInstructor from './UMIInstructorController'
 import initEnrolmentLineChart from './enrolmentLineChartController'
 import initFacultyDeptLineChart from './facultyDeptLineChartController'
-import initStats from './statsController'
 import initHighLevelOverview from './overviewController'
 
 const initOverview = () => {
@@ -26,8 +25,6 @@ const initOverview = () => {
   initEnrolmentLineChart()
 
   initFacultyDeptLineChart()
-
-  initStats()
 
   initHighLevelOverview()
 }
