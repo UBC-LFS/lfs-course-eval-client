@@ -1,16 +1,30 @@
 import { loadStats, loadOptions } from '../service/exportDataService'
 
 const statsController = () => {
-  loadOptions().then(data => console.log('loaded options in export view', data))
+  const fromYear = document.getElementById('export-from-year')
+  const toYear = document.getElementById('export-to-year')
+  const dept = document.getElementById('export-dept')
+
+  loadOptions()
+    .then(data => data[0])
+    .then(obj => {
+      obj.depts.unshift('all')
+      return obj
+    })
+    .then(obj => {
+      fromYear.innerHTML = obj.years.map(year => '<option value="' + year + '">' + year + '</option>').join(' ')
+      toYear.innerHTML = obj.years.map(year => '<option value="' + year + '">' + year + '</option>').join(' ')
+      dept.innerHTML = obj.depts.map(dept => '<option value="' + dept + '">' + dept + '</option>').join(' ')
+
+      // this sets toYear to latest year
+      toYear.value = obj.years[obj.years.length - 1]
+    })
 
   document.getElementById('export-button').addEventListener('click', function () {
-    const fromYear = document.getElementById('export-from-year').value
-    const toYear = document.getElementById('export-to-year').value
-    const dept = document.getElementById('export-dept').value
     loadStats({
-      fromYear,
-      toYear,
-      dept
+      fromYear: fromYear.value,
+      toYear: toYear.value,
+      dept: dept.value
     }).then(data => console.log(data))
   })
 }
