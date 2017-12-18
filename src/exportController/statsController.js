@@ -26,7 +26,10 @@ const statsController = () => {
         fromYear: fromYear.value,
         toYear: toYear.value,
         dept: dept.value
-      }).then(data => console.log(data))
+      }).then(data => {
+        // do something with the data, maybe a table?
+        console.log(data)
+      })
     }
   })
 }
