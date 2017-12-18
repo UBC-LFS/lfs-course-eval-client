@@ -21,11 +21,13 @@ const statsController = () => {
     })
 
   document.getElementById('export-button').addEventListener('click', function () {
-    loadStats({
-      fromYear: fromYear.value,
-      toYear: toYear.value,
-      dept: dept.value
-    }).then(data => console.log(data))
+    if (fromYear.value <= toYear.value) {
+      loadStats({
+        fromYear: fromYear.value,
+        toYear: toYear.value,
+        dept: dept.value
+      }).then(data => console.log(data))
+    }
   })
 }
 
