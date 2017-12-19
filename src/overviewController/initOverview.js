@@ -2,9 +2,8 @@ import initOverallInstructor from './overallInstructorDataController'
 import initUMIDispersion from './UMIVsDispersion/UMIVsDispersionController'
 import initCoursePerformance from './CoursePerformance/coursePerformanceController'
 import initFacultyDept from './facultyDeptController'
-import initEnrolmentTrend from './enrolmentTrendController'
 import initUMIInstructor from './UMIInstructorController'
-import initEnrolmentLineChart from './enrolmentLineChartController'
+import initEnrolmentLineChart from './EnrolmentChart/enrolmentLineChartController'
 import initFacultyDeptLineChart from './facultyDeptLineChartController'
 import initHighLevelOverview from './overviewController'
 
@@ -19,8 +18,6 @@ const initOverview = () => {
   initFacultyDept()
 
   initUMIInstructor()
-
-  initEnrolmentTrend()
 
   initEnrolmentLineChart()
 
