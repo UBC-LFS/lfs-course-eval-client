@@ -7,7 +7,7 @@ import R from 'ramda'
 const getUniqCourseTerms = (data, value) =>
   R.uniq((data.find(x => x.Course === value)).Terms.map(x => x.year.slice(-2)))
 
-const attachOptions = (arr) => arr.map(x => '<option value="' + x + '">' + x + '</option>').join(' ')
+const attachOptions = arr => arr.map(x => '<option value="' + x + '">' + x + '</option>').join(' ')
 
 const refreshPicker = () => {
   $('#enrolmentCourse.selectpicker').selectpicker('refresh')

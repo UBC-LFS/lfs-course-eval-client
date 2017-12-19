@@ -6,10 +6,7 @@ import {sortByTerm} from '../util/util'
 const initFacultyDept = () => loadFacultyDept().then(data => {
   console.log('facultyDept data:', data)
 
-  const years = R.compose(
-    R.flatten(),
-    R.map(x => R.keys(x).filter(x => x !== '_id'))
-  )(data)
+  const years = R.flatten(data)
 
   const facultyAvgData = []
   const apbiUMI6Data = []
