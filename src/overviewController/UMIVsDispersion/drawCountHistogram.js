@@ -1,6 +1,6 @@
-import { margin } from '../constants/constants'
+import { margin } from '../../constants/constants'
 import * as d3 from 'd3'
-import { convertCountIntoArray } from '../util/util'
+import { convertCountIntoArray } from '../../util/util'
 
 const drawCountHistogram = (count) => {
   const w = 300

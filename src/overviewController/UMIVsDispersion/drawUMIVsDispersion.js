@@ -1,5 +1,5 @@
-import drawUMIDispersionToolTip from './drawUMIDispersionToolTip'
-import { margin, percentFavourableColor6 } from '../constants/constants'
+import drawUMIVsDispersionToolTip from './drawUMIVsDispersionToolTip'
+import { margin, percentFavourableColor6 } from '../../constants/constants'
 import * as d3 from 'd3'
 import R from 'ramda'
 
@@ -71,7 +71,7 @@ const drawUMIvsDispersion = (data, filter) => {
   const umiDots = g.append('g').attr('id', 'umiDots')
 
   // tooltip config
-  const courseInfoTip = drawUMIDispersionToolTip(UMI)
+  const courseInfoTip = drawUMIVsDispersionToolTip(UMI)
 
   umiDots.selectAll('dot')
     .data(data)

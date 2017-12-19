@@ -1,6 +1,6 @@
 /* global $ */
-import { loadUMIDispersion } from '../service/overviewDataService'
-import drawUMIVsDispersion from '../viz/drawUMIVsDispersion'
+import { loadUMIDispersion } from '../../service/overviewDataService'
+import drawUMIVsDispersion from './drawUMIVsDispersion'
 import R from 'ramda'
 
 const attachGraph = (data, filter) => {
@@ -61,7 +61,7 @@ const initFilterHandler = (data, defaultFilter) => {
   refreshPicker()
 }
 
-const initUMIDispersion = () => loadUMIDispersion().then(data => {
+const initUMIVsDispersion = () => loadUMIDispersion().then(data => {
   console.log('umiVsDispersion data:', data)
 
   const defaultFilter = { dept: 'all', year: 2017, term: 'all', UMI: 6, meetsMin: 'false' }
@@ -70,4 +70,4 @@ const initUMIDispersion = () => loadUMIDispersion().then(data => {
   attachGraph(data, defaultFilter)
 })
 
-export default initUMIDispersion
+export default initUMIVsDispersion

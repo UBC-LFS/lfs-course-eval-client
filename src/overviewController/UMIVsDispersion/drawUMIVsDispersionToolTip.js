@@ -1,12 +1,12 @@
 import drawCountHistogram from './drawCountHistogram'
-import { stripMiddleName } from '../util/util'
-import * as questionDefinitions from '../constants/questionDefinitions'
+import { stripMiddleName } from '../../util/util'
+import * as questionDefinitions from '../../constants/questionDefinitions'
 
 import * as d3 from 'd3'
 import d3Tip from 'd3-tip'
 d3.tip = d3Tip
 
-const drawUMIDispersionToolTip = (UMI) => d3.tip().html(d => {
+const drawUMIVsDispersionToolTip = (UMI) => d3.tip().html(d => {
   const tmp = document.createElement('div')
   tmp.appendChild(drawCountHistogram(d['UMI' + UMI].count).node())
   const histHTML = tmp.innerHTML
@@ -25,4 +25,4 @@ const drawUMIDispersionToolTip = (UMI) => d3.tip().html(d => {
     '</div>'
 }).direction(d => 's')
 
-export default drawUMIDispersionToolTip
+export default drawUMIVsDispersionToolTip

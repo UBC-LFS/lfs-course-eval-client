@@ -1,6 +1,6 @@
 /* global $ */
+import * as util from '../../util/util.js'
 
-import * as util from '../util/util.js'
 const filterCPData = (coursePerformanceData, questionCode, PUID) => {
   const tableData = coursePerformanceData.find(x => x.PUID === PUID).Courses
   return tableData.map(x => {

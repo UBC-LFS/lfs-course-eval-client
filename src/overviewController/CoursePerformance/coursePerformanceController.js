@@ -1,7 +1,7 @@
 /* global $ */
-import { loadCoursePerformance } from '../service/overviewDataService'
-import { drawCoursePerformance, redrawCoursePerformance } from '../viz/drawCoursePerformanceTable'
-import { stripMiddleName, compareLastNameThenFirstName } from '../util/util'
+import { loadCoursePerformance } from '../../service/overviewDataService'
+import { drawCoursePerformance, redrawCoursePerformance } from './drawCoursePerformanceTable'
+import { stripMiddleName, compareLastNameThenFirstName } from '../../util/util'
 
 const attachOptions = (arr) =>
   arr.map(x => '<option value=' + x.PUID + '>' + x.name + '</option>').join(' ')
