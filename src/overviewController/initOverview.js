@@ -1,11 +1,10 @@
-import initOverallInstructor from './overallInstructorDataController'
+import initOverallInstructor from './OverallInstructor/overallInstructorDataController'
 import initUMIDispersion from './UMIVsDispersion/UMIVsDispersionController'
 import initCoursePerformance from './CoursePerformance/coursePerformanceController'
-import initFacultyDept from './facultyDeptController'
-import initUMIInstructor from './UMIInstructorController'
+import initFacultyDeptLineChart from './FacultyDeptLineChart/facultyDeptLineChartController'
+import initUMIInstructor from './UMIInstructor/UMIInstructorController'
 import initEnrolmentLineChart from './EnrolmentChart/enrolmentLineChartController'
-import initFacultyDeptLineChart from './facultyDeptLineChartController'
-import initHighLevelOverview from './overviewController'
+import initHighLevelOverview from './Dashboard/overviewController'
 
 const initOverview = () => {
   initOverallInstructor()
@@ -15,13 +14,11 @@ const initOverview = () => {
   // commented out for now because of annoying error message
   // initCoursePerformance()
 
-  initFacultyDept()
+  initFacultyDeptLineChart()
 
   initUMIInstructor()
 
   initEnrolmentLineChart()
-
-  initFacultyDeptLineChart()
 
   initHighLevelOverview()
 }

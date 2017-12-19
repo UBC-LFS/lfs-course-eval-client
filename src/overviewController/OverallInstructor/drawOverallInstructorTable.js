@@ -1,5 +1,5 @@
 /* global $ */
-import { stripMiddleName } from '../util/util'
+import { stripMiddleName } from '../../util/util'
 
 const drawOverallInstructor = (tableData) => {
   const data = tableData.map(x => (

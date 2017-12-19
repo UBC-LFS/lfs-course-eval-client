@@ -1,7 +1,7 @@
 /* global $ */
-import { loadUMIInstructorData } from '../service/overviewDataService'
-import { drawUMIInstructor, redrawUMIInstructor } from '../viz/drawUMIInstructorTable'
-import { stripMiddleName, compareLastNameThenFirstName } from '../util/util'
+import { loadUMIInstructorData } from '../../service/overviewDataService'
+import { drawUMIInstructor, redrawUMIInstructor } from './drawUMIInstructorTable'
+import { stripMiddleName, compareLastNameThenFirstName } from '../../util/util'
 
 const attachOptions = (arr) => arr.map(x =>
   '<option value=' + x.PUID + '>' + x.name + '</option>').join(' ')

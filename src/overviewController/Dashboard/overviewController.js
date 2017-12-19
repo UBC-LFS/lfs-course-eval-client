@@ -1,4 +1,4 @@
-import { loadOverview } from '../service/overviewDataService'
+import { loadOverview } from '../../service/overviewDataService'
 
 const toTwoDecimal = decimal => Math.round(decimal * 100) / 100
 

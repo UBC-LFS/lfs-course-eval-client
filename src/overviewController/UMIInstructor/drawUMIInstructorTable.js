@@ -1,6 +1,6 @@
 /* global $ */
 import R from 'ramda'
-import * as util from '../util/util.js'
+import * as util from '../../util/util.js'
 
 const filterUMIData = (UMIInstructorData, PUID) => {
   const tableData = R.find(x => x.PUID === PUID, UMIInstructorData).Courses

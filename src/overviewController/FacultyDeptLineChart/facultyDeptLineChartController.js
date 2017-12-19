@@ -1,9 +1,8 @@
-import { loadFacultyDept } from '../service/overviewDataService'
-import drawUMITrendLine from '../viz/drawUMITrendLine'
+import { loadFacultyDept } from '../../service/overviewDataService'
+import createLineChart from './drawUMITrendLine'
 import R from 'ramda'
-import { sortByTerm } from '../util/util'
-import { compare } from '../util/util'
-import createLineChart from '../viz/drawUMITrendLine'
+import { sortByTerm } from '../../util/util'
+import { compare } from '../../util/util'
 
 const getUniqCourseTerms = (data, value) =>
   R.uniq((data.find(x => x.department === value)).data.map(x => x.term))
