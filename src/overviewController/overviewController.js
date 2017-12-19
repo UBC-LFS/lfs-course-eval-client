@@ -16,13 +16,23 @@ const initHighLevelOverview = () => {
     title.innerHTML = year + ' Overview'
 
     const elements = [umi, enrolment, responseRate, sections]
-    const currentYear = [data.currentYear.umi6, data.currentYear.enrolment, data.currentYear.responseRate, data.currentYear.sections]
-    const previousYear = [data.previousYear.umi6, data.previousYear.enrolment, data.previousYear.responseRate, data.previousYear.sections]
-
+    const currentYear = [
+      data.currentYear.umi6,
+      data.currentYear.enrolment,
+      data.currentYear.responseRate,
+      data.currentYear.sections
+    ]
+    const previousYear = [
+      data.previousYear.umi6,
+      data.previousYear.enrolment,
+      data.previousYear.responseRate,
+      data.previousYear.sections
+    ]
     elements.map((element, i) => (element.innerHTML = currentYear[i]))
 
     const comparisons = document.getElementsByClassName('card-comparison')
-    Array.from(comparisons).map((x, i) => (x.innerHTML = (toTwoDecimal(currentYear[i] / previousYear[i] * 100 - 100) + '% from last year')))
+    Array.from(comparisons).map((x, i) =>
+      (x.innerHTML = (toTwoDecimal(currentYear[i] / previousYear[i] * 100 - 100) + '% from last year')))
   })
 }
 
