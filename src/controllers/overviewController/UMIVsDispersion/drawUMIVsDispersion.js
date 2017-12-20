@@ -1,5 +1,5 @@
 import drawUMIVsDispersionToolTip from './drawUMIVsDispersionToolTip'
-import { margin, percentFavourableColor6 } from '../../constants/constants'
+import { margin, percentFavourableColor6 } from '../../../constants/constants'
 import * as d3 from 'd3'
 import R from 'ramda'
 

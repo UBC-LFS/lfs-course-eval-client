@@ -1,4 +1,4 @@
-import { loadStats, loadOptions } from '../service/exportDataService'
+import { loadStats, loadOptions } from '../../service/exportDataService'
 
 const statsController = () => {
   const fromYear = document.getElementById('export-from-year')

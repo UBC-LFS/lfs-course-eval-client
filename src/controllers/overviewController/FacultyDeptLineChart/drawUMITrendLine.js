@@ -1,7 +1,7 @@
 import Chart from 'chart.js'
 import * as d3Selection from 'd3-selection'
-import { sortByTerm, convertYearTermtoDate } from '../../util/util'
-import { filterByTerm } from '../../util/filter'
+import { sortByTerm, convertYearTermtoDate } from '../../../util/util'
+import { filterByTerm } from '../../../util/filter'
 import * as d3 from 'd3'
 import R from 'ramda'
 

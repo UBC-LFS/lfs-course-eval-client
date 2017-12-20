@@ -1,6 +1,6 @@
 import drawCountHistogram from './drawCountHistogram'
-import { stripMiddleName } from '../../util/util'
-import * as questionDefinitions from '../../constants/questionDefinitions'
+import { stripMiddleName } from '../../../util/util'
+import * as questionDefinitions from '../../../constants/questionDefinitions'
 
 import * as d3 from 'd3'
 import d3Tip from 'd3-tip'

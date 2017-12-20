@@ -1,8 +1,8 @@
 /* global $ */
-import initOverview from './overviewController/initOverview'
-import initInstructorCourseView from './instructorCourseViewController/initInstructorCourseView'
-import initInstructorView from './instructorViewController/initInstructorView'
-import initExportView from './exportController/initExportView'
+import initOverview from './controllers/overviewController/initOverview'
+import initInstructorCourseView from './controllers/instructorCourseViewController/initInstructorCourseView'
+import initInstructorView from './controllers/instructorViewController/initInstructorView'
+import initExportView from './controllers/exportController/initExportView'
 
 document.addEventListener('DOMContentLoaded', function () {
   $('.selectpicker').selectpicker()

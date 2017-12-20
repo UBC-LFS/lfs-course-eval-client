@@ -1,7 +1,7 @@
 /* global $, Chart  */
-import { loadEnrolmentTrend } from '../../service/overviewDataService'
+import { loadEnrolmentTrend } from '../../../service/overviewDataService'
 import createLineChart from './drawEnrolmentLineChart'
-import { compareCourse } from '../../util/util'
+import { compareCourse } from '../../../util/util'
 import R from 'ramda'
 
 const getUniqCourseTerms = (data, value) =>
