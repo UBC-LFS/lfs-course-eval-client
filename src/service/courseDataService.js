@@ -1,0 +1,2 @@
+import fetchJSON from './fetch'
+

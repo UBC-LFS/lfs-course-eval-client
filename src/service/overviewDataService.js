@@ -1,6 +1,4 @@
-/* global fetch */
-
-const fetchJSON = (url) => fetch(url).then(response => response.json())
+import fetchJSON from './fetch'
 
 const loadUMIInstructorData = () => fetchJSON('overview/UMIInstructor')
 const loadOverallInstructorData = () => fetchJSON('overview/OverallInstructor')
