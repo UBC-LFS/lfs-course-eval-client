@@ -31,8 +31,23 @@ const initHighLevelOverview = () => {
     elements.map((element, i) => (element.innerHTML = currentYear[i]))
 
     const comparisons = document.getElementsByClassName('card-comparison')
-    Array.from(comparisons).map((x, i) =>
-      (x.innerHTML = (toTwoDecimal(currentYear[i] / previousYear[i] * 100 - 100) + '% from last year')))
+
+    Array.from(comparisons).map((x, i) => {
+      const upIcon = document.createElement('i')
+      upIcon.className = 'fas fa-caret-up'
+
+      const downIcon = document.createElement('i')
+      downIcon.className = 'fas fa-caret-down'
+
+      const p = document.createElement('p')
+      p.style = 'display: inline;'
+      p.innerHTML = ' ' + (toTwoDecimal(currentYear[i] / previousYear[i] * 100 - 100)) + '% from last year'
+
+      x.innerHTML = ''
+      if (currentYear[i] / previousYear[i] > 0) x.appendChild(upIcon)
+      if (currentYear[i] / previousYear[i] < 0) x.appendChild(downIcon)
+      x.appendChild(p)
+    })
   })
 }
 
