@@ -3,10 +3,10 @@ import { loadCoursePerformance } from '../../service/courseDataService'
 import { drawCoursePerformance, redrawCoursePerformance } from './drawCoursePerformanceTable'
 import { stripMiddleName, compareLastNameThenFirstName } from '../../util/util'
 
-const attachOptions = (arr) =>
+const attachOptions = arr =>
   arr.map(x => '<option value=' + x.PUID + '>' + x.name + '</option>').join(' ')
 
-const initFilterHandler = (data) => {
+const initFilterHandler = data => {
   const instructorSelect = document.getElementById('cpInstructorFilter')
   const questionSelect = document.getElementById('cpQuestionFilter')
   const elements = [instructorSelect, questionSelect]

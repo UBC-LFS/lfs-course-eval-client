@@ -1,7 +1,7 @@
 /* global $ */
 import { stripMiddleName } from '../../util/util'
 
-const drawOverallInstructor = (tableData) => {
+const drawOverallInstructor = tableData => {
   const data = tableData.map(x => (
     [stripMiddleName(x.instructorName),
       x.dept,

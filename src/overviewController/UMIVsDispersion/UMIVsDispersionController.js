@@ -10,7 +10,7 @@ const attachGraph = (data, filter) => {
   graph.appendChild(drawUMIVsDispersion(data, filter).node())
 }
 
-const attachOptions = (arr) => arr.map(x => '<option value="' + x + '">' + x + '</option>').join(' ')
+const attachOptions = arr => arr.map(x => '<option value="' + x + '">' + x + '</option>').join(' ')
 
 const refreshPicker = () => {
   $('#umiVsDispersionDept').selectpicker('refresh')

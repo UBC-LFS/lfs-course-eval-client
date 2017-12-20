@@ -3,10 +3,10 @@ import { loadUMIInstructorData } from '../../service/courseDataService'
 import { drawUMIInstructor, redrawUMIInstructor } from './drawUMIInstructorTable'
 import { stripMiddleName, compareLastNameThenFirstName } from '../../util/util'
 
-const attachOptions = (arr) => arr.map(x =>
+const attachOptions = arr => arr.map(x =>
   '<option value=' + x.PUID + '>' + x.name + '</option>').join(' ')
 
-const initFilterHandler = (data) => {
+const initFilterHandler = data => {
   const instructorSelect = document.getElementById('umiInstructorFilter')
   const instructors = data.map(x => ({
     'name': stripMiddleName(x.Courses[0].instructorName),

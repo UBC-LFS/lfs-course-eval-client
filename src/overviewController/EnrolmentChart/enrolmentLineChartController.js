@@ -14,7 +14,7 @@ const refreshPicker = () => {
   $('#enrolmentTerm.selectpicker').selectpicker('refresh')
 }
 
-const initFilterHandler = (data) => {
+const initFilterHandler = data => {
   const courseSelect = document.getElementById('enrolmentCourse')
   const termSelect = document.getElementById('enrolmentTerm')
   const grapharea = document.getElementById('enrolmentLineChartCanvas').getContext('2d')

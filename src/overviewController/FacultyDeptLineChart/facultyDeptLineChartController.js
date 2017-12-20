@@ -7,7 +7,7 @@ import { compare } from '../../util/util'
 const getUniqCourseTerms = (data, value) =>
   R.uniq((data.find(x => x.department === value)).data.map(x => x.term))
 
-const attachOptions = (arr) => arr.map(x => '<option value="' + x + '">' + x + '</option>').join(' ')
+const attachOptions = arr => arr.map(x => '<option value="' + x + '">' + x + '</option>').join(' ')
 
 const refreshPicker = () => {
   $('#UMIDeptFilter.selectpicker').selectpicker('refresh')
@@ -15,7 +15,7 @@ const refreshPicker = () => {
 }
 const getValues = (x) => x.value
 
-const initFilterHandler = (data) => {
+const initFilterHandler = data => {
   const deptSelect = document.getElementById('UMIDeptFilter')
   const termSelect = document.getElementById('UMITermFilter')
   const grapharea = document.getElementById('UMILineChartCanvas').getContext('2d')
