@@ -1,6 +1,6 @@
 import drawCountHistogram from './drawCountHistogram'
 import { stripMiddleName } from '../../../util/util'
-import * as questionDefinitions from '../../../constants/questionDefinitions'
+import * as qd from '../../../constants/questionDefinitions'
 
 import * as d3 from 'd3'
 import d3Tip from 'd3-tip'
@@ -14,7 +14,7 @@ const drawUMIVsDispersionToolTip = UMI => d3.tip().html(d => {
   return "<div class='d3ToolTip'>" +
     '<h3 style="text-align:center;"> ' + stripMiddleName(d.instructorName) + '</h3>' +
     '<p>Course: ' + d.course + ' ' + d.section + '</p>' +
-    '<p>Question Code: ' + 'UMI' + UMI + ' "' + questionDefinitions['codesAndDef']['UMI' + UMI] +
+    '<p>Question Code: ' + 'UMI' + UMI + ' "' + qd['UMI' + UMI] +
     '"' + '</p>' +
     '<p>Average: ' + d['UMI' + UMI].average + '</p>' +
     '<p>Dispersion Index: ' + d['UMI' + UMI].dispersionIndex + '</p>' +
