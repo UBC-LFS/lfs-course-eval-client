@@ -1,3 +1,5 @@
+/* global $ */
+import Chart from 'chart.js'
 import { loadFacultyDept } from '../../../service/overviewDataService'
 import createLineChart from './drawUMITrendLine'
 import R from 'ramda'
@@ -12,7 +14,8 @@ const refreshPicker = () => {
   $('#UMIDeptFilter.selectpicker').selectpicker('refresh')
   $('#UMITermFilter.selectpicker').selectpicker('refresh')
 }
-const getValues = (x) => x.value
+
+const getValue = x => x.value
 
 const initFilterHandler = data => {
   const deptSelect = document.getElementById('UMIDeptFilter')
@@ -27,7 +30,7 @@ const initFilterHandler = data => {
 
   deptSelect.addEventListener('change', function () {
     const myChart = new Chart(grapharea, {})
-    const selectedDepartments = R.map(getValues, deptSelect.selectedOptions)
+    const selectedDepartments = R.map(getValue, deptSelect.selectedOptions)
     const uniqueTerms = R.uniq(R.flatten(selectedDepartments.map(dept => getUniqCourseTerms(data, dept))))
     const courseTerms = ['all'].concat(uniqueTerms)
     termSelect.innerHTML = attachOptions(courseTerms)
@@ -38,7 +41,7 @@ const initFilterHandler = data => {
 
   termSelect.addEventListener('change', function () {
     const myChart = new Chart(grapharea, {})
-    const selectedDepartments = R.map(getValues, deptSelect.selectedOptions)
+    const selectedDepartments = R.map(getValue, deptSelect.selectedOptions)
     myChart.destroy()
     createLineChart(data, selectedDepartments, termSelect.value)
   })
@@ -49,7 +52,7 @@ const initFacultyDeptLineChart = () => loadFacultyDept().then(data => {
   const termSelect = document.getElementById('UMITermFilter')
   console.log('facultyDept data:', data)
   initFilterHandler(data)
-  const selectedDepartments = R.map(getValues, deptSelect.selectedOptions)
+  const selectedDepartments = R.map(getValue, deptSelect.selectedOptions)
   createLineChart(data, selectedDepartments, termSelect.value)
 })
 

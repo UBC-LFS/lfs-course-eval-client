@@ -2,10 +2,8 @@ import Chart from 'chart.js'
 import * as d3Selection from 'd3-selection'
 import { sortByTerm, convertYearTermtoDate } from '../../../util/util'
 import { filterByTerm } from '../../../util/filter'
-import * as d3 from 'd3'
 import R from 'ramda'
 
-const lineMargin = { top: 60, bottom: 50, left: 50, right: 30 }
 const dynamicColors = function () {
   const r = Math.floor(Math.random() * 255)
   const g = Math.floor(Math.random() * 255)
