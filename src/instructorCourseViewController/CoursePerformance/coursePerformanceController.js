@@ -1,5 +1,5 @@
 /* global $ */
-import { loadCoursePerformance } from '../../service/overviewDataService'
+import { loadCoursePerformance } from '../../service/courseDataService'
 import { drawCoursePerformance, redrawCoursePerformance } from './drawCoursePerformanceTable'
 import { stripMiddleName, compareLastNameThenFirstName } from '../../util/util'
 
