@@ -1,8 +1,8 @@
 import R from 'ramda'
 
-const greaterThanNumber = (number) => R.filter(x => x > number)
+const greaterThanNumber = number => R.filter(x => x > number)
 
-const byYear = (year) => R.filter(x => x.AcademicPeriod === year)
+const byYear = year => R.filter(x => x.AcademicPeriod === year)
 
 const filterByTerm = (term, arr) => {
   if (term === 'all') return arr.slice(-15)

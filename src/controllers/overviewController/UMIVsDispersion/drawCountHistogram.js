@@ -1,6 +1,6 @@
 import { margin } from '../../../constants/constants'
 import * as d3 from 'd3'
-import { convertCountIntoArray } from '../../../util/util'
+import { expandCount } from '../../../util/util'
 
 const drawCountHistogram = count => {
   const w = 300
@@ -17,7 +17,7 @@ const drawCountHistogram = count => {
   const x = d3.scaleLinear().rangeRound([0, width])
   const y = d3.scaleLinear().range([height, 0])
 
-  const arrayOfCounts = convertCountIntoArray(count)
+  const arrayOfCounts = expandCount(count)
 
   const bins = d3.histogram().thresholds([1, 2, 3, 4, 5])(arrayOfCounts)
 

@@ -1,6 +1,6 @@
 import R from 'ramda'
 
-const stripMiddleName = (name) => {
+const stripMiddleName = name => {
   const splitName = name.split(' ')
   if (name.split(' ').pop().length === 1) {
     splitName.pop()
@@ -8,14 +8,9 @@ const stripMiddleName = (name) => {
   } else return name
 }
 
-const roundToTwoDecimal = (x) => Math.round(x * 100) / 100
+const roundToTwoDecimal = x => Math.round(x * 100) / 100
 
-const flattenArray = (array) => array.reduce((acc, cur) => {
-  if (Array.isArray(cur)) {
-    return ([...acc, ...cur])
-  } else return ([...acc, cur])
-})
-const convertYearTermtoDate = (array) => {
+const convertYearTermtoDate = array => {
   for (var i = 0; i < array.length; i++) {
     const date = new Date(2017, 0, 1, 0, 0)
     date.setMinutes(date.getMinutes() + i)
@@ -23,18 +18,16 @@ const convertYearTermtoDate = (array) => {
   }
   return array
 }
-const convertCountIntoArray = (count) => {
-  let resultArray = []
-  for (let i = 1; i <= 5; i++) {
-    let c = count[i]
-    // if c is undefined continue
-    if (!c) continue
-    let a = Array(c).fill(Number(i))
-    resultArray = [resultArray, ...a]
-    resultArray = flattenArray(resultArray)
-  }
-  return resultArray
+
+const expandCount = count => {
+  let result = []
+  Object.keys(count).map(x => {
+    const temp = Array(count[x]).fill(Number(x))
+    result = [...result, ...temp]
+  })
+  return result
 }
+
 const compare = (a, b) => {
   if (a > b) return 1
   if (a < b) return -1
@@ -60,7 +53,7 @@ const compareLastNameThenFirstName = (instructor1, instructor2) => {
   const firstName2 = nameArray2[1]
   return compare(lastName1, lastName2) || compare(firstName1, firstName2)
 }
-const sortByYearTerm = (arr) => {
+const sortByYearTerm = arr => {
   const order = {
     'S1': 0,
     'SA': 1,
@@ -82,7 +75,7 @@ const sortByYearTerm = (arr) => {
   }, arr)
 }
 
-const sortByTerm = (arr) => {
+const sortByTerm = arr => {
   const order = {
     'S1': 0,
     'SA': 1,
@@ -107,10 +100,10 @@ const sortByTerm = (arr) => {
 export {
   stripMiddleName,
   roundToTwoDecimal,
-  convertCountIntoArray,
   sortByTerm,
   compareLastNameThenFirstName,
   compareCourse,
   convertYearTermtoDate,
-  sortByYearTerm
+  sortByYearTerm,
+  expandCount
 }
