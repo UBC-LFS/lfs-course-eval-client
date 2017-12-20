@@ -9,7 +9,6 @@ document.addEventListener('DOMContentLoaded', function () {
   $('.bootstrap-select').click(function () {
     $(this).addClass('open')
   })
-  // loading correct JS file on route
   if (window.location.pathname === '/') initOverview()
   if (window.location.pathname === '/course') initInstructorCourseView()
   if (window.location.pathname === '/instructor') initInstructorView()
