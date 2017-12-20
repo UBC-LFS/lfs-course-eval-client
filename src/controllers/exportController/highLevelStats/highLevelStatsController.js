@@ -1,6 +1,6 @@
-import { loadStats, loadOptions } from '../../service/exportDataService'
+import { loadStats, loadOptions } from '../../../service/exportDataService'
 
-const statsController = () => {
+const highLevelStatsController = () => {
   const fromYear = document.getElementById('export-from-year')
   const toYear = document.getElementById('export-to-year')
   const dept = document.getElementById('export-dept')
@@ -34,4 +34,4 @@ const statsController = () => {
   })
 }
 
-export default statsController
+export default highLevelStatsController

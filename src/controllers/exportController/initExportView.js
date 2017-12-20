@@ -1,7 +1,7 @@
-import statsController from './statsController'
+import highLevelStatsController from './highLevelStats/highLevelStatsController'
 
 const initExportView = () => {
-  statsController()
+  highLevelStatsController()
 }
 
 export default initExportView
