@@ -7,7 +7,7 @@ const attachGraph = (data, filter) => {
   const svg = document.getElementById('UMIVsDispersionSVG')
   if (svg) svg.parentElement.removeChild(svg)
   const graph = document.getElementById('UMIvsDispersionGraph')
-  graph.appendChild(drawUMIVsDispersion(data, filter).node())
+  graph.appendChild(drawUMIVsDispersion(data, filter.UMI).node())
 }
 
 const attachOptions = arr => arr.map(x => '<option value="' + x + '">' + x + '</option>').join(' ')
@@ -61,12 +61,12 @@ const initFilterHandler = (data, defaultFilter) => {
   refreshPicker()
 }
 
-const initUMIVsDispersion = () => loadUMIDispersion().then(data => {
+const initUMIVsDispersion = () => loadUMIDispersion({ dept: 'all', year: 2016, term: 'all', UMI: 6, meetsMin: 'false' }).then(data => {
   console.log('umiVsDispersion data:', data)
 
-  const defaultFilter = { dept: 'all', year: 2017, term: 'all', UMI: 6, meetsMin: 'false' }
+  const defaultFilter = { dept: 'all', year: 2016, term: 'all', UMI: 6, meetsMin: 'false' }
 
-  initFilterHandler(data, defaultFilter)
+  // initFilterHandler(data, defaultFilter)
   attachGraph(data, defaultFilter)
 })
 
