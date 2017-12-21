@@ -9,6 +9,7 @@ const animate = () => {
 }
 
 const drawUMIvsDispersion = (data, UMI) => {
+  console.log(UMI)
   const w = 1000
   const h = 600
   const width = w - margin.left - margin.right
@@ -52,11 +53,11 @@ const drawUMIvsDispersion = (data, UMI) => {
   umiDots.selectAll('dot')
     .data(data)
     .enter().append('circle')
-    .attr('cx', d => x(Math.min(d['UMI' + UMI].dispersionIndex, 0.8)))
-    .attr('cy', d => y(Math.max(d['UMI' + UMI].average, 2)))
+    .attr('cx', d => x(Math.min(d[UMI].dispersionIndex, 0.8)))
+    .attr('cy', d => y(Math.max(d[UMI].average, 2)))
     .attr('r', d => Math.pow(Math.log(d.enrolment), 1.7))
     .style('fill', d => {
-      const percentFavourable = d['UMI' + UMI].percentFavourable
+      const percentFavourable = d[UMI].percentFavourable
       if (percentFavourable >= 0.90) {
         return percentFavourableColor6.first
       } else if (percentFavourable >= 0.80 && percentFavourable < 0.90) {
