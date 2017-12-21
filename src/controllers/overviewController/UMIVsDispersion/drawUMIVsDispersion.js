@@ -9,7 +9,6 @@ const animate = () => {
 }
 
 const drawUMIvsDispersion = (data, UMI) => {
-  console.log(UMI)
   const w = 1000
   const h = 600
   const width = w - margin.left - margin.right
