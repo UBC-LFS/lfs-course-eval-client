@@ -8,25 +8,6 @@ const animate = () => {
     (x.innerHTML = '<animate attributeType="SVG" attributeName="r" begin="0s" dur="1.5s" repeatCount="indefinite" from="0%" to="10%"/><animate attributeType="CSS" attributeName="stroke-width" begin="0s"  dur="1.5s" repeatCount="indefinite" from="3%" to="0%" /><animate attributeType="CSS" attributeName="opacity" begin="0s"  dur="1.5s" repeatCount="indefinite" from="1" to="0"/>'))
 }
 
-// const filterData = (data, { dept, year, term, meetsMin }) => {
-//   return R.compose(
-//     R.filter(x => {
-//       if (dept === 'all') return true
-//       return x.dept === dept
-//     }),
-//     R.filter(x => x.year === year),
-//     R.filter(x => {
-//       if (term === 'all') return true
-//       return x.term === term
-//     }),
-//     R.filter(x => {
-//       if (meetsMin) {
-//         return x.meetsMin
-//       } else return true
-//     })
-//   )(data)
-// }
-
 const drawUMIvsDispersion = (data, UMI) => {
   const w = 1000
   const h = 600
