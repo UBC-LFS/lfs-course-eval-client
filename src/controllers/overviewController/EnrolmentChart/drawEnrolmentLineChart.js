@@ -43,7 +43,7 @@ const createLineChart = (data, course, term) => {
       }]
     }
   }
-  const lineChart = new Chart(ctx, {
+  return new Chart(ctx, {
     type: 'line',
     data: dataNew,
     options: options

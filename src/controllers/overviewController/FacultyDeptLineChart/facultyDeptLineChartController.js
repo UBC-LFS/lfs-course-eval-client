@@ -4,7 +4,7 @@ import { loadFacultyDept } from '../../../service/overviewDataService'
 import createLineChart from './drawUMITrendLine'
 import R from 'ramda'
 import { sortByTerm, compare } from '../../../util/util'
-var myChart = null
+var umiChart = null
 
 const getUniqCourseTerms = (data, value) =>
   R.uniq((data.find(x => x.department === value)).data.map(x => x.term))
@@ -19,8 +19,8 @@ const refreshPicker = () => {
 const getValue = x => x.value
 
 const destroyChart = () => {
-  if (myChart !== null) {
-    myChart.destroy()
+  if (umiChart !== null) {
+    umiChart.destroy()
   }
 }
 
@@ -42,13 +42,13 @@ const initFilterHandler = data => {
     termSelect.innerHTML = attachOptions(courseTerms)
     refreshPicker()
     destroyChart()
-    myChart = createLineChart(data, selectedDepartments, termSelect.value)
+    umiChart = createLineChart(data, selectedDepartments, termSelect.value)
   })
 
   termSelect.addEventListener('onselect', function () {
     const selectedDepartments = R.map(getValue, deptSelect.selectedOptions)
     destroyChart()
-    myChart = createLineChart(data, selectedDepartments, termSelect.value)
+    umiChart = createLineChart(data, selectedDepartments, termSelect.value)
   })
 }
 
@@ -58,7 +58,7 @@ const initFacultyDeptLineChart = () => loadFacultyDept().then(data => {
   console.log('facultyDept data:', data)
   initFilterHandler(data)
   const selectedDepartments = R.map(getValue, deptSelect.selectedOptions)
-  myChart = createLineChart(data, selectedDepartments, termSelect.value)
+  umiChart = createLineChart(data, selectedDepartments, termSelect.value)
 })
 
 export default initFacultyDeptLineChart
