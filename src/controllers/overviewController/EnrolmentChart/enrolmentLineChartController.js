@@ -4,6 +4,8 @@ import createLineChart from './drawEnrolmentLineChart'
 import { compareCourse } from '../../../util/util'
 import R from 'ramda'
 
+var enrolmentChart = null
+
 const getUniqCourseTerms = (data, value) =>
   R.uniq((data.find(x => x.Course === value)).Terms.map(x => x.year.slice(-2)))
 
@@ -12,6 +14,12 @@ const attachOptions = arr => arr.map(x => '<option value="' + x + '">' + x + '</
 const refreshPicker = () => {
   $('#enrolmentCourse.selectpicker').selectpicker('refresh')
   $('#enrolmentTerm.selectpicker').selectpicker('refresh')
+}
+
+const destroyChart = () => {
+  if (enrolmentChart !== null) {
+    enrolmentChart.destroy()
+  }
 }
 
 const initFilterHandler = data => {
@@ -24,18 +32,16 @@ const initFilterHandler = data => {
   const courseTerms = ['all'].concat(getUniqCourseTerms(data, courseSelect.value))
   termSelect.innerHTML = attachOptions(courseTerms)
   courseSelect.addEventListener('change', function () {
-    const myChart = new Chart(grapharea, {})
     const courseTerms = ['all'].concat(getUniqCourseTerms(data, courseSelect.value))
     termSelect.innerHTML = attachOptions(courseTerms)
     refreshPicker()
-    myChart.destroy()
-    createLineChart(data, courseSelect.value, termSelect.value)
+    destroyChart()
+    enrolmentChart = createLineChart(data, courseSelect.value, termSelect.value)
   })
 
   termSelect.addEventListener('change', function () {
-    const myChart = new Chart(grapharea, {})
-    myChart.destroy()
-    createLineChart(data, courseSelect.value, termSelect.value)
+    destroyChart()
+    enrolmentChart = createLineChart(data, courseSelect.value, termSelect.value)
   })
   refreshPicker()
 }
@@ -45,7 +51,7 @@ const initEnrolmentLineChart = () => loadEnrolmentTrend().then(data => {
   const termSelect = document.getElementById('enrolmentTerm')
   initFilterHandler(data)
   console.log('enrolmentLineChart data:', data)
-  createLineChart(data, courseSelect.value, termSelect.value)
+  enrolmentChart = createLineChart(data, courseSelect.value, termSelect.value)
 })
 
 export default initEnrolmentLineChart
