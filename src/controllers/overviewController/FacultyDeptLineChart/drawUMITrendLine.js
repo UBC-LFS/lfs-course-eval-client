@@ -65,7 +65,7 @@ const createLineChart = (data, departments, term) => {
     },
     spanGaps: true
   }
-  const lineChart = new Chart(ctx, {
+  return new Chart(ctx, {
     type: 'line',
     data: dataNew,
     options: options
