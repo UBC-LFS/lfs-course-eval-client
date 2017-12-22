@@ -1,6 +1,4 @@
-/* global fetch */
-
-const fetchJSON = url => fetch(url).then(response => response.json())
+import fetchJSON from './fetch'
 
 const loadOptions = () => fetchJSON('export/options')
 const loadStats = statsObj => fetchJSON('export/' + statsObj.fromYear + '/' + statsObj.toYear + '/' + statsObj.dept)
