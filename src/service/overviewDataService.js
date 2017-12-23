@@ -4,7 +4,7 @@ const loadUMIVsDispersion = ({ year, dept, term, UMI, meetsMin }) => fetchJSON('
 const loadOptions = () => fetchJSON('overview/options')
 const loadEnrolmentTrend = () => fetchJSON('overview/EnrolmentTrend')
 const loadFacultyDept = () => fetchJSON('overview/FacultyDept')
-const loadOverview = (year) => fetchJSON('overview/Overview/' + year)
+const loadOverview = year => fetchJSON('overview/Overview/' + year)
 
 export {
     loadUMIVsDispersion,
