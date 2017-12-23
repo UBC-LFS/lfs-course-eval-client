@@ -1,6 +1,6 @@
 /* global $ */
 import Chart from 'chart.js'
-import { loadFacultyDept } from '../../../service/overviewDataService'
+import { loadFacultyDept, loadOptions } from '../../../service/overviewDataService'
 import createLineChart from './drawUMITrendLine'
 import R from 'ramda'
 import { sortByTerm, compare } from '../../../util/util'
@@ -28,13 +28,21 @@ const initFilterHandler = data => {
   const deptSelect = document.getElementById('UMIDeptFilter')
   const termSelect = document.getElementById('UMITermFilter')
   const grapharea = document.getElementById('UMILineChartCanvas').getContext('2d')
-  const departments = data.map(x => x.department).sort(compare)
-  deptSelect.innerHTML = attachOptions(departments)
-  deptSelect.options[0].selected = true
-  const terms = ['all'].concat(getUniqCourseTerms(data, deptSelect.value))
-  termSelect.innerHTML = attachOptions(terms)
-  refreshPicker()
-
+  loadOptions()
+    .then(options => options[0])
+    .then(options => {
+      return options
+    })
+    .then(options => {
+      deptSelect.innerHTML = attachOptions(options.depts)
+      deptSelect.options[0].selected = true
+      refreshPicker()
+      const terms = ['all'].concat(getUniqCourseTerms(data, deptSelect.value))
+      termSelect.innerHTML = attachOptions(terms)
+      refreshPicker()      
+      const selectedDepartments = R.map(getValue, deptSelect.selectedOptions)
+      umiChart = createLineChart(data, selectedDepartments, termSelect.value)
+    })
   deptSelect.addEventListener('change', function (e) {
     const selectedDepartments = R.map(getValue, deptSelect.selectedOptions)
     const uniqueTerms = R.uniq(R.flatten(selectedDepartments.map(dept => getUniqCourseTerms(data, dept))))
@@ -45,7 +53,7 @@ const initFilterHandler = data => {
     umiChart = createLineChart(data, selectedDepartments, termSelect.value)
   })
 
-  termSelect.addEventListener('onselect', function () {
+  termSelect.addEventListener('change', function () {
     const selectedDepartments = R.map(getValue, deptSelect.selectedOptions)
     destroyChart()
     umiChart = createLineChart(data, selectedDepartments, termSelect.value)
@@ -57,8 +65,6 @@ const initFacultyDeptLineChart = () => loadFacultyDept().then(data => {
   const termSelect = document.getElementById('UMITermFilter')
   console.log('facultyDept data:', data)
   initFilterHandler(data)
-  const selectedDepartments = R.map(getValue, deptSelect.selectedOptions)
-  umiChart = createLineChart(data, selectedDepartments, termSelect.value)
 })
 
 export default initFacultyDeptLineChart

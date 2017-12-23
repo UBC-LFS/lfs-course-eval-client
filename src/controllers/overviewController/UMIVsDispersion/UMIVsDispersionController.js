@@ -1,5 +1,5 @@
 /* global $ */
-import { loadUMIVsDispersion, loadUMIVsDispersionOptions } from '../../../service/overviewDataService'
+import { loadUMIVsDispersion, loadOptions } from '../../../service/overviewDataService'
 import drawUMIVsDispersion from './drawUMIVsDispersion'
 
 const attachGraph = (data, umi = 'UMI6') => {
@@ -27,7 +27,7 @@ const initUMIVsDispersion = () => {
   const UMI = ['UMI1', 'UMI2', 'UMI3', 'UMI4', 'UMI5', 'UMI6']
   const elements = [deptSelect, yearSelect, termSelect, umiSelect, belowMinSelect]
 
-  loadUMIVsDispersionOptions()
+  loadOptions()
     .then(options => options[0])
     .then(options => {
       options.depts.unshift('all')
