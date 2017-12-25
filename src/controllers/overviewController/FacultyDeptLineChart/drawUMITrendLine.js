@@ -4,11 +4,21 @@ import { sortByTerm, convertYearTermtoDate } from '../../../util/util'
 import { filterByTerm } from '../../../util/filter'
 import R from 'ramda'
 
-const dynamicColors = function () {
-  const r = Math.floor(Math.random() * 255)
-  const g = Math.floor(Math.random() * 255)
-  const b = Math.floor(Math.random() * 255)
-  return [r, g, b]
+const getColour = function (dept) {
+  const colorPalette = {
+    'APBI': [70, 130, 180],
+    'ECON': [165, 42, 42],
+    'FNH': [0, 128, 128],
+    'FOOD': [255, 215, 0],
+    'FRE': [0, 100, 0],
+    'GRS': [128, 0, 0],
+    'HUNU': [255, 127, 80],
+    'LFS': [255, 192, 303],
+    'PLNT': [147, 112, 219],
+    'RMES': [220, 20, 60],
+    'SOIL': [255, 255, 0]
+  }
+  return colorPalette[dept]
 }
 const createLineChart = (data, departments, term) => {
   const deptDatasets = departments.map(department => data.find(x => x.department === department))
@@ -33,7 +43,7 @@ const createLineChart = (data, departments, term) => {
       } else { score = null }
       dataset.push(score)
     }
-    const colour = dynamicColors()
+    const colour = getColour(oDataset.department)
     return {
 
       label: oDataset.department,
