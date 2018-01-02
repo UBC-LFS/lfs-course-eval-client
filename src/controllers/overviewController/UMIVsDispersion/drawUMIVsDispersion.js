@@ -81,7 +81,7 @@ const drawUMIvsDispersion = (data, UMI) => {
         }
       })
       const selectedCircles = document.getElementsByClassName(d.PUID)
-      Array.prototype.map.call(selectedCircles, (x) => x.classList.add('pulse'))
+      Array.prototype.map.call(selectedCircles, x => x.classList.add('pulse'))
       animate()
     })
 
