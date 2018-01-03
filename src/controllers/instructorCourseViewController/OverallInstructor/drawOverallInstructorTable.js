@@ -14,8 +14,7 @@ const drawOverallInstructor = tableData => {
     Math.round(x.UMI6.percentFavourable * 100) + '%',
     x.numCoursesTaught,
     x.numStudentsTaught
-  ])
-  )
+  ]))
 
   $('#OverallInstructors').DataTable({
     'aaData': data,
