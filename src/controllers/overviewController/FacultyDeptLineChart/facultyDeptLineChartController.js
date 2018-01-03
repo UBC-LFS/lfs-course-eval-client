@@ -39,7 +39,7 @@ const initFilterHandler = data => {
       refreshPicker()
       const terms = ['all'].concat(getUniqCourseTerms(data, deptSelect.value))
       termSelect.innerHTML = attachOptions(terms)
-      refreshPicker()      
+      refreshPicker()
       const selectedDepartments = R.map(getValue, deptSelect.selectedOptions)
       umiChart = createLineChart(data, selectedDepartments, termSelect.value)
     })
