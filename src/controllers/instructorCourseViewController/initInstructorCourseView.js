@@ -4,10 +4,6 @@ import initUMIInstructor from './UMIInstructor/UMIInstructorController'
 
 const initInstructorCourseView = () => {
   initOverallInstructor()
-
-  initCoursePerformance()
-
-  initUMIInstructor()
 }
 
 export default initInstructorCourseView

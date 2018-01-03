@@ -2,7 +2,7 @@ import { loadOptions } from '../../../service/overviewDataService'
 import { loadInstructorOverview } from '../../../service/instructorDataService'
 const attachOptions = arr => arr.map(x => '<option value="' + x + '">' + x + '</option>').join(' ')
 
-const initInstructorOverview = (instructor) => {
+const initHighLevelInstructorOverview = (instructor) => {
   loadInstructorOverview(instructor).then(data => {
     const umi = document.getElementById('instructor-umi')
     const percentFavourable = document.getElementById('instructor-pf')
@@ -29,13 +29,17 @@ const initInstructorSelector = () => {
     instructorSelect.options[0].selected = true
     $('#instructor-select.selectpicker').selectpicker('refresh')
     const selectedInstructor = instructorSelect.value
-    initInstructorOverview(selectedInstructor)
+    initHighLevelInstructorOverview(selectedInstructor)
   })
 
   instructorSelect.addEventListener('change', function (e) {
     const selectedInstructor = instructorSelect.value
-    initInstructorOverview(selectedInstructor)
+    initHighLevelInstructorOverview(selectedInstructor)
   })
 }
 
-export default initInstructorSelector
+const initInstructorOverview = () => {
+    initInstructorSelector()
+}
+
+export default initInstructorOverview

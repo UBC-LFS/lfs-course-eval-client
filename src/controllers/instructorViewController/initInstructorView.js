@@ -1,7 +1,11 @@
-import initInstructorSelector from './Dashboard/overviewInstructorController'
+import initInstructorOverview from './Dashboard/overviewInstructorController'
+import initCoursePerformance from './CoursePerformance/coursePerformanceController'
+import initUMIInstructor from './UMIInstructor/UMIInstructorController'
 
 const initInstructorView = () => {
-  initInstructorSelector()
+  initInstructorOverview()
+  initCoursePerformance()
+  initUMIInstructor()
 }
 
 export default initInstructorView
