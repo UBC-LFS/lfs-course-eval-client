@@ -1,6 +1,6 @@
 import fetchJSON from './fetch'
 
-const loadUMIVsDispersion = ({ year, dept, term, UMI, meetsMin }) => fetchJSON('overview/UMIVsDispersion/' + year + '/' + term + '/' + dept + '/' + meetsMin)
+const loadUMIVsDispersion = ({ year, dept, term, meetsMin }) => fetchJSON('overview/UMIVsDispersion/' + year + '/' + term + '/' + dept + '/' + meetsMin)
 const loadOptions = () => fetchJSON('overview/options')
 const loadEnrolmentTrend = () => fetchJSON('overview/EnrolmentTrend')
 const loadFacultyDept = () => fetchJSON('overview/FacultyDept')
