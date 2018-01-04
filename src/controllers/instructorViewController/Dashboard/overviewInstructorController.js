@@ -1,3 +1,5 @@
+/* global $ */
+
 import { loadOptions } from '../../../service/overviewDataService'
 import { loadInstructorOverview } from '../../../service/instructorDataService'
 const attachOptions = arr => arr.map(x => '<option value="' + x + '">' + x + '</option>').join(' ')
@@ -39,7 +41,7 @@ const initInstructorSelector = () => {
 }
 
 const initInstructorOverview = () => {
-    initInstructorSelector()
+  initInstructorSelector()
 }
 
 export default initInstructorOverview
