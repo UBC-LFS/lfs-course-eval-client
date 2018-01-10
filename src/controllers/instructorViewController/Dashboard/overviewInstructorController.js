@@ -1,9 +1,10 @@
 import { loadOptions } from '../../../service/overviewDataService'
 import { loadInstructorOverview } from '../../../service/instructorDataService'
 const attachOptions = arr => arr.map(x => '<option value="' + x + '">' + x + '</option>').join(' ')
+const toTwoDecimal = decimal => Math.round(decimal * 100) / 100
 
 const initHighLevelInstructorOverview = (instructor) => {
-  loadInstructorOverview(instructor).then(data => {
+  loadInstructorOverview(instructor, 2016).then(data => {
     const umi = document.getElementById('instructor-umi')
     const percentFavourable = document.getElementById('instructor-pf')
     const coursesTaught = document.getElementById('instructor-courses-count')
@@ -12,12 +13,36 @@ const initHighLevelInstructorOverview = (instructor) => {
     title.innerHTML = 'Overview of ' + instructor
     const elements = [umi, percentFavourable, coursesTaught, studentsTaught]
     const currentYear = [
-      data[0].UMI6.average,
-      data[0].UMI6.percentFavourable * 100 + '%',
-      data[0].numCoursesTaught,
-      data[0].numStudentsTaught
+      data.currentYear.umi6,
+      data.currentYear.percentFavourable,
+      data.currentYear.numCoursesTaught,
+      data.currentYear.numStudentsTaught
+    ]
+    const prevYear = [
+      data.previousYear.umi6,
+      data.previousYear.percentFavourable,
+      data.previousYear.numCoursesTaught,
+      data.previousYear.numStudentsTaught
     ]
     elements.map((element, i) => (element.innerHTML = currentYear[i]))
+    const comparisons = document.getElementsByClassName('card-comparison')
+
+    Array.from(comparisons).map((x, i) => {
+      const upIcon = document.createElement('i')
+      upIcon.className = 'fas fa-caret-up'
+
+      const downIcon = document.createElement('i')
+      downIcon.className = 'fas fa-caret-down'
+
+      const p = document.createElement('p')
+      p.style = 'display: inline;'
+      p.innerHTML = ' ' + (toTwoDecimal(currentYear[i] / prevYear[i] * 100 - 100)) + '% from last year'
+
+      x.innerHTML = ''
+      if ((currentYear[i] / prevYear[i] * 100 - 100) > 0) x.appendChild(upIcon)
+      if ((currentYear[i] / prevYear[i] * 100 - 100) < 0) x.appendChild(downIcon)
+      x.appendChild(p)
+    })
   })
 }
 
@@ -39,7 +64,7 @@ const initInstructorSelector = () => {
 }
 
 const initInstructorOverview = () => {
-    initInstructorSelector()
+  initInstructorSelector()
 }
 
 export default initInstructorOverview
