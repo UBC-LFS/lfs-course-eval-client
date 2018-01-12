@@ -2,17 +2,17 @@
 
 import { loadOptions } from '../../../service/overviewDataService'
 import { loadInstructorOverview } from '../../../service/instructorDataService'
-const attachOptions = arr => arr.map(x => '<option value="' + x + '">' + x + '</option>').join(' ')
+const attachOptions = arr => arr.map(x => '<option value="' + x.PUID + '">' + x.name + '</option>').join(' ')
 const toTwoDecimal = decimal => Math.round(decimal * 100) / 100
 
-const initHighLevelInstructorOverview = (instructor) => {
-  loadInstructorOverview(instructor, 2016).then(data => {
+const initHighLevelInstructorOverview = (instructorName, puid) => {
+  loadInstructorOverview(puid, 2016).then(data => {
     const umi = document.getElementById('instructor-umi')
     const percentFavourable = document.getElementById('instructor-pf')
     const coursesTaught = document.getElementById('instructor-courses-count')
     const studentsTaught = document.getElementById('instructor-students-count')
     const title = document.getElementById('instructor-title')
-    title.innerHTML = 'Overview of ' + instructor
+    title.innerHTML = 'Overview of ' + instructorName
     const elements = [umi, percentFavourable, coursesTaught, studentsTaught]
     const currentYear = [
       data.currentYear.umi6,
@@ -51,17 +51,20 @@ const initHighLevelInstructorOverview = (instructor) => {
 const initInstructorSelector = () => {
   const instructorSelect = document.getElementById('instructor-select')
   loadOptions().then(data => {
+    console.log(data)
     const instructors = data[0].instructors
     instructorSelect.innerHTML = attachOptions(instructors)
     instructorSelect.options[0].selected = true
     $('#instructor-select.selectpicker').selectpicker('refresh')
-    const selectedInstructor = instructorSelect.value
-    initHighLevelInstructorOverview(selectedInstructor)
+    const puid = instructorSelect.value
+    const instructorName = instructorSelect.text
+    initHighLevelInstructorOverview(instructorName, puid)
   })
 
   instructorSelect.addEventListener('change', function (e) {
-    const selectedInstructor = instructorSelect.value
-    initHighLevelInstructorOverview(selectedInstructor)
+    const puid = instructorSelect.value
+    const instructorName = instructorSelect.text
+    initHighLevelInstructorOverview(instructorName, puid)
   })
 }
 
