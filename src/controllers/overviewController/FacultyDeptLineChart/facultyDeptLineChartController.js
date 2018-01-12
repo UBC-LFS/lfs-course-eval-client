@@ -1,5 +1,4 @@
 /* global $ */
-import Chart from 'chart.js'
 import { loadFacultyDept, loadOptions } from '../../../service/overviewDataService'
 import createLineChart from './drawUMITrendLine'
 import R from 'ramda'

@@ -4,7 +4,7 @@ import { sortByTerm, convertYearTermtoDate } from '../../../util/util'
 import { filterByTerm } from '../../../util/filter'
 import R from 'ramda'
 
-const getColour = function (dept) {
+const getColour = dept => {
   const colorPalette = {
     'APBI': [70, 130, 180],
     'ECON': [165, 42, 42],
@@ -75,6 +75,9 @@ const createLineChart = (data, departments, term) => {
     },
     spanGaps: true
   }
+
+  console.log('chart dataset', dataNew)
+
   return new Chart(ctx, {
     type: 'line',
     data: dataNew,
