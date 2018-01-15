@@ -44,8 +44,8 @@ const createLineChart = (data, departments, term) => {
       dataset.push(score)
     }
     const colour = getColour(oDataset.department)
-    return {
 
+    return {
       label: oDataset.department,
       lineTension: 0,
       backgroundColor: 'rgba(' + colour[0] + ',' + colour[1] + ',' + colour[2] + ',0.2)',
@@ -57,8 +57,7 @@ const createLineChart = (data, departments, term) => {
       pointHoverBorderColor: 'rgba(' + colour[0] + ',' + colour[1] + ',' + colour[2] + ',1)',
       data: dataset
     }
-  }
-  )
+  })
 
   const dataNew = {
     labels: termLabels,
