@@ -5,7 +5,6 @@ const toTwoDecimal = decimal => Math.round(decimal * 100) / 100
 const initHighLevelOverview = () => {
   const year = 2016
   loadOverview(year).then(data => {
-    console.log('highLevelOverview data', data)
     const umi = document.getElementById('card-umi')
     const enrolment = document.getElementById('card-enrolment')
     const responseRate = document.getElementById('card-response-rate')
