@@ -2,17 +2,19 @@
 
 import { loadOptions } from '../../../service/overviewDataService'
 import { loadInstructorOverview } from '../../../service/instructorDataService'
-const attachOptions = arr => arr.map(x => '<option value="' + x + '">' + x + '</option>').join(' ')
+const attachOptions = arr => arr.map(x => '<option value="' + x.PUID + '" data-terms=' + x.terms + '>' + x.name + '</option>').join(' ')
 const toTwoDecimal = decimal => Math.round(decimal * 100) / 100
 
 const initHighLevelInstructorOverview = (instructor) => {
-  loadInstructorOverview(instructor, 2016).then(data => {
+  const terms = instructor.selectedOptions[0].dataset.terms.split(',')
+  const lastTerm = terms[terms.length - 1].substring(0, 4)
+  loadInstructorOverview(instructor.value, lastTerm).then(data => {
     const umi = document.getElementById('instructor-umi')
     const percentFavourable = document.getElementById('instructor-pf')
     const coursesTaught = document.getElementById('instructor-courses-count')
     const studentsTaught = document.getElementById('instructor-students-count')
     const title = document.getElementById('instructor-title')
-    title.innerHTML = 'Overview of ' + instructor
+    title.innerHTML = 'Overview of ' + $('#instructor-select option:selected')[0].innerHTML
     const elements = [umi, percentFavourable, coursesTaught, studentsTaught]
     const currentYear = [
       data.currentYear.umi6,
@@ -28,23 +30,25 @@ const initHighLevelInstructorOverview = (instructor) => {
     ]
     elements.map((element, i) => (element.innerHTML = currentYear[i]))
     const comparisons = document.getElementsByClassName('card-comparison')
+    if (terms.length > 1) {
+      Array.from(comparisons).map((x, i) => {
+        const upIcon = document.createElement('i')
+        upIcon.className = 'fas fa-caret-up'
 
-    Array.from(comparisons).map((x, i) => {
-      const upIcon = document.createElement('i')
-      upIcon.className = 'fas fa-caret-up'
+        const downIcon = document.createElement('i')
+        downIcon.className = 'fas fa-caret-down'
 
-      const downIcon = document.createElement('i')
-      downIcon.className = 'fas fa-caret-down'
+        const p = document.createElement('p')
+        p.style = 'display: inline;'
+        p.innerHTML = ' ' + (toTwoDecimal(currentYear[i] / prevYear[i] * 100 - 100)) + '% from ' + (parseInt(lastTerm) - 1)
 
-      const p = document.createElement('p')
-      p.style = 'display: inline;'
-      p.innerHTML = ' ' + (toTwoDecimal(currentYear[i] / prevYear[i] * 100 - 100)) + '% from last year'
-
-      x.innerHTML = ''
-      if ((currentYear[i] / prevYear[i] * 100 - 100) > 0) x.appendChild(upIcon)
-      if ((currentYear[i] / prevYear[i] * 100 - 100) < 0) x.appendChild(downIcon)
-      x.appendChild(p)
-    })
+        x.innerHTML = ''
+        if ((currentYear[i] / prevYear[i] * 100 - 100) > 0) x.appendChild(upIcon)
+        if ((currentYear[i] / prevYear[i] * 100 - 100) < 0) x.appendChild(downIcon)
+        x.appendChild(p)
+      })
+    }
+    else { Array.from(comparisons).map((x, i) => { x.innerHTML = '' }) }
   })
 }
 
@@ -55,13 +59,11 @@ const initInstructorSelector = () => {
     instructorSelect.innerHTML = attachOptions(instructors)
     instructorSelect.options[0].selected = true
     $('#instructor-select.selectpicker').selectpicker('refresh')
-    const selectedInstructor = instructorSelect.value
-    initHighLevelInstructorOverview(selectedInstructor)
+    initHighLevelInstructorOverview(instructorSelect)
   })
 
   instructorSelect.addEventListener('change', function (e) {
-    const selectedInstructor = instructorSelect.value
-    initHighLevelInstructorOverview(selectedInstructor)
+    initHighLevelInstructorOverview(instructorSelect)
   })
 }
 
