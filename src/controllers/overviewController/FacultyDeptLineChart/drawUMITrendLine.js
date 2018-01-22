@@ -4,7 +4,7 @@ import { sortByTerm, convertYearTermtoDate } from '../../../util/util'
 import { filterByTerm } from '../../../util/filter'
 import R from 'ramda'
 
-const getColour = function (dept) {
+const getColour = dept => {
   const colorPalette = {
     'APBI': [70, 130, 180],
     'ECON': [165, 42, 42],
@@ -44,8 +44,8 @@ const createLineChart = (data, departments, term) => {
       dataset.push(score)
     }
     const colour = getColour(oDataset.department)
-    return {
 
+    return {
       label: oDataset.department,
       lineTension: 0,
       backgroundColor: 'rgba(' + colour[0] + ',' + colour[1] + ',' + colour[2] + ',0.2)',
@@ -57,8 +57,7 @@ const createLineChart = (data, departments, term) => {
       pointHoverBorderColor: 'rgba(' + colour[0] + ',' + colour[1] + ',' + colour[2] + ',1)',
       data: dataset
     }
-  }
-  )
+  })
 
   const dataNew = {
     labels: termLabels,
@@ -75,6 +74,9 @@ const createLineChart = (data, departments, term) => {
     },
     spanGaps: true
   }
+
+  console.log('chart dataset', dataNew)
+
   return new Chart(ctx, {
     type: 'line',
     data: dataNew,

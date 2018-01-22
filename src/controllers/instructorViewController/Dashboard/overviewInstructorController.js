@@ -55,6 +55,7 @@ const initHighLevelInstructorOverview = (instructor) => {
 const initInstructorSelector = () => {
   const instructorSelect = document.getElementById('instructor-select')
   loadOptions().then(data => {
+    console.log(data)
     const instructors = data[0].instructors
     instructorSelect.innerHTML = attachOptions(instructors)
     instructorSelect.options[0].selected = true

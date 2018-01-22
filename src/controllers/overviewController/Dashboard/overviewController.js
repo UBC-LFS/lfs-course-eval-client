@@ -42,8 +42,8 @@ const initHighLevelOverview = () => {
       p.innerHTML = ' ' + (toTwoDecimal(currentYear[i] / previousYear[i] * 100 - 100)) + '% from last year'
 
       x.innerHTML = ''
-      if ((currentYear[i] / prevYear[i] * 100 - 100) > 0) x.appendChild(upIcon)
-      if ((currentYear[i] / prevYear[i] * 100 - 100) < 0) x.appendChild(downIcon)
+      if ((currentYear[i] / previousYear[i] * 100 - 100) > 0) x.appendChild(upIcon)
+      if ((currentYear[i] / previousYear[i] * 100 - 100) < 0) x.appendChild(downIcon)
       x.appendChild(p)
     })
   })
