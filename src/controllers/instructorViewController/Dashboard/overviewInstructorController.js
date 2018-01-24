@@ -48,7 +48,7 @@ const initHighLevelInstructorOverview = (instructor) => {
         x.appendChild(p)
       })
     }
-    else { Array.from(comparisons).map((x, i) => { x.innerHTML = '' }) }
+    else { Array.from(comparisons).map(x => { x.innerHTML = '' }) }
   })
 }
 
