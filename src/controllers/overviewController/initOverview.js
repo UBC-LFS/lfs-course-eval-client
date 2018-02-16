@@ -6,13 +6,9 @@ import initOverallInstructor from './OverallInstructor/overallInstructorDataCont
 
 const initOverview = () => {
   initUMIDispersion()
-
   initFacultyDeptLineChart()
-
   initEnrolmentLineChart()
-
   initHighLevelOverview()
-
   initOverallInstructor()
 }
 
