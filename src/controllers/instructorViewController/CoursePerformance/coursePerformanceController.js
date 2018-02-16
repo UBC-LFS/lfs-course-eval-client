@@ -4,7 +4,7 @@ import { drawCoursePerformance, redrawCoursePerformance } from './drawCoursePerf
 import { stripMiddleName, compareLastNameThenFirstName } from '../../../util/util'
 
 const refreshFilters = () => {
-  $('#cpInstructorFilter.selectpicker').selectpicker('refresh')
+  $('#instructor-select.selectpicker').selectpicker('refresh')
   $('#cpQuestionFilter.selectpicker').selectpicker('refresh')
 }
 
@@ -12,7 +12,7 @@ const attachOptions = arr =>
   arr.map(x => '<option value=' + x.PUID + '>' + x.name + '</option>').join(' ')
 
 const initFilterHandler = data => {
-  const instructorSelect = document.getElementById('cpInstructorFilter')
+  const instructorSelect = document.getElementById('instructor-select')
   const questionSelect = document.getElementById('cpQuestionFilter')
   const elements = [instructorSelect, questionSelect]
 
@@ -30,7 +30,7 @@ const initFilterHandler = data => {
 }
 
 const initCoursePerformance = () => loadCoursePerformance().then(data => {
-  const instructorSelect = document.getElementById('cpInstructorFilter')
+  const instructorSelect = document.getElementById('instructor-select')
   const questionSelect = document.getElementById('cpQuestionFilter')
   questionSelect.selectedIndex = 5
   refreshFilters()

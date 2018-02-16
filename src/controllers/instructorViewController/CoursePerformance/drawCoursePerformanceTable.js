@@ -134,7 +134,7 @@ const drawCoursePerformance = (coursePerformanceData, questionCode, PUID) => {
       { 'className': 'umiAvg5', 'targets': [6] },
       { 'className': 'umiAvg6', 'targets': [7] }
     ],
-    'orderFixed': [9, 'asc'],
+    'orderFixed': [9, 'desc'],
     'rowGroup': {
       'dataSrc': 9
     }
