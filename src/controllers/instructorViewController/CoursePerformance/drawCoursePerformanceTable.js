@@ -1,7 +1,7 @@
 /* global $ */
 import * as util from '../../../util/util.js'
 
-const filterCPData = (coursePerformanceData, questionCode, PUID) => {
+const filterCPData = (coursePerformanceData, PUID) => {
   const tableData = coursePerformanceData.find(x => x.PUID === PUID).Courses
   return tableData.map(x => {
     return [x.course + ' ' + x.section,
@@ -59,10 +59,10 @@ const renderUMIColumn = (row, rowNum, deptRowNum, facultyRowNum) => {
     return bars
   }).prop('outerHTML')).prop('outerHTML')
 }
-//TODO: refactor rest of columns to use renderumicolumn function
+
 const drawCoursePerformance = (coursePerformanceData, questionCode, PUID) => {
-  const data = filterCPData(coursePerformanceData, questionCode, PUID)
-  $('#CoursePerformance').DataTable({
+  const data = filterCPData(coursePerformanceData, PUID)
+  const table = $('#CoursePerformance').DataTable({
     'aaData': data,
     'aoColumns':
       [
@@ -77,111 +77,32 @@ const drawCoursePerformance = (coursePerformanceData, questionCode, PUID) => {
         {
           'sTitle': 'UMI2 Average',
           'render': function (data, type, row, meta) {
-            return renderUMIColumn(3, 11, 17)
+            return renderUMIColumn(row, 3, 11, 17)
           }
         },
         {
           'sTitle': 'UMI3 Average',
           'render': function (data, type, row, meta) {
-            return $('<div></div>').append(row[4] + $('<div></div>', {
-              'class': 'bar-chart-bar'
-            }).append(function () {
-              const bars = []
-              bars.push($('<div></div>', {
-                'class': 'bar '
-              }).css({
-                'width': (row[4] / 5) * 100 + '%'
-              }))
-              bars.push($('<div></div>', { 'class': 'line' }).css({ 'left': (row[12] / 5) * 100 + '%' }).css({ 'color': '#ccc' }).append(function () {
-                return $('<span></span>', {
-                  'class': 'tooltiptext'
-                }).append('Department Average: ' + row[12]).prop('outerHTML')
-              }))
-              bars.push($('<div></div>', { 'class': 'line' }).css({ 'left': (row[18] / 5) * 100 + '%' }).css({ 'color': 'gold' }).append(function () {
-                return $('<span></span>', {
-                  'class': 'tooltiptext'
-                }).append('Faculty Average: ' + row[18]).prop('outerHTML')
-              }))
-              return bars
-            }).prop('outerHTML')).prop('outerHTML')
+            return renderUMIColumn(row, 4, 12, 18)
           }
         },
         {
           'sTitle': 'UMI4 Average',
           'render': function (data, type, row, meta) {
-            return $('<div></div>').append(row[5] + $('<div></div>', {
-              'class': 'bar-chart-bar'
-            }).append(function () {
-              const bars = []
-              bars.push($('<div></div>', {
-                'class': 'bar '
-              }).css({
-                'width': (row[5] / 5) * 100 + '%'
-              }))
-              bars.push($('<div></div>', { 'class': 'line' }).css({ 'left': (row[13] / 5) * 100 + '%' }).css({ 'color': '#ccc' }).append(function () {
-                return $('<span></span>', {
-                  'class': 'tooltiptext'
-                }).append('Department Average: ' + row[13]).prop('outerHTML')
-              }))
-              bars.push($('<div></div>', { 'class': 'line' }).css({ 'left': (row[19] / 5) * 100 + '%' }).css({ 'color': 'gold' }).append(function () {
-                return $('<span></span>', {
-                  'class': 'tooltiptext'
-                }).append('Faculty Average: ' + row[19]).prop('outerHTML')
-              }))
-              return bars
-            }).prop('outerHTML')).prop('outerHTML')
+            return renderUMIColumn(row, 5, 13, 19)
+
           }
         },
         {
           'sTitle': 'UMI5 Average',
           'render': function (data, type, row, meta) {
-            return $('<div></div>').append(row[6] + $('<div></div>', {
-              'class': 'bar-chart-bar'
-            }).append(function () {
-              const bars = []
-              bars.push($('<div></div>', {
-                'class': 'bar '
-              }).css({
-                'width': (row[6] / 5) * 100 + '%'
-              }))
-              bars.push($('<div></div>', { 'class': 'line' }).css({ 'left': (row[14] / 5) * 100 + '%' }).css({ 'color': '#ccc' }).append(function () {
-                return $('<span></span>', {
-                  'class': 'tooltiptext'
-                }).append('Department Average: ' + row[14]).prop('outerHTML')
-              }))
-              bars.push($('<div></div>', { 'class': 'line' }).css({ 'left': (row[20] / 5) * 100 + '%' }).css({ 'color': 'gold' }).append(function () {
-                return $('<span></span>', {
-                  'class': 'tooltiptext'
-                }).append('Faculty Average: ' + row[20]).prop('outerHTML')
-              }))
-              return bars
-            }).prop('outerHTML')).prop('outerHTML')
+            return renderUMIColumn(row, 6, 14, 20)
           }
         },
         {
           'sTitle': 'UMI6 Average',
           'render': function (data, type, row, meta) {
-            return $('<div></div>').append(row[7] + $('<div></div>', {
-              'class': 'bar-chart-bar'
-            }).append(function () {
-              const bars = []
-              bars.push($('<div></div>', {
-                'class': 'bar '
-              }).css({
-                'width': (row[7] / 5) * 100 + '%'
-              }))
-              bars.push($('<div></div>', { 'class': 'line' }).css({ 'left': (row[15] / 5) * 100 + '%' }).css({ 'color': '#ccc' }).append(function () {
-                return $('<span></span>', {
-                  'class': 'tooltiptext'
-                }).append('Department Average: ' + row[15]).prop('outerHTML')
-              }))
-              bars.push($('<div></div>', { 'class': 'line' }).css({ 'left': (row[21] / 5) * 100 + '%' }).css({ 'color': 'gold' }).append(function () {
-                return $('<span></span>', {
-                  'class': 'tooltiptext'
-                }).append('Faculty Average: ' + row[21]).prop('outerHTML')
-              }))
-              return bars
-            }).prop('outerHTML')).prop('outerHTML')
+            return renderUMIColumn(row, 7, 15, 21)
           }
         },
         { 'sTitle': 'Response Rate' },
@@ -202,7 +123,7 @@ const drawCoursePerformance = (coursePerformanceData, questionCode, PUID) => {
     'aoColumnDefs': [
       { 'bSortable': false, 'aTargets': [0] },
       {
-        'targets': [3, 4, 5, 6, 7, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21],
+        'targets': [2, 3, 4, 5, 6, 7, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21],
         'visible': false,
         'searchable': false
       },
@@ -218,13 +139,25 @@ const drawCoursePerformance = (coursePerformanceData, questionCode, PUID) => {
       'dataSrc': 9
     }
   })
+  for (let i = 0; i < questionCode.length; i++) {
+    const column = table.column(parseInt(questionCode[i].slice(-1)) + 1)
+    column.visible(true)
+  }
 }
 
 const redrawCoursePerformance = (coursePerformanceData, questionCode, PUID) => {
-  const data = filterCPData(coursePerformanceData, questionCode, PUID)
+  const data = filterCPData(coursePerformanceData, PUID)
   const CPTable = $('#CoursePerformance').dataTable()
   CPTable.fnClearTable()
   CPTable.fnAddData(data)
+  const table = $('#CoursePerformance').DataTable()
+  for (let j=2; j<=7;j++){
+    table.column(j).visible(false)
+  }
+  for (let i = 0; i < questionCode.length; i++) {
+    const column = table.column(parseInt(questionCode[i].slice(-1)) + 1)
+    column.visible(true)
+  }
 }
 
 export { drawCoursePerformance, redrawCoursePerformance }

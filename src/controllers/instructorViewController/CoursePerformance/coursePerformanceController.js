@@ -36,7 +36,7 @@ const initCoursePerformance = () => loadCoursePerformance().then(data => {
   refreshFilters()
   console.log('coursePerformanceData data:', data)
   initFilterHandler(data)
-  drawCoursePerformance(data, questionSelect.value, instructorSelect.value)
+  drawCoursePerformance(data, $('#cpQuestionFilter').val(), instructorSelect.value)
 })
 
 export default initCoursePerformance
