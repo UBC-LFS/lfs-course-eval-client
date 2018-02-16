@@ -32,7 +32,7 @@ const initFilterHandler = data => {
 const initCoursePerformance = () => loadCoursePerformance().then(data => {
   const instructorSelect = document.getElementById('cpInstructorFilter')
   const questionSelect = document.getElementById('cpQuestionFilter')
-  questionSelect.selectedIndex = 0
+  questionSelect.selectedIndex = 5
   refreshFilters()
   console.log('coursePerformanceData data:', data)
   initFilterHandler(data)

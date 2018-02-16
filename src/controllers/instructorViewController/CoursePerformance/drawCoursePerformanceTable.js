@@ -151,7 +151,7 @@ const redrawCoursePerformance = (coursePerformanceData, questionCode, PUID) => {
   CPTable.fnClearTable()
   CPTable.fnAddData(data)
   const table = $('#CoursePerformance').DataTable()
-  for (let j=2; j<=7;j++){
+  for (let j = 2; j <= 7; j++) {
     table.column(j).visible(false)
   }
   for (let i = 0; i < questionCode.length; i++) {
