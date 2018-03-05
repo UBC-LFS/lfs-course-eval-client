@@ -1,14 +1,12 @@
 /* global $ */
 
 import { loadOptions } from '../../../service/overviewDataService'
-import { loadInstructorOverview } from '../../../service/instructorDataService'
-const attachOptions = arr => arr.map(x => '<option value="' + x.PUID + '" data-terms=' + x.terms + '>' + x.name + '</option>').join(' ')
+import { loadInstructorOverview, loadInstructorTerms } from '../../../service/instructorDataService'
 const toTwoDecimal = decimal => Math.round(decimal * 100) / 100
 
-const initHighLevelInstructorOverview = (instructor) => {
-  const terms = instructor.selectedOptions[0].dataset.terms.split(',')
-  const lastTerm = terms[terms.length - 1].substring(0, 4)
-  loadInstructorOverview(instructor.value, lastTerm).then(data => {
+const initHighLevelInstructorOverview = (instructor, terms) => {
+  const lastYear = terms[terms.length - 1].substring(0, 4)
+  loadInstructorOverview(instructor.value, lastYear).then(data => {
     const umi = document.getElementById('instructor-umi')
     const percentFavourable = document.getElementById('instructor-pf')
     const coursesTaught = document.getElementById('instructor-courses-count')
@@ -40,31 +38,36 @@ const initHighLevelInstructorOverview = (instructor) => {
 
         const p = document.createElement('p')
         p.style = 'display: inline;'
-        p.innerHTML = ' ' + (toTwoDecimal(currentYear[i] / prevYear[i] * 100 - 100)) + '% from ' + (parseInt(lastTerm) - 1)
+        p.innerHTML = ' ' + (toTwoDecimal(currentYear[i] / prevYear[i] * 100 - 100)) + '% from ' + (parseInt(lastYear) - 1)
 
         x.innerHTML = ''
         if ((currentYear[i] / prevYear[i] * 100 - 100) > 0) x.appendChild(upIcon)
         if ((currentYear[i] / prevYear[i] * 100 - 100) < 0) x.appendChild(downIcon)
         x.appendChild(p)
       })
-    }
-    else { Array.from(comparisons).map(x => { x.innerHTML = '' }) }
+    } else { Array.from(comparisons).map(x => { x.innerHTML = '' }) }
   })
 }
 
+const updateInstructorKPI = (instructorSelect) => {
+  loadInstructorTerms(instructorSelect.selectedOptions[0].value).then(terms => {
+    initHighLevelInstructorOverview(instructorSelect, terms)
+  })
+}
 const initInstructorSelector = () => {
   const instructorSelect = document.getElementById('instructor-select')
   loadOptions().then(data => {
+    const attachOptions = arr => arr.map(x => '<option value="' + x.PUID + '">' + x.name + '</option>').join(' ')
     console.log(data)
     const instructors = data[0].instructors
     instructorSelect.innerHTML = attachOptions(instructors)
     instructorSelect.options[0].selected = true
     $('#instructor-select.selectpicker').selectpicker('refresh')
-    initHighLevelInstructorOverview(instructorSelect)
+    updateInstructorKPI(instructorSelect)
   })
 
   instructorSelect.addEventListener('change', function (e) {
-    initHighLevelInstructorOverview(instructorSelect)
+    updateInstructorKPI(instructorSelect)
   })
 }
 
