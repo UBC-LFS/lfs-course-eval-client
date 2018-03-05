@@ -20,18 +20,12 @@ const filterCPData = (coursePerformanceData, PUID) => {
     util.roundToTwoDecimal(x.deptAverage.UMI4),
     util.roundToTwoDecimal(x.deptAverage.UMI5),
     util.roundToTwoDecimal(x.deptAverage.UMI6),
-      0,
-      0,
-      0,
-      0,
-      0,
-      0
-      // util.roundToTwoDecimal(x.facultyAverage.UMI1),
-      // util.roundToTwoDecimal(x.facultyAverage.UMI2),
-      // util.roundToTwoDecimal(x.facultyAverage.UMI3),
-      // util.roundToTwoDecimal(x.facultyAverage.UMI4),
-      // util.roundToTwoDecimal(x.facultyAverage.UMI5),
-      // util.roundToTwoDecimal(x.facultyAverage.UMI6)
+    util.roundToTwoDecimal(x.facultyAverage.UMI1),
+    util.roundToTwoDecimal(x.facultyAverage.UMI2),
+    util.roundToTwoDecimal(x.facultyAverage.UMI3),
+    util.roundToTwoDecimal(x.facultyAverage.UMI4),
+    util.roundToTwoDecimal(x.facultyAverage.UMI5),
+    util.roundToTwoDecimal(x.facultyAverage.UMI6)
     ]
   })
 }
