@@ -12,12 +12,12 @@ const highLevelStatsController = () => {
       return obj
     })
     .then(obj => {
-      fromYear.innerHTML = obj.years.map(year => '<option value="' + year + '">' + year + '</option>').join(' ')
-      toYear.innerHTML = obj.years.map(year => '<option value="' + year + '">' + year + '</option>').join(' ')
+      fromYear.innerHTML = obj.years.map(year => '<option value="' + year.year + '">' + year.year + '</option>').join(' ')
+      toYear.innerHTML = obj.years.map(year => '<option value="' + year.year + '">' + year.year + '</option>').join(' ')
       dept.innerHTML = obj.depts.map(dept => '<option value="' + dept + '">' + dept + '</option>').join(' ')
 
       // this sets toYear to latest year
-      toYear.value = obj.years[obj.years.length - 1]
+      toYear.value = obj.years[obj.years.length - 1].year
     })
 
   document.getElementById('export-button').addEventListener('click', function () {

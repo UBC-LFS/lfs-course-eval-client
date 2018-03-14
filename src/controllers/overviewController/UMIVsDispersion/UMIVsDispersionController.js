@@ -39,12 +39,12 @@ const initUMIVsDispersion = () => {
       umiSelect.value = 'UMI6'
 
       deptSelect.innerHTML = attachOptions(options.depts)
-      yearSelect.innerHTML = attachOptions(options.years)
+      yearSelect.innerHTML = attachOptions(options.years.map(x=> x.year))
       termSelect.innerHTML = attachOptions(options.terms)
       umiSelect.innerHTML = attachOptions(UMI)
 
       $('#umiVsDispersionDept').selectpicker('val', options.depts[0])
-      $('#umiVsDispersionYear').selectpicker('val', options.years[options.years.length - 1])
+      $('#umiVsDispersionYear').selectpicker('val', options.years[options.years.length - 1].year)
       $('#umiVsDispersionTerm').selectpicker('val', options.terms[0])
       $('#umiVsDispersionUMI').selectpicker('val', 'UMI6')
 
