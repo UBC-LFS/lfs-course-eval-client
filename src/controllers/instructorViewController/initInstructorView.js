@@ -6,7 +6,7 @@ import initInstructorRanking from './InstructorRanking/instructorRankingControll
 const initInstructorView = () => {
   initInstructorOverview()
   initCoursePerformance()
-  //initInstructorRanking()
+  initInstructorRanking()
 }
 
 export default initInstructorView
