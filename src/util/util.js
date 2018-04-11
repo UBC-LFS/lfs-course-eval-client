@@ -74,6 +74,33 @@ const sortByTerm = arr => {
     }
   }, arr)
 }
+// this 'fills in' any missing counts with 0
+const fillInMissingCounts = count => {
+  for (let i = 1; i <= 5; i++) {
+    const key = String(i)
+    if (!count.hasOwnProperty(key)) count[key] = 0
+  }
+  return count
+}
+
+const sumCount = counts => counts.reduce((acc, cur) => {
+  cur = fillInMissingCounts(cur)
+  for (let scoreIndex = 1; scoreIndex <= 5; scoreIndex++) {
+    if (acc[scoreIndex + '']) {
+      acc[scoreIndex + ''] = acc[scoreIndex + ''] + cur[scoreIndex + '']
+    } else acc[scoreIndex + ''] = cur[scoreIndex + '']
+  }
+  return acc
+}, {})
+
+const umiAvg = count => {
+  count = fillInMissingCounts(count)
+
+  const numberOfResponses = Object.keys(count).reduce((acc, curKey) => (acc += count[curKey]), 0)
+  const UMITimesCount = Object.keys(count).reduce((acc, key) => (acc += count[key] * Number(key)), 0)
+
+  return roundToTwoDecimal(UMITimesCount / numberOfResponses)
+}
 
 export {
   stripMiddleName,
@@ -82,5 +109,7 @@ export {
   compareLastNameThenFirstName,
   compareCourse,
   convertYearTermtoDate,
-  expandCount
+  expandCount,
+  sumCount,
+  umiAvg
 }
