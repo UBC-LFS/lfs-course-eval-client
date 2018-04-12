@@ -1,7 +1,7 @@
 /* global $ */
 import { loadOptions } from '../../../service/overviewDataService'
 import { loadInstructorRanking } from '../../../service/instructorDataService';
-import drawInstructorRankingChart from '../InstructorRanking/drawInstructorRankingGraph'
+import {drawInstructorRankingChart} from '../InstructorRanking/drawInstructorRankingGraph'
 import R from 'ramda'
 
 
