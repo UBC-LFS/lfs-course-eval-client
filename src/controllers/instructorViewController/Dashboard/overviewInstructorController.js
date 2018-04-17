@@ -13,6 +13,8 @@ const initHighLevelInstructorOverview = (instructor, terms) => {
     const studentsTaught = document.getElementById('instructor-students-count')
     const title = document.getElementById('instructor-title')
     title.innerHTML = 'Overview of ' + $('#instructor-select option:selected')[0].innerHTML
+    const yearTitle = document.getElementById('most-recent-year')
+    yearTitle.innerHTML = 'Most Recent Year Taught: ' + lastYear
     const elements = [umi, percentFavourable, coursesTaught, studentsTaught]
     const currentYear = [
       data.currentYear.umi6,
@@ -38,18 +40,12 @@ const initHighLevelInstructorOverview = (instructor, terms) => {
 
         const p = document.createElement('p')
         p.style = 'display: inline;'
-        p.innerHTML = ' ' + (toTwoDecimal(currentYear[i] / prevYear[i] * 100 - 100)) + '% from ' + (parseInt(lastYear) - 1)
+        p.innerHTML = ' ' + (toTwoDecimal(currentYear[i] / prevYear[i] * 100 - 100)) + '%' + ' (' + (toTwoDecimal(currentYear[i] - prevYear[i])) + ') ' + 'from ' + (parseInt(lastYear) - 1)
 
         x.innerHTML = ''
         if ((currentYear[i] / prevYear[i] * 100 - 100) > 0) x.appendChild(upIcon)
         if ((currentYear[i] / prevYear[i] * 100 - 100) < 0) x.appendChild(downIcon)
         x.appendChild(p)
-        const br = document.createElement('br')
-        x.appendChild(br)
-        const p2 = document.createElement('p')
-        p2.style = 'display: inline;'
-        p2.innerHTML = ' ' + (toTwoDecimal(currentYear[i] - prevYear[i])) + ' from ' + (parseInt(lastYear) - 1)
-        x.appendChild(p2)
       })
     } else { Array.from(comparisons).map(x => { x.innerHTML = '' }) }
   })
