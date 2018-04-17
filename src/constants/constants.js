@@ -31,10 +31,10 @@ const percentFavourableColor6 = {
 }
 
 export {
-    margin,
-    graphWidth,
-    height,
-    color,
-    percentFavourableColor,
-    percentFavourableColor6
- }
+  margin,
+  graphWidth,
+  height,
+  color,
+  percentFavourableColor,
+  percentFavourableColor6
+}

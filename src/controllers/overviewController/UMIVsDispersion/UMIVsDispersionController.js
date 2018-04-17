@@ -39,7 +39,7 @@ const initUMIVsDispersion = () => {
       umiSelect.value = 'UMI6'
 
       deptSelect.innerHTML = attachOptions(options.depts)
-      yearSelect.innerHTML = attachOptions(options.years.map(x=> x.year))
+      yearSelect.innerHTML = attachOptions(options.years.map(x => x.year))
       termSelect.innerHTML = attachOptions(options.terms)
       umiSelect.innerHTML = attachOptions(UMI)
 

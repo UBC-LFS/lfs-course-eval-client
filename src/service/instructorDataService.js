@@ -4,7 +4,7 @@ const loadInstructorOverview = (instructor, year) => fetchJSON('instructor/instr
 const loadInstructorTerms = (PUID) => fetchJSON('instructor/instructorOverview/' + PUID)
 const loadInstructorRanking = (year, minClassSize, maxClassSize) => fetchJSON('instructor/instructorRanking/' + year + '/' + minClassSize + '/' + maxClassSize)
 export {
-    loadInstructorOverview,
-    loadInstructorTerms,
-    loadInstructorRanking
+  loadInstructorOverview,
+  loadInstructorTerms,
+  loadInstructorRanking
 }

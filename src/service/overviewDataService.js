@@ -7,9 +7,9 @@ const loadFacultyDept = () => fetchJSON('overview/FacultyDept')
 const loadOverview = year => fetchJSON('overview/Overview/' + year)
 
 export {
-    loadUMIVsDispersion,
-    loadOptions,
-    loadEnrolmentTrend,
-    loadFacultyDept,
-    loadOverview
+  loadUMIVsDispersion,
+  loadOptions,
+  loadEnrolmentTrend,
+  loadFacultyDept,
+  loadOverview
 }

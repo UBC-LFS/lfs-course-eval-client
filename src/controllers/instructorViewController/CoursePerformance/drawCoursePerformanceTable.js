@@ -5,27 +5,27 @@ const filterCPData = (coursePerformanceData, PUID) => {
   const tableData = coursePerformanceData.find(x => x.PUID === PUID).Courses
   return tableData.map(x => {
     return [x.course + ' ' + x.section,
-    x.enrolment,
-    util.roundToTwoDecimal(x.UMI1.average),
-    util.roundToTwoDecimal(x.UMI2.average),
-    util.roundToTwoDecimal(x.UMI3.average),
-    util.roundToTwoDecimal(x.UMI4.average),
-    util.roundToTwoDecimal(x.UMI5.average),
-    util.roundToTwoDecimal(x.UMI6.average),
-    util.roundToTwoDecimal(x.responseRate * 100) + '%',
-    x.year,
-    util.roundToTwoDecimal(x.deptAverage.UMI1),
-    util.roundToTwoDecimal(x.deptAverage.UMI2),
-    util.roundToTwoDecimal(x.deptAverage.UMI3),
-    util.roundToTwoDecimal(x.deptAverage.UMI4),
-    util.roundToTwoDecimal(x.deptAverage.UMI5),
-    util.roundToTwoDecimal(x.deptAverage.UMI6),
-    util.roundToTwoDecimal(x.facultyAverage.UMI1),
-    util.roundToTwoDecimal(x.facultyAverage.UMI2),
-    util.roundToTwoDecimal(x.facultyAverage.UMI3),
-    util.roundToTwoDecimal(x.facultyAverage.UMI4),
-    util.roundToTwoDecimal(x.facultyAverage.UMI5),
-    util.roundToTwoDecimal(x.facultyAverage.UMI6)
+      x.enrolment,
+      util.roundToTwoDecimal(x.UMI1.average),
+      util.roundToTwoDecimal(x.UMI2.average),
+      util.roundToTwoDecimal(x.UMI3.average),
+      util.roundToTwoDecimal(x.UMI4.average),
+      util.roundToTwoDecimal(x.UMI5.average),
+      util.roundToTwoDecimal(x.UMI6.average),
+      util.roundToTwoDecimal(x.responseRate * 100) + '%',
+      x.year,
+      util.roundToTwoDecimal(x.deptAverage.UMI1),
+      util.roundToTwoDecimal(x.deptAverage.UMI2),
+      util.roundToTwoDecimal(x.deptAverage.UMI3),
+      util.roundToTwoDecimal(x.deptAverage.UMI4),
+      util.roundToTwoDecimal(x.deptAverage.UMI5),
+      util.roundToTwoDecimal(x.deptAverage.UMI6),
+      util.roundToTwoDecimal(x.facultyAverage.UMI1),
+      util.roundToTwoDecimal(x.facultyAverage.UMI2),
+      util.roundToTwoDecimal(x.facultyAverage.UMI3),
+      util.roundToTwoDecimal(x.facultyAverage.UMI4),
+      util.roundToTwoDecimal(x.facultyAverage.UMI5),
+      util.roundToTwoDecimal(x.facultyAverage.UMI6)
     ]
   })
 }
@@ -84,7 +84,6 @@ const drawCoursePerformance = (coursePerformanceData, questionCode, PUID) => {
           'sTitle': 'UMI4 Average',
           'render': function (data, type, row, meta) {
             return renderUMIColumn(row, 5, 13, 19)
-
           }
         },
         {
