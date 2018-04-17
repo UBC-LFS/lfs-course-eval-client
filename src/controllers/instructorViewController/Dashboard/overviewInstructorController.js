@@ -40,7 +40,7 @@ const initHighLevelInstructorOverview = (instructor, terms) => {
 
         const p = document.createElement('p')
         p.style = 'display: inline;'
-        p.innerHTML = ' ' + (toTwoDecimal(currentYear[i] / prevYear[i] * 100 - 100)) + '%' + ' (' + (toTwoDecimal(currentYear[i] - prevYear[i])) + ') ' + 'from ' + (parseInt(lastYear) - 1)
+        p.innerHTML = ' ' + (toTwoDecimal(currentYear[i] - prevYear[i])) + ' (' + (toTwoDecimal(currentYear[i] / prevYear[i] * 100 - 100)) + '%' + ') ' + 'from ' + (parseInt(lastYear) - 1)
 
         x.innerHTML = ''
         if ((currentYear[i] / prevYear[i] * 100 - 100) > 0) x.appendChild(upIcon)
