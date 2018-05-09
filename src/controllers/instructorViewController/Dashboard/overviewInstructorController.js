@@ -38,14 +38,16 @@ const initHighLevelInstructorOverview = (instructor, terms) => {
         const downIcon = document.createElement('i')
         downIcon.className = 'fas fa-caret-down'
 
-        const p = document.createElement('p')
-        p.style = 'display: inline;'
-        p.innerHTML = ' ' + (toTwoDecimal(currentYear[i] - prevYear[i])) + ' (' + (toTwoDecimal(currentYear[i] / prevYear[i] * 100 - 100)) + '%' + ') ' + 'from ' + (parseInt(lastYear) - 1)
+        if (prevYear[i]) {
+          const p = document.createElement('p')
+          p.style = 'display: inline;'
+          p.innerHTML = ' ' + (toTwoDecimal(currentYear[i] - prevYear[i])) + ' (' + (toTwoDecimal(currentYear[i] / prevYear[i] * 100 - 100)) + '%' + ') ' + 'from ' + (parseInt(lastYear) - 1)
 
-        x.innerHTML = ''
-        if ((currentYear[i] / prevYear[i] * 100 - 100) > 0) x.appendChild(upIcon)
-        if ((currentYear[i] / prevYear[i] * 100 - 100) < 0) x.appendChild(downIcon)
-        x.appendChild(p)
+          x.innerHTML = ''
+          if ((currentYear[i] / prevYear[i] * 100 - 100) > 0) x.appendChild(upIcon)
+          if ((currentYear[i] / prevYear[i] * 100 - 100) < 0) x.appendChild(downIcon)
+          x.appendChild(p)
+        }
       })
     } else { Array.from(comparisons).map(x => { x.innerHTML = '' }) }
   })
