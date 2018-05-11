@@ -37,14 +37,16 @@ const initHighLevelOverview = () => {
       const downIcon = document.createElement('i')
       downIcon.className = 'fas fa-caret-down'
 
-      const p = document.createElement('p')
-      p.style = 'display: inline;'
-      p.innerHTML = ' ' + (toTwoDecimal(currentYear[i] / previousYear[i] * 100 - 100)) + '% from last year'
+      if (previousYear[i]) {
+        const p = document.createElement('p')
+        p.style = 'display: inline;'
+        p.innerHTML = ' ' + (toTwoDecimal(currentYear[i] / previousYear[i] * 100 - 100)) + '% from last year'
 
-      x.innerHTML = ''
-      if ((currentYear[i] / previousYear[i] * 100 - 100) > 0) x.appendChild(upIcon)
-      if ((currentYear[i] / previousYear[i] * 100 - 100) < 0) x.appendChild(downIcon)
-      x.appendChild(p)
+        x.innerHTML = ''
+        if ((currentYear[i] / previousYear[i] * 100 - 100) > 0) x.appendChild(upIcon)
+        if ((currentYear[i] / previousYear[i] * 100 - 100) < 0) x.appendChild(downIcon)
+        x.appendChild(p)
+      }
     })
   })
 }
