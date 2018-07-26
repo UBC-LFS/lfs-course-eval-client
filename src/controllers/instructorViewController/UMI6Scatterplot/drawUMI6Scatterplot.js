@@ -1,15 +1,16 @@
 import * as d3 from 'd3'
 
 const trendline = ({
-  data,
-  selector: _selector = '#chart',
-  container: _container = `
-    <div id="container">
-      <h2>Bar Chart</h2>
-      <div id="chart"></div>
-    </div>
-  `,
-  style: _style = '',
+  data = [ { key: '2016W2', // TODO replace with real data
+       value: 3.11,
+       enrolment: 187,
+       facultyStats: [Object],
+       course: 'APBI 265' },
+     { key: '2016W1',
+       value: 3.08,
+       enrolment: 78,
+       facultyStats: [Object],
+       course: 'APBI 265' } ],
   width: _width = 850,
   height: _height = 500,
   margin: _margin = { top: 20, right: 20, bottom: 40, left: 40 },
@@ -194,7 +195,6 @@ const trendline = ({
 
   var legend = circleLegend(svg)
   legend.render()
-
 }
 
 const initUMI6Scatterplot = () => {
