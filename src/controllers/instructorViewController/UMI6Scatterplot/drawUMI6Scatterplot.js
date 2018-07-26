@@ -11,28 +11,23 @@ const trendline = ({
        enrolment: 78,
        facultyStats: [Object],
        course: 'APBI 265' } ],
-  width: _width = 850,
-  height: _height = 500,
-  margin: _margin = { top: 20, right: 20, bottom: 40, left: 40 },
+
   lineColor: _lineColor = 'steelblue',
   lineWidth: _lineWidth = 1.5,
   tickSize: _tickSize = 5,
   tickPadding: _tickPadding = 5
 } = {}) => {
-  // const d3n = new D3Node({
-  //   selector: _selector,
-  //   svgStyles: _style,
-  //   container: _container
-  // })
-  // const d3 = d3n.d3
-  const width = _width - _margin.left - _margin.right
-  const height = _height - _margin.top - _margin.bottom
+
+  // TODO use window width and height
+  const margin = { top: 20, right: 20, bottom: 40, left: 40 }
+  const width = 900 - margin.left - margin.right
+  const height = 600 - margin.top - margin.bottom
 
   const svg = d3.select('#UMI6Scatterplot').append('svg')
     .attr('width', width)
     .attr('height', height)
     .append('g')
-    .attr('transform', `translate(${_margin.left}, ${_margin.top})`)
+    .attr('transform', `translate(${margin.left}, ${margin.top})`)
 
   const g = svg.append('g')
 
@@ -86,14 +81,6 @@ const trendline = ({
     .style('stroke', 'black')
     .style('fill', 'none')
     .attr('r', d => Math.pow(Math.log(d.enrolment), 1.7))
-
-  // g.selectAll('text')
-  //   .data(data)
-  // .enter().append('text')
-  //   .text(d => d.course)
-  //   .attr('x', d => xScale(d.key))
-  //   .attr('y', d => yScale(d.value))
-  //   .attr('font-size', '11px')
 
   g.selectAll('rect')
     .data(data)
